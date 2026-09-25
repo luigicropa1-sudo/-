@@ -552,6 +552,7 @@ p { margin: 0 0 1em; }
 .events { position: relative; max-width: 760px; }
 .events .section__title { color: #fff; }
 .events p { color: rgba(255,255,255,.85); font-size: 1.1rem; margin-bottom: 2.2rem; }
+.events__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
 
 /* ---------- Contatti ---------- */
 .contact { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(40px, 6vw, 80px); align-items: stretch; }
