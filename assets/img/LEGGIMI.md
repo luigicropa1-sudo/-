@@ -9,7 +9,7 @@ con lo stesso nome (JPG, circa 1600 px di larghezza).
 | fritto.jpg      | Sezione "Chi siamo"                          |
 | mare.jpg        | Card "Il mare"                               |
 | carne.jpg       | Card "I monti"                               |
-| pizza.jpg       | Card "La pizza" (manca: ora c'è uno sfondo sfumato) |
+| pizza.jpg       | Card "La pizza"                              |
 | eventi.jpg      | Sezione "Banchetti ed eventi"                |
 | g-*.jpg         | Galleria                                     |
 
