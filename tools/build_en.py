@@ -33,6 +33,7 @@ TEXT = [
     (">Galleria<", ">Gallery<"),
     ('<a href="#eventi">Eventi</a>', '<a href="#eventi">Events</a>'),
     ('<a href="#contatti">Contatti</a>', '<a href="#contatti">Contact</a>'),
+    ('<a href="#contatti">Dove siamo</a>', '<a href="#contatti">Find us</a>'),
     ('class="btn btn--small">Prenota</a>', 'class="btn btn--small">Book</a>'),
     # Apertura
     ("Ristorante · Pizzeria · Locate di Triulzi (MI)", "Restaurant · Pizzeria · Locate di Triulzi (Milan)"),
