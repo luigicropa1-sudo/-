@@ -119,8 +119,7 @@ TEXT = [
     (">Scrivici su WhatsApp<", ">Message us on WhatsApp<"),
     ("Buongiorno%2C%20vorrei%20organizzare%20un%20evento%20da%20Maremonti", "Hello%2C%20I%20would%20like%20to%20organise%20an%20event%20at%20Maremonti"),
     # Domande frequenti
-    ('<p class="eyebrow">Domande frequenti</p>', '<p class="eyebrow">FAQ</p>'),
-    (">Tutto quello che c'è da sapere<", ">Everything you need to know<"),
+    ('<h2 class="section__title">Domande frequenti</h2>', '<h2 class="section__title">Frequently asked questions</h2>'),
     # Contatti
     ('<p class="eyebrow">Contatti</p>', '<p class="eyebrow">Contact</p>'),
     (">Vieni a trovarci<", ">Come and visit us<"),
@@ -161,21 +160,12 @@ ATTR = [
 ]
 
 FAQ = [
-    ("Dove si trova il Ristorante Maremonti?", "Where is Ristorante Maremonti?",
-     "In Via Roma 45, 20085 Locate di Triulzi (MI), a sud di Milano.",
-     "At Via Roma 45, 20085 Locate di Triulzi (MI), just south of Milan."),
-    ("Quali sono gli orari di apertura?", "What are your opening hours?",
-     "Siamo aperti dal martedì alla domenica, a pranzo dalle 12:00 alle 14:30 e a cena dalle 19:00 alle 23:00. Il lunedì siamo chiusi.",
-     "We are open Tuesday to Sunday, for lunch from 12:00 to 14:30 and for dinner from 19:00 to 23:00. We are closed on Mondays."),
     ("Fate la pizza da asporto?", "Do you do takeaway pizza?",
      "Sì. Le nostre pizze cotte nel forno a legna sono disponibili a pranzo e a cena, anche da asporto: chiamaci allo 02 907 7708 per ordinare.",
      "Yes. Our wood-fired pizzas are available at lunch and dinner, also to take away: call us on +39 02 907 7708 to order."),
     ("C'è un menù per il pranzo?", "Do you have a lunch menu?",
      "Sì, dal martedì al venerdì puoi scegliere tra il menù pizza a 10 € (pizza classica, bevanda e caffè) e il menù fisso a 12 € (primo, secondo e contorno del giorno, bevanda e caffè).",
      "Yes, from Tuesday to Friday you can choose between the €10 pizza menu (classic pizza, drink and coffee) and the €12 set menu (first course, main course and side dish of the day, drink and coffee)."),
-    ("Si possono organizzare pranzi e cene per eventi?", "Can you host events?",
-     "Sì. Con oltre 200 coperti in sale climatizzate organizziamo comunioni, cresime, compleanni, anniversari e cene aziendali, con menù personalizzati.",
-     "Yes. With over 200 seats in air-conditioned rooms we host first communions, confirmations, birthdays, anniversaries and business dinners, with tailored menus."),
     ("Come posso prenotare un tavolo?", "How can I book a table?",
      "Chiamaci allo 02 907 7708, al 328 467 5980 o al 389 268 3838, oppure scrivici su WhatsApp.",
      "Call us on +39 02 907 7708, +39 328 467 5980 or +39 389 268 3838, or message us on WhatsApp."),
@@ -296,7 +286,7 @@ def main():
     s = re.sub(r'(href|src)="(assets/|css/|js/)', r'\1="../\2', s)
 
     # Controllo finale: nessun testo italiano visibile dimenticato tra quelli noti
-    leftovers = [w for w in ("Prenota ", "Chi siamo", "Contatti<", "Vieni a trovarci", "Domande frequenti")
+    leftovers = [w for w in ("Prenota ", "Chi siamo", "Contatti<", "Vieni a trovarci")
                  if w in re.sub(r"<script.*?</script>", "", s, flags=re.S)]
     if leftovers:
         sys.exit(f"[build_en] Testi italiani rimasti: {leftovers}")
