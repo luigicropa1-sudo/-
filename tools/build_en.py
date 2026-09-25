@@ -133,6 +133,7 @@ TEXT = [
     (">Chiama ora<", ">Call now<"),
     # Footer
     ("<p>Ristorante · Pizzeria</p>", "<p>Restaurant · Pizzeria</p>"),
+    ("<br>P.IVA 07536110963 · REA 1965908</p>", "<br>VAT no. IT07536110963 · REA 1965908</p>"),
 ]
 
 # Attributi (alt, aria-label, placeholder, title)
