@@ -8,7 +8,8 @@
   <meta property="og:title" content="Ristorante Maremonti – Locate di Triulzi">
   <meta property="og:description" content="Cucina di mare e di terra, pizza nel forno a legna, banchetti ed eventi.">
   <meta property="og:type" content="restaurant">
-  <link rel="icon" href="assets/logo.png">
+  <link rel="icon" href="assets/favicon.png">
+  <meta property="og:image" content="assets/img/hero.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -53,15 +54,14 @@
   <header class="header" id="header">
     <div class="container header__inner">
       <a href="#home" class="brand" aria-label="Ristorante Maremonti – Home">
-        <!-- Logo originale: salvare il file del logo come assets/logo.png -->
-        <img src="assets/logo.png" alt="Maremonti" class="brand__logo" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
-        <span class="brand__text" hidden>Maremonti</span>
+        <img src="assets/logo.jpg" alt="Maremonti" class="brand__logo">
       </a>
 
       <nav class="nav" id="nav" aria-label="Navigazione principale">
         <a href="#chi-siamo">Chi siamo</a>
         <a href="#cucina">La cucina</a>
         <a href="#menu">Menù</a>
+        <a href="#galleria">Galleria</a>
         <a href="#eventi">Eventi</a>
         <a href="#contatti">Contatti</a>
         <a href="tel:+39029077708" class="btn btn--small">Prenota</a>
@@ -116,13 +116,13 @@
   <section class="section" id="chi-siamo">
     <div class="container split">
       <div class="split__media reveal">
-        <div class="img-frame img-frame--sala" role="img" aria-label="La sala del ristorante"></div>
+        <div class="img-frame img-frame--sala" role="img" aria-label="Il banco del pesce fresco"></div>
       </div>
       <div class="split__text reveal">
         <p class="eyebrow">Chi siamo</p>
         <h2 class="section__title">Una tavola per ogni occasione</h2>
         <p>Il Ristorante Maremonti è la meta ideale per ogni occasione: una cena in famiglia, una serata romantica o un evento aziendale. Da noi trovi la cucina tradizionale italiana, preparata con ingredienti di qualità selezionati con cura.</p>
-        <p>Ambienti eleganti e spaziosi, un servizio attento e una cortesia impeccabile ci rendono un punto di riferimento a Locate di Triulzi per chi desidera vivere un pranzo o una cena senza pensieri.</p>
+        <p>Il pesce arriva fresco e lo scegli dal nostro banco. Ambienti eleganti e spaziosi, un servizio attento e una cortesia impeccabile ci rendono un punto di riferimento a Locate di Triulzi per chi desidera vivere un pranzo o una cena senza pensieri.</p>
       </div>
     </div>
   </section>
@@ -141,21 +141,21 @@
           <div class="card__img img-frame--mare" role="img" aria-label="Piatti di pesce"></div>
           <div class="card__body">
             <h3>Il mare</h3>
-            <p>Pesce fresco lavorato ogni giorno: spaghetti allo scoglio, frittura mista, grigliata di gamberoni, pesce spada e orata al forno.</p>
+            <p>Crudi, astice, linguine con gamberone e scampone, zuppa di pesce, fritto misto, orata e branzino al forno, al sale o alla griglia.</p>
           </div>
         </article>
         <article class="card reveal">
           <div class="card__img img-frame--monti" role="img" aria-label="Piatti di carne"></div>
           <div class="card__body">
             <h3>I monti</h3>
-            <p>Carni selezionate alla griglia e grandi classici della tradizione, come la cotoletta alla milanese, preparati con la cura di sempre.</p>
+            <p>Filetto, costata, tagliate e grigliata mista, accanto ai classici come la cotoletta alla milanese e i risotti con i funghi porcini.</p>
           </div>
         </article>
         <article class="card reveal">
           <div class="card__img img-frame--pizza" role="img" aria-label="Pizza nel forno a legna"></div>
           <div class="card__body">
             <h3>La pizza</h3>
-            <p>Impasto a lievitazione lenta e naturale, cotto nel forno a legna. Dalle classiche Margherita e Quattro Stagioni alle proposte con il pesce.</p>
+            <p>Impasto a lievitazione lenta e naturale, cotto nel forno a legna, anche integrale. Oltre 45 pizze tra classiche, speciali, bianche, focacce e calzoni.</p>
           </div>
         </article>
       </div>
@@ -163,49 +163,376 @@
   </section>
 
   <!-- ===== MENU ===== -->
+  <!-- Menù trascritto dal PDF assets/menu-maremonti.pdf -->
   <section class="section" id="menu">
     <div class="container">
       <div class="section__head reveal">
         <p class="eyebrow">Il menù</p>
-        <h2 class="section__title">Alcune delle nostre specialità</h2>
-        <p class="section__intro">Il menù completo e i piatti del giorno ti aspettano in sala.</p>
+        <h2 class="section__title">Dal mare, dalla terra, dal forno a legna</h2>
+        <p class="section__intro">Ristorante · Pizzeria · Forno a legna</p>
       </div>
 
       <div class="tabs" role="tablist">
-        <button class="tab is-active" role="tab" aria-selected="true" data-tab="mare">Dal mare</button>
-        <button class="tab" role="tab" aria-selected="false" data-tab="terra">Dalla terra</button>
+        <button class="tab is-active" role="tab" aria-selected="true" data-tab="antipasti">Antipasti</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="primi">Primi</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="secondi">Secondi</button>
         <button class="tab" role="tab" aria-selected="false" data-tab="pizze">Pizze</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="piatti">Insalatone e contorni</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="dolci">Dolci e caffè</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="bevande">Bevande e vini</button>
       </div>
 
-      <!-- Per aggiungere i prezzi: inserire il valore dentro <span class="dish__price"> -->
-      <div class="menu-panel is-active" id="tab-mare" role="tabpanel">
-        <ul class="dishes">
-          <li class="dish"><div class="dish__row"><h4>Spaghetti allo scoglio</h4><span class="dish__dots"></span><span class="dish__price"></span></div><p>Con frutti di mare freschi</p></li>
-          <li class="dish"><div class="dish__row"><h4>Zuppa di cozze e vongole</h4><span class="dish__dots"></span><span class="dish__price"></span></div><p>Con crostini di pane</p></li>
-          <li class="dish"><div class="dish__row"><h4>Frittura mista di pesce</h4><span class="dish__dots"></span><span class="dish__price"></span></div><p>Calamari, gamberi e pescato del giorno</p></li>
-          <li class="dish"><div class="dish__row"><h4>Grigliata di gamberoni</h4><span class="dish__dots"></span><span class="dish__price"></span></div><p>Alla brace</p></li>
-          <li class="dish"><div class="dish__row"><h4>Pesce spada alla siciliana</h4><span class="dish__dots"></span><span class="dish__price"></span></div><p>Pomodorini, olive e capperi</p></li>
-          <li class="dish"><div class="dish__row"><h4>Orata al forno</h4><span class="dish__dots"></span><span class="dish__price"></span></div><p>Con patate e insalata</p></li>
-        </ul>
+      <div class="menu-panel is-active" id="tab-antipasti" role="tabpanel">
+        <div class="menu-group">
+          <h3 class="menu-group__title">Mare</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Misto pesce crudo</h4><span class="dish__dots"></span><span class="dish__price">23,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Antipasto Maremonti</h4><span class="dish__dots"></span><span class="dish__price">16,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Alici marinate</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Antipasto di mare caldo</h4><span class="dish__dots"></span><span class="dish__price">13,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Capesante gratinate 3 pz.</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Carpaccio di spada al limone</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Cocktail di gamberi</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Crostini al salmone</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Gamberetti/Piovra alla Catalana</h4><span class="dish__dots"></span><span class="dish__price">12,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Impepata di cozze</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Misto marinato</h4><span class="dish__dots"></span><span class="dish__price">13,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Piovra con patate</h4><span class="dish__dots"></span><span class="dish__price">13,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Sautè di gamberi con carciofi freschi e trevisana</h4><span class="dish__dots"></span><span class="dish__price">12,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Tentacolo di polipo con rucola e pomodorini</h4><span class="dish__dots"></span><span class="dish__price">14,00 €</span></div></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Terra</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Affettato misto con grana</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Gnocco fritto con prosciutto crudo</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Bresaola carciofi grana</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Bruschette</h4><span class="dish__dots"></span><span class="dish__price">4,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Crostini di funghi porcini trifolati</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Misto di bruschette</h4><span class="dish__dots"></span><span class="dish__price">8,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Crudo e bufala</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+          </ul>
+        </div>
       </div>
-
-      <div class="menu-panel" id="tab-terra" role="tabpanel" hidden>
-        <ul class="dishes">
-          <li class="dish"><div class="dish__row"><h4>Cotoletta alla milanese</h4><span class="dish__dots"></span><span class="dish__price"></span></div><p>La tradizione lombarda</p></li>
-          <li class="dish"><div class="dish__row"><h4>Grigliata mista di carne</h4><span class="dish__dots"></span><span class="dish__price"></span></div><p>Tagli selezionati alla brace</p></li>
-          <li class="dish"><div class="dish__row"><h4>Primi della tradizione</h4><span class="dish__dots"></span><span class="dish__price"></span></div><p>Paste fresche e ricette di casa</p></li>
-          <li class="dish"><div class="dish__row"><h4>Contorni di stagione</h4><span class="dish__dots"></span><span class="dish__price"></span></div><p>Verdure fresche, patate al forno, insalate</p></li>
-        </ul>
+      <div class="menu-panel" id="tab-primi" role="tabpanel" hidden>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Mare</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Spaghetti alle vongole e astice tagliato</h4><span class="dish__dots"></span><span class="dish__price">20,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Tagliatelle maremonti</h4><span class="dish__dots"></span><span class="dish__price">12,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Spaghetti sottocoperta</h4><span class="dish__dots"></span><span class="dish__price">14,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Spaghetti alle vongole veraci</h4><span class="dish__dots"></span><span class="dish__price">14,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Spaghetti alle vongole veraci e bottarga</h4><span class="dish__dots"></span><span class="dish__price">16,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Linguine con gamberone e scampone</h4><span class="dish__dots"></span><span class="dish__price">17,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Linguine all&#x27;astice</h4><span class="dish__dots"></span><span class="dish__price">20,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Pappardelle gamberetti e zucchine</h4><span class="dish__dots"></span><span class="dish__price">11,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Tagliatelle capesante e fiori di zucca</h4><span class="dish__dots"></span><span class="dish__price">12,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Tagliatelle al salmone</h4><span class="dish__dots"></span><span class="dish__price">11,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Risotto con scampetti e fiori di zucca</h4><span class="dish__dots"></span><span class="dish__price">13,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Risotto ai frutti di mare</h4><span class="dish__dots"></span><span class="dish__price">14,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Risotto gamberetti e rucola</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Spaghetti al nero di seppia</h4><span class="dish__dots"></span><span class="dish__price">13,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Penne con scampi e zucchine</h4><span class="dish__dots"></span><span class="dish__price">12,00 €</span></div></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Terra</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Spaghetti alla carbonara</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Pappardelle ai funghi porcini</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Penne della casa</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div><p>porcini e ragù di manzo</p></li>
+            <li class="dish"><div class="dish__row"><h4>Penne Sancho Panza</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Penne alla tirolese</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Risotto taleggio e pistacchio</h4><span class="dish__dots"></span><span class="dish__price">11,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Risotto trevisana e scamorza</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Risotto ai funghi porcini</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Risotto con spinaci e stracchino</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Gnocchi ai 4 formaggi</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Gnocchi alla sorrentina</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Gnocchi gorgonzola e pistacchio</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Gnocchi spinaci e zola</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Tortellini speck e trevisana</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Fusilli alla diavola con ragù e mozzarella</h4><span class="dish__dots"></span><span class="dish__price">11,00 €</span></div></li>
+          </ul>
+        </div>
       </div>
-
+      <div class="menu-panel" id="tab-secondi" role="tabpanel" hidden>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Mare</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Orata o branzino maremonti</h4><span class="dish__dots"></span><span class="dish__price">20,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Astice alla catalana</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Branzino o orata al forno con patate e carciofi</h4><span class="dish__dots"></span><span class="dish__price">17,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Branzino o orata al sale</h4><span class="dish__dots"></span><span class="dish__price">15,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Branzino o orata alla griglia</h4><span class="dish__dots"></span><span class="dish__price">15,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Filetto di branzino al cartoccio</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Filetto di branzino alla crema di limone o al vino bianco</h4><span class="dish__dots"></span><span class="dish__price">15,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Filetto di branzino ai funghi porcini</h4><span class="dish__dots"></span><span class="dish__price">17,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Fritto misto</h4><span class="dish__dots"></span><span class="dish__price">15,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Misto di pesce alla griglia o gratinata</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Pesce spada alla griglia</h4><span class="dish__dots"></span><span class="dish__price">13,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Pesce spada alla siciliana</h4><span class="dish__dots"></span><span class="dish__price">15,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Spiedini di gamberoni con verdure alla griglia</h4><span class="dish__dots"></span><span class="dish__price">17,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Tagliata di branzino con patate o rucola</h4><span class="dish__dots"></span><span class="dish__price">15,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Filetto di orata alla mediterranea</h4><span class="dish__dots"></span><span class="dish__price">14,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Tartar di salmone fresco</h4><span class="dish__dots"></span><span class="dish__price">14,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Tagliata di salmone al pepe rosa</h4><span class="dish__dots"></span><span class="dish__price">14,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Zuppa di pesce</h4><span class="dish__dots"></span><span class="dish__price">20,00 €</span></div></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Terra</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Costata all&#x27;antica</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Costata alla griglia</h4><span class="dish__dots"></span><span class="dish__price">17,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Cotoletta alla milanese</h4><span class="dish__dots"></span><span class="dish__price">15,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Entrecôte con patate</h4><span class="dish__dots"></span><span class="dish__price">17,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Filetto al cartoccio</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Filetto al pepe verde</h4><span class="dish__dots"></span><span class="dish__price">17,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Filetto alla griglia</h4><span class="dish__dots"></span><span class="dish__price">16,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Filetto con aceto balsamico</h4><span class="dish__dots"></span><span class="dish__price">17,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Filetto tartara</h4><span class="dish__dots"></span><span class="dish__price">17,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Filetto di manzo trifolato con funghi e riso bianco</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Filetto di manzo alla crema di tartufo</h4><span class="dish__dots"></span><span class="dish__price">17,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Grigliata mista di carne</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Tagliata di costata all&#x27;olio e rosmarino</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Tagliata di manzo con porcini</h4><span class="dish__dots"></span><span class="dish__price">17,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Tagliata di manzo con rucola e grana</h4><span class="dish__dots"></span><span class="dish__price">16,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Tagliata di manzo con trevisana e scamorza</h4><span class="dish__dots"></span><span class="dish__price">16,00 €</span></div></li>
+          </ul>
+        </div>
+      </div>
       <div class="menu-panel" id="tab-pizze" role="tabpanel" hidden>
-        <ul class="dishes">
-          <li class="dish"><div class="dish__row"><h4>Margherita</h4><span class="dish__dots"></span><span class="dish__price"></span></div><p>Pomodoro, mozzarella, basilico</p></li>
-          <li class="dish"><div class="dish__row"><h4>Quattro Stagioni</h4><span class="dish__dots"></span><span class="dish__price"></span></div><p>Prosciutto cotto, funghi, carciofi, olive</p></li>
-          <li class="dish"><div class="dish__row"><h4>Pizze di mare</h4><span class="dish__dots"></span><span class="dish__price"></span></div><p>Con pesce fresco e verdure</p></li>
-          <li class="dish"><div class="dish__row"><h4>Pizze della casa</h4><span class="dish__dots"></span><span class="dish__price"></span></div><p>Chiedi al personale le proposte del momento</p></li>
-        </ul>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Classiche</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Marinara</h4><span class="dish__dots"></span><span class="dish__price">4,50 €</span></div><p>pomodoro, olio, aglio, origano</p></li>
+            <li class="dish"><div class="dish__row"><h4>Margherita</h4><span class="dish__dots"></span><span class="dish__price">5,50 €</span></div><p>pomodoro, mozzarella, basilico</p></li>
+            <li class="dish"><div class="dish__row"><h4>Americana</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, wurstel, patatine</p></li>
+            <li class="dish"><div class="dish__row"><h4>Bufalina</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella di bufala, basilico</p></li>
+            <li class="dish"><div class="dish__row"><h4>Calabrese</h4><span class="dish__dots"></span><span class="dish__price">7,00 €</span></div><p>pomodoro, mozzarella, &#x27;nduja, cipolle</p></li>
+            <li class="dish"><div class="dish__row"><h4>Capricciosa</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, cotto, funghi, carciofi, olive, capperi, acciughe, origano</p></li>
+            <li class="dish"><div class="dish__row"><h4>Crudo e rucola</h4><span class="dish__dots"></span><span class="dish__price">8,00 €</span></div><p>pomodoro, mozzarella, prosciutto crudo, rucola</p></li>
+            <li class="dish"><div class="dish__row"><h4>Diavola</h4><span class="dish__dots"></span><span class="dish__price">6,50 €</span></div><p>pomodoro, mozzarella, salame piccante</p></li>
+            <li class="dish"><div class="dish__row"><h4>Frutti di mare</h4><span class="dish__dots"></span><span class="dish__price">9,50 €</span></div><p>pomodoro, misto frutti di mare (con mozzarella 10,50 €)</p></li>
+            <li class="dish"><div class="dish__row"><h4>Napoletana</h4><span class="dish__dots"></span><span class="dish__price">6,50 €</span></div><p>pomodoro, mozzarella, acciughe, origano</p></li>
+            <li class="dish"><div class="dish__row"><h4>Ortolana</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, misto verdure alla griglia</p></li>
+            <li class="dish"><div class="dish__row"><h4>Prosciutto</h4><span class="dish__dots"></span><span class="dish__price">6,50 €</span></div><p>pomodoro, mozzarella, prosciutto cotto</p></li>
+            <li class="dish"><div class="dish__row"><h4>Pugliese</h4><span class="dish__dots"></span><span class="dish__price">6,50 €</span></div><p>pomodoro, mozzarella, cipolle, origano</p></li>
+            <li class="dish"><div class="dish__row"><h4>Quattro formaggi</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>mozzarella, scamorza, zola, brie, grana</p></li>
+            <li class="dish"><div class="dish__row"><h4>Quattro stagioni</h4><span class="dish__dots"></span><span class="dish__price">7,00 €</span></div><p>pomodoro, mozzarella, funghi, carciofi, cotto, olive</p></li>
+            <li class="dish"><div class="dish__row"><h4>Regina</h4><span class="dish__dots"></span><span class="dish__price">7,00 €</span></div><p>pomodoro, mozzarella, cotto, funghi</p></li>
+            <li class="dish"><div class="dish__row"><h4>Romana</h4><span class="dish__dots"></span><span class="dish__price">7,00 €</span></div><p>pomodoro, mozzarella, acciughe, olive, capperi, origano</p></li>
+            <li class="dish"><div class="dish__row"><h4>Siciliana</h4><span class="dish__dots"></span><span class="dish__price">6,50 €</span></div><p>pomodoro, acciughe, capperi, olive, origano</p></li>
+            <li class="dish"><div class="dish__row"><h4>Speck e zola</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, speck, zola</p></li>
+            <li class="dish"><div class="dish__row"><h4>Tonnara</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, tonno, cipolla</p></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Speciali</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Maremonti</h4><span class="dish__dots"></span><span class="dish__price">8,00 €</span></div><p>pomodoro, mozzarella, gamberetti, porcini</p></li>
+            <li class="dish"><div class="dish__row"><h4>Brie</h4><span class="dish__dots"></span><span class="dish__price">7,00 €</span></div><p>pomodoro, mozzarella, brie, radicchio</p></li>
+            <li class="dish"><div class="dish__row"><h4>Davide</h4><span class="dish__dots"></span><span class="dish__price">7,00 €</span></div><p>pomodoro, mozzarella, stracchino, rucola, bresaola</p></li>
+            <li class="dish"><div class="dish__row"><h4>Deliziosa</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, salame piccante, porcini</p></li>
+            <li class="dish"><div class="dish__row"><h4>Amatriciana</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, pancetta, cipolla, peperoncino</p></li>
+            <li class="dish"><div class="dish__row"><h4>Giancarlo</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, salame piccante, zola</p></li>
+            <li class="dish"><div class="dish__row"><h4>Giorgio</h4><span class="dish__dots"></span><span class="dish__price">7,00 €</span></div><p>pomodoro, mozzarella, zucchine, salame piccante</p></li>
+            <li class="dish"><div class="dish__row"><h4>Quattro salumi</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, prosciutto, wurstel, salame piccante, salsiccia</p></li>
+            <li class="dish"><div class="dish__row"><h4>Sandi</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, zola, cipolla, speck</p></li>
+            <li class="dish"><div class="dish__row"><h4>Saporita</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, prosciutto, zola, peperoni</p></li>
+            <li class="dish"><div class="dish__row"><h4>Sfiziosa</h4><span class="dish__dots"></span><span class="dish__price">7,00 €</span></div><p>pomodoro, mozzarella, salsiccia, scamorza</p></li>
+            <li class="dish"><div class="dish__row"><h4>Valtellina</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, bresaola, rucola, grana</p></li>
+            <li class="dish"><div class="dish__row"><h4>Venturina</h4><span class="dish__dots"></span><span class="dish__price">8,00 €</span></div><p>pomodoro, mozzarella, cotto, porcini, scaglie di grana</p></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Bianche e focacce</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Fumè</h4><span class="dish__dots"></span><span class="dish__price">7,00 €</span></div><p>mozzarella, scamorza, radicchio, speck</p></li>
+            <li class="dish"><div class="dish__row"><h4>Andromeda</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>mozzarella di bufala, pomodoro fresco, basilico</p></li>
+            <li class="dish"><div class="dish__row"><h4>Bolognese</h4><span class="dish__dots"></span><span class="dish__price">9,00 €</span></div><p>burrata, mortadella, granella di pistacchi</p></li>
+            <li class="dish"><div class="dish__row"><h4>Contadina</h4><span class="dish__dots"></span><span class="dish__price">7,00 €</span></div><p>mozzarella, salsiccia, friarielli</p></li>
+            <li class="dish"><div class="dish__row"><h4>Alessia (focaccia)</h4><span class="dish__dots"></span><span class="dish__price">7,00 €</span></div><p>crudo, rucola, pomodoro fresco, scaglie di grana</p></li>
+            <li class="dish"><div class="dish__row"><h4>Primavera (focaccia)</h4><span class="dish__dots"></span><span class="dish__price">7,00 €</span></div><p>mozzarella di bufala, rucola, pomodoro fresco</p></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Calzoni</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Calabrese</h4><span class="dish__dots"></span><span class="dish__price">8,00 €</span></div><p>pomodoro, mozzarella, salame piccante</p></li>
+            <li class="dish"><div class="dish__row"><h4>Classico</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, prosciutto cotto</p></li>
+            <li class="dish"><div class="dish__row"><h4>Quattro formaggi</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>mozzarella, formaggi misti</p></li>
+            <li class="dish"><div class="dish__row"><h4>Farcito</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, cotto, funghi, carciofi</p></li>
+            <li class="dish"><div class="dish__row"><h4>Vegetariano</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>pomodoro, mozzarella, misto verdure alla griglia</p></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Fantasia</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Del pizzaiolo</h4><span class="dish__dots"></span><span class="dish__price">8,00 €</span></div><p>metà calzone, metà pizza</p></li>
+            <li class="dish"><div class="dish__row"><h4>Sfilatino di Capri</h4><span class="dish__dots"></span><span class="dish__price">7,50 €</span></div><p>mozzarella, pomodoro fresco, cotto, ricotta, basilico</p></li>
+          </ul>
+        </div>
       </div>
+      <div class="menu-panel" id="tab-piatti" role="tabpanel" hidden>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Insalatone</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Maremonti</h4><span class="dish__dots"></span><span class="dish__price">12,00 €</span></div><p>insalata verde, gamberetti, funghi porcini</p></li>
+            <li class="dish"><div class="dish__row"><h4>Zia Teresa</h4><span class="dish__dots"></span><span class="dish__price">11,00 €</span></div><p>insalata verde, straccetti di pollo, mais, pomodorini e salsa rosa</p></li>
+            <li class="dish"><div class="dish__row"><h4>Classica</h4><span class="dish__dots"></span><span class="dish__price">11,00 €</span></div><p>insalata verde, grana, rucola, gamberetti</p></li>
+            <li class="dish"><div class="dish__row"><h4>La Fattoria</h4><span class="dish__dots"></span><span class="dish__price">9,00 €</span></div><p>insalata verde, bocconcini di mozzarella, rucola, carote grattugiate</p></li>
+            <li class="dish"><div class="dish__row"><h4>Mar Rosso</h4><span class="dish__dots"></span><span class="dish__price">13,00 €</span></div><p>insalata verde, rucola, piovra, gamberetti, scaglie di grana</p></li>
+            <li class="dish"><div class="dish__row"><h4>Primavera</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div><p>insalata verde, rossa, olive, pomodoro, tonno, uovo sodo</p></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Cous cous</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Cous cous di verdura</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Cous cous di pesce</h4><span class="dish__dots"></span><span class="dish__price">15,00 €</span></div></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Contorni</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Insalata mista</h4><span class="dish__dots"></span><span class="dish__price">5,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Patate fritte</h4><span class="dish__dots"></span><span class="dish__price">4,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Patate prezzemolate</h4><span class="dish__dots"></span><span class="dish__price">4,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Sautè di patate</h4><span class="dish__dots"></span><span class="dish__price">4,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Spinaci aglio e olio</h4><span class="dish__dots"></span><span class="dish__price">4,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Spinaci al burro</h4><span class="dish__dots"></span><span class="dish__price">4,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Trevisana saltata</h4><span class="dish__dots"></span><span class="dish__price">4,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Verdure alla griglia</h4><span class="dish__dots"></span><span class="dish__price">5,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Verdure lesse</h4><span class="dish__dots"></span><span class="dish__price">4,50 €</span></div></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Formaggi</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Brie</h4><span class="dish__dots"></span><span class="dish__price">5,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Gorgonzola</h4><span class="dish__dots"></span><span class="dish__price">5,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Grana</h4><span class="dish__dots"></span><span class="dish__price">5,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Taleggio</h4><span class="dish__dots"></span><span class="dish__price">5,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Misto</h4><span class="dish__dots"></span><span class="dish__price">8,00 €</span></div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu-panel" id="tab-dolci" role="tabpanel" hidden>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Dolci</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Dolci fatti in casa</h4><span class="dish__dots"></span><span class="dish__price">5,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Affogato al caffè</h4><span class="dish__dots"></span><span class="dish__price">6,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Affogato al liquore</h4><span class="dish__dots"></span><span class="dish__price">7,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Ananas o frutta di stagione</h4><span class="dish__dots"></span><span class="dish__price">4,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Tartufo bianco o nero</h4><span class="dish__dots"></span><span class="dish__price">4,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Torroncino semifreddo</h4><span class="dish__dots"></span><span class="dish__price">4,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Flute sorbetto al limoncello</h4><span class="dish__dots"></span><span class="dish__price">4,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Coppa gelato</h4><span class="dish__dots"></span><span class="dish__price">4,50 €</span></div></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Caffè</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Caffè</h4><span class="dish__dots"></span><span class="dish__price">1,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Corretto</h4><span class="dish__dots"></span><span class="dish__price">2,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Cappuccino</h4><span class="dish__dots"></span><span class="dish__price">2,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Ginseng</h4><span class="dish__dots"></span><span class="dish__price">2,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Decaffeinato</h4><span class="dish__dots"></span><span class="dish__price">2,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Orzo</h4><span class="dish__dots"></span><span class="dish__price">2,00 €</span></div></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Digestivo</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Liquori</h4><span class="dish__dots"></span><span class="dish__price">4,00 €</span></div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu-panel" id="tab-bevande" role="tabpanel" hidden>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Bibite</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Acqua 3/4 lt</h4><span class="dish__dots"></span><span class="dish__price">2,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Coca, Fanta, Sprite</h4><span class="dish__dots"></span><span class="dish__price">2,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Thè alla pesca o al limone</h4><span class="dish__dots"></span><span class="dish__price">2,00 €</span></div></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Birre</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Birra alla spina grande</h4><span class="dish__dots"></span><span class="dish__price">9,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Birra alla spina media</h4><span class="dish__dots"></span><span class="dish__price">4,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Birra alla spina piccola</h4><span class="dish__dots"></span><span class="dish__price">3,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Birra in bottiglia 66 cl</h4><span class="dish__dots"></span><span class="dish__price">4,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Birra rossa in bottiglia 33 cl</h4><span class="dish__dots"></span><span class="dish__price">4,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Birra/Birra analcolica in bottiglia</h4><span class="dish__dots"></span><span class="dish__price">3,50 €</span></div></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Vino della casa</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Della casa 1/4 lt bianco o rosso</h4><span class="dish__dots"></span><span class="dish__price">3,50 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Della casa 1/2 lt bianco o rosso</h4><span class="dish__dots"></span><span class="dish__price">5,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Della casa 1 lt bianco o rosso</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Spumante dolce o secco</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Rossi</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Nero d&#x27;Avola</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Bonarda frizzante</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Pinot nero</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Chianti</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Chianti (0,375)</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <h3 class="menu-group__title">Bianchi</h3>
+          <ul class="dishes">
+            <li class="dish"><div class="dish__row"><h4>Pinot nero vinificato bianco</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Pinot grigio</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Müller Thurgau</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Greco di Tufo</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Falanghina</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Chardonnay</h4><span class="dish__dots"></span><span class="dish__price">18,00 €</span></div></li>
+            <li class="dish"><div class="dish__row"><h4>Vino bianco (0,375)</h4><span class="dish__dots"></span><span class="dish__price">10,00 €</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-notes">
+        <p>Coperto 2,00 € · Pizza con impasto integrale +1,00 €</p>
+        <p>Alcuni piatti possono contenere allergeni: chiedi al nostro staff tutte le informazioni sugli ingredienti (Reg. UE 1169/2011). Qualora il prodotto fresco non fosse disponibile, la preparazione potrebbe avvenire con materie prime congelate o surgelate all'origine.</p>
+        <a href="assets/menu-maremonti.pdf" class="btn btn--outline" target="_blank" rel="noopener">Scarica il menù in PDF</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERIA ===== -->
+  <section class="section section--dark" id="galleria">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">Galleria</p>
+        <h2 class="section__title">Dalla nostra cucina</h2>
+      </div>
+      <div class="gallery">
+        <figure class="gallery__item gallery__item--tall reveal"><img src="assets/img/g-crudo.jpg" alt="Piatto di frutti di mare e crudi" loading="lazy"></figure>
+        <figure class="gallery__item reveal"><img src="assets/img/g-gamberoni.jpg" alt="Gamberoni gratinati pronti per il forno" loading="lazy"></figure>
+        <figure class="gallery__item reveal"><img src="assets/img/g-grigliata.jpg" alt="Grigliata mista di pesce" loading="lazy"></figure>
+        <figure class="gallery__item reveal"><img src="assets/img/g-filetto.jpg" alt="Filetto di manzo con salsa" loading="lazy"></figure>
+        <figure class="gallery__item gallery__item--tall reveal"><img src="assets/img/g-cotoletta.jpg" alt="Cotoletta alla milanese" loading="lazy"></figure>
+        <figure class="gallery__item reveal"><img src="assets/img/g-orata.jpg" alt="Filetti di orata con patate" loading="lazy"></figure>
+        <figure class="gallery__item reveal"><img src="assets/img/g-insalata.jpg" alt="Insalatona" loading="lazy"></figure>
+        <figure class="gallery__item reveal"><img src="assets/img/g-misto.jpg" alt="Misto di pesce alla griglia con verdure" loading="lazy"></figure>
+        <figure class="gallery__item reveal"><img src="assets/img/g-tagliata.jpg" alt="Tagliata di manzo con verdure" loading="lazy"></figure>
+        <figure class="gallery__item reveal"><img src="assets/img/g-tiramisu.jpg" alt="Tiramisù fatto in casa" loading="lazy"></figure>
+      </div>
+      <p class="gallery__more"><a href="https://www.instagram.com/maremontilocate/" target="_blank" rel="noopener">Altre foto su Instagram · @maremontilocate</a></p>
     </div>
   </section>
 
@@ -278,8 +605,7 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
-        <img src="assets/logo.png" alt="Maremonti" class="footer__logo" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
-        <span class="brand__text" hidden>Maremonti</span>
+        <img src="assets/logo.jpg" alt="Maremonti" class="footer__logo">
         <p>Ristorante · Pizzeria</p>
       </div>
       <div class="footer__links">
