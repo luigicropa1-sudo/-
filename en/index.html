@@ -148,7 +148,7 @@
           "name": "Do you have a lunch menu?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, from Tuesday to Friday you can choose between the €10 pizza menu (classic pizza, drink and coffee) and the €12 set menu."
+            "text": "Yes, from Tuesday to Friday you can choose between the €10 pizza menu (classic pizza, drink and coffee) and the €12 set menu (first course, main course and side dish of the day, drink and coffee)."
           }
         },
         {
@@ -341,10 +341,19 @@
         <article class="lunch-card lunch-card--dark reveal" style="--d:.15s">
           <div class="lunch-card__price"><small>€</small>12</div>
           <h3>Set Menu</h3>
-          <!-- Composizione del menù fisso: da completare con i piatti inclusi -->
-          <ul class="lunch-card__list">
-            <li><strong>Today's dishes</strong><span>The menu changes every day: ask our staff or call us to find out what's on today</span></li>
+          <!--
+            Menù fisso del giorno: i piatti vengono letti dal foglio Google
+            indicato in data-sheet (link "Pubblica sul web" in formato CSV).
+            Se il link manca o per oggi non c'è una riga, resta il testo qui sotto.
+          -->
+          <p class="lunch-card__date" id="mfDate">First course, main course and side dish</p>
+          <ul class="lunch-card__list" id="menuFisso" data-sheet="">
+            <li><strong>First course</strong><span data-mf="primo">Changes every day</span></li>
+            <li><strong>Main course</strong><span data-mf="secondo">Changes every day</span></li>
+            <li><strong>Side dish</strong><span data-mf="contorno">Changes every day</span></li>
+            <li><strong>Drink and coffee</strong></li>
           </ul>
+          <p class="lunch-card__hint" id="mfHint">Ask our staff or call us to find out what's on today.</p>
           <a href="tel:+39029077708" class="btn btn--ghost">Ask for today's menu</a>
         </article>
       </div>
@@ -778,7 +787,7 @@
         </details>
         <details class="faq__item">
           <summary>Do you have a lunch menu?</summary>
-          <p>Yes, from Tuesday to Friday you can choose between the €10 pizza menu (classic pizza, drink and coffee) and the €12 set menu.</p>
+          <p>Yes, from Tuesday to Friday you can choose between the €10 pizza menu (classic pizza, drink and coffee) and the €12 set menu (first course, main course and side dish of the day, drink and coffee).</p>
         </details>
         <details class="faq__item">
           <summary>Can you host events?</summary>

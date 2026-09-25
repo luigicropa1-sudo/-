@@ -95,5 +95,70 @@
     counters.forEach((el) => co.observe(el));
   }
 
+  // Menù fisso del giorno, letto dal foglio Google pubblicato in CSV
+  const mfList = document.getElementById('menuFisso');
+  if (mfList && mfList.dataset.sheet) {
+    const en = document.documentElement.lang === 'en';
+    const mfDate = document.getElementById('mfDate');
+    const mfHint = document.getElementById('mfHint');
+    const today = new Date();
+    const pad = (n) => String(n).padStart(2, '0');
+    const todayKey = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+
+    // CSV con virgolette e a capo dentro le celle
+    const parseCSV = (text) => {
+      const rows = [];
+      let row = [], cell = '', quoted = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (quoted) {
+          if (c === '"' && text[i + 1] === '"') { cell += '"'; i++; }
+          else if (c === '"') quoted = false;
+          else cell += c;
+        } else if (c === '"') quoted = true;
+        else if (c === ',') { row.push(cell); cell = ''; }
+        else if (c === '\n' || c === '\r') {
+          if (c === '\r' && text[i + 1] === '\n') i++;
+          row.push(cell); rows.push(row); row = []; cell = '';
+        } else cell += c;
+      }
+      if (cell || row.length) { row.push(cell); rows.push(row); }
+      return rows.filter((r) => r.some((x) => x.trim()));
+    };
+
+    // Date nel foglio: 30/09/2026, 30/09/26, 30-9-2026 oppure 2026-09-30
+    const toKey = (v) => {
+      v = (v || '').trim();
+      let m = v.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+      if (m) return `${m[1]}-${pad(m[2])}-${pad(m[3])}`;
+      m = v.match(/^(\d{1,2})[/.-](\d{1,2})[/.-](\d{2,4})/);
+      if (m) return `${m[3].length === 2 ? '20' + m[3] : m[3]}-${pad(m[2])}-${pad(m[1])}`;
+      return '';
+    };
+
+    const dateLabel = today.toLocaleDateString(en ? 'en-GB' : 'it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
+
+    fetch(mfList.dataset.sheet + (mfList.dataset.sheet.includes('?') ? '&' : '?') + 't=' + Date.now())
+      .then((r) => (r.ok ? r.text() : Promise.reject(r.status)))
+      .then((text) => {
+        const rows = parseCSV(text);
+        const head = rows[0].map((h) => h.trim().toLowerCase());
+        const col = (name, fallback) => (head.indexOf(name) >= 0 ? head.indexOf(name) : fallback);
+        const iDate = col('data', 0), iPrimo = col('primo', 1), iSecondo = col('secondo', 2), iContorno = col('contorno', 3);
+        const row = rows.slice(1).find((r) => toKey(r[iDate]) === todayKey);
+        if (!row) return;
+        const set = (key, i) => {
+          const val = (row[i] || '').trim();
+          if (val) mfList.querySelector(`[data-mf="${key}"]`).textContent = val;
+        };
+        set('primo', iPrimo);
+        set('secondo', iSecondo);
+        set('contorno', iContorno);
+        mfDate.textContent = (en ? 'Today, ' : 'Oggi, ') + dateLabel;
+        mfHint.hidden = true;
+      })
+      .catch(() => { /* in caso di errore resta il testo predefinito */ });
+  }
+
   document.getElementById('year').textContent = new Date().getFullYear();
 })();

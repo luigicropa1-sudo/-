@@ -147,7 +147,7 @@
           "name": "C'è un menù per il pranzo?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sì, dal martedì al venerdì puoi scegliere tra il menù pizza a 10 € (pizza classica, bevanda e caffè) e il menù fisso a 12 €."
+            "text": "Sì, dal martedì al venerdì puoi scegliere tra il menù pizza a 10 € (pizza classica, bevanda e caffè) e il menù fisso a 12 € (primo, secondo e contorno del giorno, bevanda e caffè)."
           }
         },
         {
@@ -340,10 +340,19 @@
         <article class="lunch-card lunch-card--dark reveal" style="--d:.15s">
           <div class="lunch-card__price"><small>€</small>12</div>
           <h3>Menù Fisso</h3>
-          <!-- Composizione del menù fisso: da completare con i piatti inclusi -->
-          <ul class="lunch-card__list">
-            <li><strong>Le proposte del giorno</strong><span>Il menù cambia ogni giorno: chiedi in sala o chiamaci per sapere cosa c'è oggi</span></li>
+          <!--
+            Menù fisso del giorno: i piatti vengono letti dal foglio Google
+            indicato in data-sheet (link "Pubblica sul web" in formato CSV).
+            Se il link manca o per oggi non c'è una riga, resta il testo qui sotto.
+          -->
+          <p class="lunch-card__date" id="mfDate">Primo, secondo e contorno</p>
+          <ul class="lunch-card__list" id="menuFisso" data-sheet="">
+            <li><strong>Primo</strong><span data-mf="primo">Cambia ogni giorno</span></li>
+            <li><strong>Secondo</strong><span data-mf="secondo">Cambia ogni giorno</span></li>
+            <li><strong>Contorno</strong><span data-mf="contorno">Cambia ogni giorno</span></li>
+            <li><strong>Bevanda e caffè</strong></li>
           </ul>
+          <p class="lunch-card__hint" id="mfHint">Chiedi in sala o chiamaci per sapere cosa c'è oggi.</p>
           <a href="tel:+39029077708" class="btn btn--ghost">Chiedi il menù di oggi</a>
         </article>
       </div>
@@ -777,7 +786,7 @@
         </details>
         <details class="faq__item">
           <summary>C'è un menù per il pranzo?</summary>
-          <p>Sì, dal martedì al venerdì puoi scegliere tra il menù pizza a 10 € (pizza classica, bevanda e caffè) e il menù fisso a 12 €.</p>
+          <p>Sì, dal martedì al venerdì puoi scegliere tra il menù pizza a 10 € (pizza classica, bevanda e caffè) e il menù fisso a 12 € (primo, secondo e contorno del giorno, bevanda e caffè).</p>
         </details>
         <details class="faq__item">
           <summary>Si possono organizzare pranzi e cene per eventi?</summary>

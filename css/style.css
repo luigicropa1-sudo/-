@@ -387,6 +387,16 @@ p { margin: 0 0 1em; }
 .lunch-card--dark .lunch-card__list span { color: rgba(255,255,255,.8); }
 .lunch-card .btn { align-self: flex-start; }
 .lunch-card--dark .btn--ghost:hover { color: var(--red); }
+.lunch-card__date {
+  margin: -.6rem 0 .8rem;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.9);
+}
+.lunch-card__hint { margin: -1rem 0 1.6rem; font-size: .9rem; color: rgba(255,255,255,.8); }
+.lunch-card__list span[data-mf] { white-space: pre-line; }
 .lunch__note { text-align: center; margin: 2.6rem 0 0; color: rgba(255,255,255,.7); letter-spacing: .06em; }
 
 /* ---------- Domande frequenti ---------- */
