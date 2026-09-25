@@ -5,8 +5,8 @@ con lo stesso nome (JPG, circa 1600 px di larghezza).
 
 | File            | Dove appare                                  |
 |-----------------|----------------------------------------------|
-| hero.jpg        | Sfondo principale in cima alla pagina         |
-| banco.jpg       | Sezione "Chi siamo"                          |
+| hero.jpg        | Sfondo principale in cima alla pagina (banco del pesce) |
+| fritto.jpg      | Sezione "Chi siamo"                          |
 | mare.jpg        | Card "Il mare"                               |
 | carne.jpg       | Card "I monti"                               |
 | pizza.jpg       | Card "La pizza" (manca: ora c'è uno sfondo sfumato) |

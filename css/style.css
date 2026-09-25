@@ -232,7 +232,7 @@ p { margin: 0 0 1em; }
   border-radius: var(--radius);
   z-index: -1;
 }
-.img-frame--sala  { background: url("../assets/img/banco.jpg")  center / cover, linear-gradient(135deg, #2c4a63, #0f2233); }
+.img-frame--sala  { background: url("../assets/img/fritto.jpg")  center / cover, linear-gradient(135deg, #2c4a63, #0f2233); }
 .img-frame--mare  { background: url("../assets/img/mare.jpg")  center / cover, linear-gradient(135deg, #2f6d8c, #123049); }
 .img-frame--monti { background: url("../assets/img/carne.jpg") center / cover, linear-gradient(135deg, #7b4a2e, #3a2215); }
 .img-frame--pizza { background: url("../assets/img/pizza.jpg") center / cover, radial-gradient(circle at 50% 110%, #f0a13a 0%, #c0421f 35%, #5b1a12 75%, #2a0f0b 100%); }
@@ -423,6 +423,7 @@ p { margin: 0 0 1em; }
   .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; gap: 8px; }
   .brand__logo, .header.is-scrolled .brand__logo { height: 38px; }
   .hero__actions .btn { flex: 1 1 100%; text-align: center; }
+  .hero__overlay { background: linear-gradient(180deg, rgba(20,14,12,.55) 0%, rgba(20,14,12,.8) 45%, rgba(20,14,12,.85) 100%); }
   .highlight strong { font-size: 1.6rem; }
   .contact__map, .contact__map iframe { min-height: 320px; }
 }
