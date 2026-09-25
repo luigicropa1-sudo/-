@@ -323,6 +323,72 @@ p { margin: 0 0 1em; }
 .menu-notes p:first-child { font-weight: 500; color: var(--ink); font-size: 1rem; }
 .menu-notes .btn { margin-top: 1rem; }
 
+/* ---------- Menù del pranzo ---------- */
+.lunch {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(168,39,42,.35), transparent 55%),
+    var(--navy);
+  color: #fff;
+}
+.lunch .section__title { color: #fff; }
+.lunch .eyebrow { color: var(--gold); }
+.lunch .section__intro { color: rgba(255,255,255,.75); }
+.lunch__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 420px));
+  justify-content: center;
+  gap: 2rem;
+}
+.lunch-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 2.4rem 2.4rem;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 10px;
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.6);
+  transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s;
+}
+.lunch-card:hover { transform: translateY(-8px); box-shadow: 0 40px 70px -30px rgba(0,0,0,.7); }
+.lunch-card--dark { background: var(--red); color: #fff; }
+.lunch-card__badge {
+  position: absolute;
+  top: 1.2rem; left: 1.2rem;
+  padding: .3em .9em;
+  background: var(--gold);
+  color: var(--navy);
+  border-radius: 99px;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.lunch-card__price {
+  align-self: flex-end;
+  font-family: var(--serif);
+  font-size: 4.2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--red);
+}
+.lunch-card--dark .lunch-card__price { color: #fff; }
+.lunch-card__price small { font-size: 1.6rem; vertical-align: super; margin-right: .1em; }
+.lunch-card h3 { font-size: 2.2rem; margin: .4rem 0 1.2rem; }
+.lunch-card__list { list-style: none; margin: 0 0 2rem; padding: 0; flex: 1; }
+.lunch-card__list li {
+  padding: .8rem 0;
+  border-top: 1px solid var(--line);
+}
+.lunch-card--dark .lunch-card__list li { border-color: rgba(255,255,255,.25); }
+.lunch-card__list strong { display: block; font-weight: 500; }
+.lunch-card__list span { font-size: .92rem; color: var(--muted); }
+.lunch-card--dark .lunch-card__list span { color: rgba(255,255,255,.8); }
+.lunch-card .btn { align-self: flex-start; }
+.lunch-card--dark .btn--ghost:hover { color: var(--red); }
+.lunch__note { text-align: center; margin: 2.6rem 0 0; color: rgba(255,255,255,.7); letter-spacing: .06em; }
+
 /* ---------- Barra di avanzamento ---------- */
 .progress {
   position: fixed;
@@ -534,7 +600,7 @@ p { margin: 0 0 1em; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1200px) and (min-width: 861px) {
-  .nav { gap: 1.25rem; }
+  .nav { gap: 1.05rem; }
   .nav a:not(.btn) { font-size: .74rem; letter-spacing: .12em; }
   .nav__social { display: none; }
 }
@@ -573,6 +639,8 @@ p { margin: 0 0 1em; }
   .img-frame { aspect-ratio: 4 / 3; }
   .img-frame::after { inset: 14px -14px -14px 14px; }
   .dishes { grid-template-columns: 1fr; gap: 1.1rem; }
+  .lunch__grid { grid-template-columns: 1fr; }
+  .lunch-card { padding: 2.6rem 1.6rem 1.8rem; }
   .tabs { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin-inline: -20px; padding-inline: 20px; scrollbar-width: none; }
   .tab { flex: 0 0 auto; padding: .8em 1.1em; }
 }
