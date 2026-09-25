@@ -113,26 +113,6 @@ TEXT = [
     (">Organizza il tuo evento<", ">Plan your event<"),
     (">Scrivici su WhatsApp<", ">Message us on WhatsApp<"),
     ("Buongiorno%2C%20vorrei%20organizzare%20un%20evento%20da%20Maremonti", "Hello%2C%20I%20would%20like%20to%20organise%20an%20event%20at%20Maremonti"),
-    # Prenotazione
-    ('<p class="eyebrow">Prenota</p>', '<p class="eyebrow">Book</p>'),
-    (">Prenota il tuo tavolo in un attimo<", ">Book your table in seconds<"),
-    ("<p>Compila i campi e premi <strong>Invia su WhatsApp</strong>: si aprirà la chat con il ristorante con il messaggio già pronto, devi solo inviarlo.</p>",
-     "<p>Fill in the form and tap <strong>Send on WhatsApp</strong>: a chat with the restaurant will open with your message ready, you just need to send it.</p>"),
-    ("<p>La prenotazione è confermata quando ti rispondiamo. Preferisci telefonare? Chiamaci allo ",
-     "<p>Your booking is confirmed once we reply. Prefer to call? Ring us on "),
-    ("<li><span>Pranzo</span> 12:00 – 14:30</li>", "<li><span>Lunch</span> 12:00 – 14:30</li>"),
-    ("<li><span>Cena</span> 19:00 – 23:00</li>", "<li><span>Dinner</span> 19:00 – 23:00</li>"),
-    ("<li><span>Lunedì</span> chiuso</li>", "<li><span>Monday</span> closed</li>"),
-    ('<label for="bk-name">Nome</label>', '<label for="bk-name">Name</label>'),
-    ('<label for="bk-date">Data</label>', '<label for="bk-date">Date</label>'),
-    ('<label for="bk-people">Persone</label>', '<label for="bk-people">Guests</label>'),
-    ('<option value="più di 20">Più di 20</option>', '<option value="more than 20">More than 20</option>'),
-    ("<legend>Pranzo o cena?</legend>", "<legend>Lunch or dinner?</legend>"),
-    ('<input type="radio" name="meal" value="pranzo" required><span>Pranzo</span>', '<input type="radio" name="meal" value="pranzo" required><span>Lunch</span>'),
-    ('<input type="radio" name="meal" value="cena" checked><span>Cena</span>', '<input type="radio" name="meal" value="cena" checked><span>Dinner</span>'),
-    ('<label for="bk-time">Orario</label>', '<label for="bk-time">Time</label>'),
-    ('<label for="bk-notes">Note <small>(facoltativo)</small></label>', '<label for="bk-notes">Notes <small>(optional)</small></label>'),
-    ("<span>Invia su WhatsApp</span>", "<span>Send on WhatsApp</span>"),
     # Domande frequenti
     ('<p class="eyebrow">Domande frequenti</p>', '<p class="eyebrow">FAQ</p>'),
     (">Tutto quello che c'è da sapere<", ">Everything you need to know<"),
@@ -146,9 +126,6 @@ TEXT = [
     ("<tr><td>Lunedì</td><td>Chiuso</td></tr>", "<tr><td>Monday</td><td>Closed</td></tr>"),
     ("<td>Martedì – Domenica</td>", "<td>Tuesday – Sunday</td>"),
     (">Chiama ora<", ">Call now<"),
-    ("<span>Mostra la mappa</span>", "<span>Show map</span>"),
-    ("<small>Cliccando, la mappa viene caricata da Google Maps</small>", "<small>Clicking loads the map from Google Maps</small>"),
-    (">Indicazioni stradali →<", ">Get directions →<"),
     # Footer
     ("<p>Ristorante · Pizzeria</p>", "<p>Restaurant · Pizzeria</p>"),
 ]
@@ -174,9 +151,7 @@ ATTR = [
     ('alt="Tagliata di manzo con verdure"', 'alt="Sliced beef with vegetables"'),
     ('alt="Pizza con salsiccia cotta nel forno a legna"', 'alt="Sausage pizza from the wood-fired oven"'),
     ('alt="Tiramisù fatto in casa"', 'alt="Homemade tiramisù"'),
-    ('placeholder="Il tuo nome"', 'placeholder="Your name"'),
-    ("placeholder=\"Seggiolone, intolleranze, un'occasione speciale…\"", 'placeholder="High chair, food intolerances, a special occasion…"'),
-    ('data-title="Mappa Ristorante Maremonti"', 'data-title="Map of Ristorante Maremonti"'),
+    ('title="Mappa Ristorante Maremonti"', 'title="Map of Ristorante Maremonti"'),
 ]
 
 FAQ = [
@@ -196,8 +171,8 @@ FAQ = [
      "Sì. Con oltre 200 coperti in sale climatizzate organizziamo comunioni, cresime, compleanni, anniversari e cene aziendali, con menù personalizzati.",
      "Yes. With over 200 seats in air-conditioned rooms we host first communions, confirmations, birthdays, anniversaries and business dinners, with tailored menus."),
     ("Come posso prenotare un tavolo?", "How can I book a table?",
-     "Compila il modulo di prenotazione qui sopra: si apre WhatsApp con il messaggio già pronto. Oppure chiamaci allo 02 907 7708, al 328 467 5980 o al 389 268 3838.",
-     "Fill in the booking form above: WhatsApp opens with your message ready to send. Or call us on +39 02 907 7708, +39 328 467 5980 or +39 389 268 3838."),
+     "Chiamaci allo 02 907 7708, al 328 467 5980 o al 389 268 3838, oppure scrivici su WhatsApp.",
+     "Call us on +39 02 907 7708, +39 328 467 5980 or +39 389 268 3838, or message us on WhatsApp."),
     ("Dove si può parcheggiare?", "Where can I park?",
      "Il ristorante non ha un parcheggio privato: si può parcheggiare nei parcheggi pubblici della zona.",
      "The restaurant has no private car park: you can use the public parking in the area."),
@@ -279,7 +254,7 @@ def main():
             node["@id"] = DOMAIN + "/en/#faq"
             for qa in node["mainEntity"]:
                 q_en, a_en = faq_q[qa["name"]]
-                qa["name"], qa["acceptedAnswer"]["text"] = q_en, a_en.replace("above", "on our website")
+                qa["name"], qa["acceptedAnswer"]["text"] = q_en, a_en
     s = s[:m.start(2)] + json.dumps(data, ensure_ascii=False, indent=2) + s[m.end(2):]
 
     # 3) Intestazione della pagina
@@ -310,9 +285,6 @@ def main():
     for q_it, q_en, a_it, a_en in FAQ:
         s = must_replace(s, f"<summary>{q_it}</summary>", f"<summary>{q_en}</summary>", "domanda")
         s = must_replace(s, f"<p>{a_it}</p>", f"<p>{a_en}</p>", "risposta")
-    # Persone nel modulo
-    s = s.replace(">1 persona<", ">1 guest<")
-    s = re.sub(r">(\d+) persone<", r">\1 guests<", s)
 
     # 5) Percorsi dei file: la pagina inglese sta in /en/
     s = re.sub(r'(href|src)="(assets/|css/|js/)', r'\1="../\2', s)

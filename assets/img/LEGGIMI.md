@@ -1,21 +1,17 @@
 # Foto del sito
 
-Le foto sono in formato WebP (più leggero del JPG). Per sostituirne una, salva la nuova
-foto in WebP con lo stesso nome; un qualsiasi convertitore online "JPG to WebP" va bene.
+Le foto vengono dal sito attuale del ristorante. Per sostituirne una, salva la nuova foto
+con lo stesso nome (JPG, circa 1600 px di larghezza).
 
-| File            | Dove appare                                      |
-|-----------------|--------------------------------------------------|
-| hero.webp       | Sfondo principale in cima alla pagina (banco del pesce) |
-| fritto.webp     | Sezione "Chi siamo"                              |
-| mare.webp       | Scheda "Il mare"                                 |
-| carne.webp      | Scheda "I monti"                                 |
-| pizza.webp      | Scheda "La pizza"                                |
-| eventi.webp     | Sezione "Banchetti ed eventi"                    |
-| g-*.webp        | Galleria                                         |
+| File            | Dove appare                                  |
+|-----------------|----------------------------------------------|
+| hero.jpg        | Sfondo principale in cima alla pagina (banco del pesce) |
+| fritto.jpg      | Sezione "Chi siamo"                          |
+| mare.jpg        | Card "Il mare"                               |
+| carne.jpg       | Card "I monti"                               |
+| pizza.jpg       | Card "La pizza"                              |
+| eventi.jpg      | Sezione "Banchetti ed eventi"                |
+| g-*.jpg         | Galleria                                     |
 
-Altri file in `assets/`:
-- `logo.webp`: logo del sito attuale, solo ritagliato
-- `og-image.jpg`: immagine mostrata quando il link viene condiviso (1200×630)
-- `favicon-48.png`, `apple-touch-icon.png`: icone del sito
-- `menu-maremonti.pdf`: menù completo
-- `fonts/`: caratteri Cormorant Garamond e Jost (licenza SIL Open Font License)
+Il logo è `assets/logo.jpg`, ritagliato dal logo del sito attuale senza modifiche.
+Il menù in PDF è `assets/menu-maremonti.pdf`.

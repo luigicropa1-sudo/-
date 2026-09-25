@@ -3,11 +3,6 @@
    Palette ripresa dal logo: rosso Maremonti + antracite caldo + ambra + avorio
    ========================================================== */
 
-/* Caratteri ospitati sul sito (SIL Open Font License) */
-@font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 500 700; font-display: swap; src: url("../assets/fonts/cormorant.woff2") format("woff2"); }
-@font-face { font-family: "Cormorant Garamond"; font-style: italic; font-weight: 500; font-display: swap; src: url("../assets/fonts/cormorant-italic.woff2") format("woff2"); }
-@font-face { font-family: "Jost"; font-style: normal; font-weight: 300 600; font-display: swap; src: url("../assets/fonts/jost.woff2") format("woff2"); }
-
 :root {
   --navy: #1d1715;      /* antracite caldo (sfondi scuri) */
   --navy-2: #2a211e;
@@ -170,7 +165,7 @@ p { margin: 0 0 1em; }
   position: absolute;
   inset: -12% 0;
   background:
-    url("../assets/img/hero.webp") center / cover no-repeat,
+    url("../assets/img/hero.jpg") center / cover no-repeat,
     radial-gradient(ellipse at 70% 30%, #5a1a1c 0%, var(--navy) 60%, #120d0c 100%);
   animation: kenburns 18s ease-out both;
   will-change: transform;
@@ -251,10 +246,10 @@ p { margin: 0 0 1em; }
   border-radius: var(--radius);
   z-index: -1;
 }
-.img-frame--sala  { background: url("../assets/img/fritto.webp")  center / cover, linear-gradient(135deg, #2c4a63, #0f2233); }
-.img-frame--mare  { background: url("../assets/img/mare.webp")  center / cover, linear-gradient(135deg, #2f6d8c, #123049); }
-.img-frame--monti { background: url("../assets/img/carne.webp") center / cover, linear-gradient(135deg, #7b4a2e, #3a2215); }
-.img-frame--pizza { background: url("../assets/img/pizza.webp") center / cover, radial-gradient(circle at 50% 110%, #f0a13a 0%, #c0421f 35%, #5b1a12 75%, #2a0f0b 100%); }
+.img-frame--sala  { background: url("../assets/img/fritto.jpg")  center / cover, linear-gradient(135deg, #2c4a63, #0f2233); }
+.img-frame--mare  { background: url("../assets/img/mare.jpg")  center / cover, linear-gradient(135deg, #2f6d8c, #123049); }
+.img-frame--monti { background: url("../assets/img/carne.jpg") center / cover, linear-gradient(135deg, #7b4a2e, #3a2215); }
+.img-frame--pizza { background: url("../assets/img/pizza.jpg") center / cover, radial-gradient(circle at 50% 110%, #f0a13a 0%, #c0421f 35%, #5b1a12 75%, #2a0f0b 100%); }
 
 /* ---------- Cards ---------- */
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -393,86 +388,6 @@ p { margin: 0 0 1em; }
 .lunch-card .btn { align-self: flex-start; }
 .lunch-card--dark .btn--ghost:hover { color: var(--red); }
 .lunch__note { text-align: center; margin: 2.6rem 0 0; color: rgba(255,255,255,.7); letter-spacing: .06em; }
-
-/* ---------- Prenotazione ---------- */
-.booking { background: var(--paper); }
-.booking__inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(40px, 6vw, 90px); align-items: start; }
-.booking__intro p { color: var(--muted); }
-.booking__intro a { color: var(--red); font-weight: 500; }
-.booking__hours { list-style: none; padding: 0; margin: 2rem 0 0; border-top: 1px solid var(--line); }
-.booking__hours li { display: flex; justify-content: space-between; padding: .8rem 0; border-bottom: 1px solid var(--line); }
-.booking__hours span { font-weight: 500; }
-.booking__form {
-  background: #fff;
-  padding: clamp(1.6rem, 4vw, 2.6rem);
-  border-radius: 12px;
-  box-shadow: 0 30px 60px -30px rgba(29,23,21,.35);
-  border-top: 4px solid var(--red);
-}
-.field { margin: 0 0 1.2rem; padding: 0; border: 0; min-width: 0; }
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.field label, .field legend {
-  display: block;
-  margin-bottom: .45rem;
-  padding: 0;
-  font-size: .74rem;
-  font-weight: 600;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--navy);
-}
-.field label small { font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--muted); }
-.field input, .field select, .field textarea {
-  width: 100%;
-  padding: .85rem 1rem;
-  font: inherit;
-  font-size: 1rem;
-  color: var(--ink);
-  background: var(--paper);
-  border: 1px solid rgba(29,23,21,.18);
-  border-radius: 6px;
-  transition: border-color .2s, box-shadow .2s;
-}
-.field textarea { resize: vertical; }
-.field input:focus, .field select:focus, .field textarea:focus {
-  outline: none;
-  border-color: var(--red);
-  box-shadow: 0 0 0 3px rgba(168,39,42,.15);
-}
-.field .is-invalid { border-color: var(--red); background: #fff5f5; }
-.segmented { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
-.segmented label { margin: 0; cursor: pointer; }
-.segmented input { position: absolute; opacity: 0; pointer-events: none; }
-.segmented span {
-  display: block;
-  padding: .8rem;
-  text-align: center;
-  border: 1px solid rgba(29,23,21,.18);
-  border-radius: 6px;
-  font-size: .95rem;
-  letter-spacing: normal;
-  text-transform: none;
-  font-weight: 500;
-  color: var(--ink);
-  transition: background .2s, color .2s, border-color .2s;
-}
-.segmented input:checked + span { background: var(--navy); border-color: var(--navy); color: #fff; }
-.segmented input:focus-visible + span { box-shadow: 0 0 0 3px rgba(168,39,42,.25); }
-.booking__error { margin: 0 0 1rem; padding: .8rem 1rem; background: #fff1f1; color: var(--red-dark); border-radius: 6px; font-size: .92rem; }
-.btn--wa {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: .7rem;
-  background: #25d366;
-  border-color: #25d366;
-  color: #fff;
-  cursor: pointer;
-  font-size: .9rem;
-}
-.btn--wa:hover { background: #1da851; border-color: #1da851; }
-.btn--wa svg { width: 22px; height: 22px; fill: currentColor; }
 
 /* ---------- Domande frequenti ---------- */
 .faq { max-width: 820px; margin: 0 auto; }
@@ -676,7 +591,7 @@ p { margin: 0 0 1em; }
   position: absolute;
   inset: -20% 0;
   background:
-    url("../assets/img/eventi.webp") center / cover no-repeat,
+    url("../assets/img/eventi.jpg") center / cover no-repeat,
     linear-gradient(135deg, #3a1415, #120d0c);
   will-change: transform;
 }
@@ -707,53 +622,6 @@ p { margin: 0 0 1em; }
 .contact__actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
 .contact__map { min-height: 440px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
 .contact__map iframe { width: 100%; height: 100%; min-height: 440px; border: 0; filter: grayscale(.25); }
-
-.contact__map { position: relative; display: flex; flex-direction: column; }
-.map-load {
-  flex: 1;
-  min-height: 440px;
-  width: 100%;
-  border: 0;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
-  padding: 2rem;
-  color: #fff;
-  font-family: var(--sans);
-  background:
-    linear-gradient(rgba(29,23,21,.78), rgba(29,23,21,.88)),
-    repeating-linear-gradient(45deg, #3a2f2b 0 2px, transparent 2px 22px),
-    repeating-linear-gradient(-45deg, #3a2f2b 0 2px, transparent 2px 22px),
-    var(--navy-2);
-  transition: filter .3s;
-}
-.map-load:hover { filter: brightness(1.12); }
-.map-load svg { width: 44px; height: 44px; fill: var(--red); margin-bottom: .4rem; }
-.map-load strong { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; }
-.map-load span {
-  margin-top: .6rem;
-  padding: .7em 1.6em;
-  background: var(--red);
-  border-radius: var(--radius);
-  font-size: .8rem;
-  font-weight: 600;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-}
-.map-load small { margin-top: .6rem; font-size: .78rem; opacity: .7; }
-.map-directions {
-  display: block;
-  padding: .9rem 1.2rem;
-  background: var(--paper);
-  color: var(--red);
-  font-weight: 500;
-  text-decoration: none;
-  text-align: right;
-}
-.map-directions:hover { text-decoration: underline; }
 
 /* ---------- Footer ---------- */
 .footer { background: var(--navy); color: rgba(255,255,255,.7); padding: 4rem 0 2.5rem; text-align: center; }
@@ -820,7 +688,6 @@ p { margin: 0 0 1em; }
   .img-frame::after { inset: 14px -14px -14px 14px; }
   .dishes { grid-template-columns: 1fr; gap: 1.1rem; }
   .lunch__grid { grid-template-columns: 1fr; }
-  .booking__inner { grid-template-columns: 1fr; }
   .lunch-card { padding: 2.6rem 1.6rem 1.8rem; }
   .tabs { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin-inline: -20px; padding-inline: 20px; scrollbar-width: none; }
   .tab { flex: 0 0 auto; padding: .8em 1.1em; }
