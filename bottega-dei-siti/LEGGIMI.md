@@ -10,19 +10,29 @@ bottega-dei-siti/
 └── assets/
     ├── favicon.svg     l'icona nella scheda del browser
     └── logo/
-        ├── logo.svg / logo.png                   logo per sfondi chiari
-        ├── logo-negativo.svg / logo-negativo.png logo per sfondi scuri
-        ├── marchio.svg / marchio-512.png         solo il simbolo (arco con la B)
-        ├── profilo-social.png                    foto profilo per Instagram, Facebook, WhatsApp
-        └── anteprima-social.png                  immagine che compare quando condividi il link
+        ├── logo.svg / logo.png                           stemma per sfondi chiari (il logo principale)
+        ├── logo-negativo.svg / logo-negativo.png         stemma per sfondi scuri
+        ├── logo-orizzontale.svg / .png                   insegna orizzontale, per spazi bassi e larghi
+        ├── logo-orizzontale-negativo.svg / .png          insegna per sfondi scuri
+        ├── marchio.svg / marchio-512.png                 solo l'arco col puntatore (favicon, icone)
+        ├── profilo-social.png                            foto profilo per Instagram, Facebook, WhatsApp
+        └── anteprima-social.png                          immagine che compare quando condividi il link
 ```
 
 ## Il logo
 
-Un arco da bottega blu notte, con un filo color sabbia e la "B" in Bodoni: l'ingresso della bottega.
-Accanto, la scritta su due righe: "La Bottega" e, in corsivo, "dei Siti".
-Le scritte sono già convertite in forme, quindi i file SVG si aprono uguali ovunque
-(browser, Illustrator, Canva, tipografia).
+Il nome è dentro il logo. Ci sono due forme:
+
+- **Stemma** (il logo principale): l'arco di una bottega, blu notte con un filo color sabbia.
+  Dentro: un piccolo puntatore del mouse, "LA" in maiuscoletto, "Bottega" in Bodoni e
+  "dei Siti" in corsivo, con un ornamento a rombo in basso. Va bene per social, biglietti da
+  visita, vetrofanie e per il piè di pagina del sito.
+- **Insegna**: la versione orizzontale, come l'insegna sopra un negozio, con la scritta
+  "La Bottega dei Siti" su una riga e un piccolo arco a sinistra. È quella nell'intestazione del sito.
+
+Per le icone molto piccole (la scheda del browser) c'è solo l'arco col puntatore, perché lì
+il testo non si leggerebbe. Le scritte sono già convertite in forme: i file SVG si aprono
+uguali ovunque (browser, Illustrator, Canva, tipografia).
 
 ## Effetti
 
@@ -45,7 +55,7 @@ Chi ha attivato "riduci movimento" sul telefono o sul computer vede il sito ferm
 | Blu notte     | `#1C2E54` | pulsanti, simbolo del logo                    |
 | Blu scuro     | `#121D36` | sezione "Perché noi", piè di pagina           |
 | Testo         | `#14213D` | testi e titoli                                |
-| Sabbia        | `#B9A68A` | filo dell'arco nel logo, linee e dettagli    |
+| Sabbia        | `#B9A68A` | filo del logo, linee e dettagli               |
 | Sabbia chiara | `#EDE4D5` | evidenziato del titolo, fondo delle icone     |
 | Beige         | `#F3EDE3` | sfondo dell'apertura e delle sezioni alterne  |
 | Avorio        | `#FBF8F3` | sfondo della pagina                           |

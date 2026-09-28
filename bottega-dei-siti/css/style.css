@@ -24,11 +24,11 @@
   --ombra: 0 1px 2px rgb(20 33 61 / .06), 0 20px 44px -20px rgb(20 33 61 / .25);
 
   /* colori del logo (sfondo chiaro) */
-  --l-corpo: #1C2E54;
+  --l-fondo: #1C2E54;
   --l-filo: #B9A68A;
-  --l-lettera: #F4EEE4;
-  --l-forte: #14213D;
-  --l-leggero: #8C7A5E;
+  --l-dettaglio: #CDBFA8;
+  --l-testo: #F4EEE4;
+  --l-testo2: #D9CBB3;
 
   --f-titoli: "Bodoni Moda", "Bodoni 72", Didot, Georgia, serif;
   --f-testo: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
@@ -67,10 +67,10 @@
     --icona-fondo: #22304D;
     --icona-tratto: #D2C3AA;
     --ombra: 0 1px 2px rgb(0 0 0 / .3), 0 20px 44px -20px rgb(0 0 0 / .7);
-    --l-corpo: #F4EEE4;
-    --l-lettera: #1C2E54;
-    --l-forte: #F4EEE4;
-    --l-leggero: #CDBFA8;
+    --l-fondo: #F4EEE4;
+    --l-dettaglio: #8C7A5E;
+    --l-testo: #14213D;
+    --l-testo2: #7A6A55;
     color-scheme: dark;
   }
 }
@@ -93,10 +93,10 @@
   --icona-fondo: #22304D;
   --icona-tratto: #D2C3AA;
   --ombra: 0 1px 2px rgb(0 0 0 / .3), 0 20px 44px -20px rgb(0 0 0 / .7);
-  --l-corpo: #F4EEE4;
-  --l-lettera: #1C2E54;
-  --l-forte: #F4EEE4;
-  --l-leggero: #CDBFA8;
+  --l-fondo: #F4EEE4;
+  --l-dettaglio: #8C7A5E;
+  --l-testo: #14213D;
+  --l-testo2: #7A6A55;
   color-scheme: dark;
 }
 
@@ -198,7 +198,8 @@ p { margin: 0; }
 .testata.scorsa { border-bottom-color: var(--riga); box-shadow: 0 10px 30px -22px rgb(20 33 61 / .45); }
 .testata__in { display: flex; align-items: center; gap: 28px; min-height: 80px; transition: min-height .3s var(--morbido); }
 .testata.scorsa .testata__in { min-height: 68px; }
-.testata__logo { display: block; height: 46px; flex: none; transition: height .3s var(--morbido); }
+.testata__logo { display: block; height: 46px; flex: none; transition: height .3s var(--morbido), transform .4s var(--morbido); }
+.testata__logo:hover { transform: translateY(-1px); }
 .testata.scorsa .testata__logo { height: 40px; }
 
 .nav { display: flex; gap: 30px; margin-left: auto; }
@@ -223,9 +224,12 @@ p { margin: 0; }
   .nav { display: none; }
   .testata__in { justify-content: space-between; gap: 12px; }
 }
+@media (max-width: 360px) {
+  .testata__logo, .testata.scorsa .testata__logo { height: 30px; }
+}
 @media (max-width: 560px) {
   .testata__in, .testata.scorsa .testata__in { min-height: 64px; }
-  .testata__logo, .testata.scorsa .testata__logo { height: 38px; }
+  .testata__logo, .testata.scorsa .testata__logo { height: 36px; }
   .btn__lungo { display: none; }
   .btn__corto { display: inline; }
 }
@@ -684,17 +688,17 @@ p { margin: 0; }
 
 /* ---------- Piè di pagina ---------- */
 .piede {
-  --l-corpo: #F4EEE4;
-  --l-lettera: #1C2E54;
-  --l-forte: #F4EEE4;
-  --l-leggero: #CDBFA8;
+  --l-fondo: #F4EEE4;
+  --l-dettaglio: #8C7A5E;
+  --l-testo: #14213D;
+  --l-testo2: #7A6A55;
   background: var(--blu-scuro);
   color: #B9B4AA;
   padding-block: 56px 28px;
 }
 .piede__in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 28px 48px; padding-bottom: 32px; }
-.piede__marca { display: grid; gap: 16px; }
-.piede__marca .logo { height: 52px; }
+.piede__marca { display: grid; justify-items: start; gap: 18px; }
+.piede__marca .logo--stemma { height: 150px; }
 .piede__nav { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; }
 .piede__nav a { text-decoration: none; color: #EDE7DC; font-weight: 500; transition: color .2s ease; }
 .piede__nav a:hover { color: #CDBFA8; }
