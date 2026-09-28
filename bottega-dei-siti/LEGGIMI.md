@@ -25,13 +25,15 @@ si aprono uguali ovunque (browser, Illustrator, Canva, tipografia).
 
 ## Colori e font
 
-| Nome        | Colore    | Dove si usa                          |
-|-------------|-----------|--------------------------------------|
-| Blu notte   | `#1B2D52` | pulsanti, simbolo del logo           |
-| Blu scuro   | `#121E38` | sezione "Perché noi", piè di pagina  |
-| Ambra       | `#F0B43C` | tenda del logo, dettagli, evidenziato |
-| Testo       | `#16213A` | testi e titoli                       |
-| Grigio      | `#F4F5F8` | sfondo delle sezioni alterne         |
+| Nome          | Colore    | Dove si usa                                   |
+|---------------|-----------|-----------------------------------------------|
+| Blu notte     | `#1C2E54` | pulsanti, simbolo del logo                    |
+| Blu scuro     | `#121D36` | sezione "Perché noi", piè di pagina           |
+| Testo         | `#14213D` | testi e titoli                                |
+| Sabbia        | `#B9A68A` | tenda del logo, linee e dettagli              |
+| Sabbia chiara | `#EDE4D5` | evidenziato del titolo, fondo delle icone     |
+| Beige         | `#F3EDE3` | sfondo dell'apertura e delle sezioni alterne  |
+| Avorio        | `#FBF8F3` | sfondo della pagina                           |
 
 - Titoli in Bodoni Moda, tutto il resto in Instrument Sans.
 - Il sito ha anche una versione scura, che si attiva da sola se il telefono è in modalità scura.
