@@ -1,14 +1,75 @@
-/* La Bottega dei Siti: intestazione, modulo contatti e pulsanti "Copia" */
+/* La Bottega dei Siti: effetti allo scorrimento, domande, modulo contatti e pulsanti "Copia" */
 (function () {
   'use strict';
 
-  /* ---------- Intestazione: ombra quando la pagina scorre ---------- */
+  var riduci = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Intestazione: si stringe e prende l'ombra quando scorri ---------- */
   var testata = document.getElementById('testata');
-  if (testata) {
-    var aggiorna = function () { testata.classList.toggle('scorsa', window.scrollY > 8); };
-    aggiorna();
-    window.addEventListener('scroll', aggiorna, { passive: true });
+
+  /* ---------- Linea delle fasi che si riempie mentre scorri ---------- */
+  var fasi = document.getElementById('fasi');
+
+  var inAttesa = false;
+  function aggiornaScorrimento() {
+    inAttesa = false;
+    if (testata) testata.classList.toggle('scorsa', window.scrollY > 8);
+    if (fasi && !riduci) {
+      var r = fasi.getBoundingClientRect();
+      var centro = window.innerHeight * 0.6;
+      var avanzamento = Math.min(1, Math.max(0, (centro - r.top) / r.height));
+      fasi.style.setProperty('--avanzamento', avanzamento.toFixed(3));
+    }
   }
+  function suScorrimento() {
+    if (!inAttesa) { inAttesa = true; window.requestAnimationFrame(aggiornaScorrimento); }
+  }
+  aggiornaScorrimento();
+  window.addEventListener('scroll', suScorrimento, { passive: true });
+  window.addEventListener('resize', suScorrimento);
+
+  /* ---------- Comparsa degli elementi quando entrano nello schermo ---------- */
+  var daMostrare = document.querySelectorAll('[data-reveal]');
+  function mostra(el) {
+    el.classList.add('visto');
+    if (el.classList.contains('servizio')) {
+      var ritardo = parseFloat(getComputedStyle(el).getPropertyValue('--rit')) || 0;
+      setTimeout(function () { el.classList.add('pronto'); }, 950 + ritardo * 1000);
+    }
+  }
+  if (riduci || !('IntersectionObserver' in window)) {
+    daMostrare.forEach(mostra);
+  } else {
+    var osservatore = new IntersectionObserver(function (voci) {
+      voci.forEach(function (v) {
+        if (!v.isIntersecting) return;
+        mostra(v.target);
+        osservatore.unobserve(v.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    daMostrare.forEach(function (el) { osservatore.observe(el); });
+  }
+
+  /* ---------- Domande: la risposta si apre e si chiude dolcemente ---------- */
+  document.querySelectorAll('.domande__lista details').forEach(function (d) {
+    var risposta = d.querySelector('.risposta');
+    if (!risposta) return;
+    if (d.open) risposta.classList.add('aperta');
+    d.querySelector('summary').addEventListener('click', function (e) {
+      if (riduci) return;
+      e.preventDefault();
+      if (d.open) {
+        risposta.classList.remove('aperta');
+        setTimeout(function () { if (!risposta.classList.contains('aperta')) d.open = false; }, 450);
+      } else {
+        d.open = true;
+        void risposta.offsetHeight;
+        risposta.classList.add('aperta');
+      }
+    });
+    // se la pagina apre la domanda da sola (ricerca nel testo), la risposta si vede
+    d.addEventListener('toggle', function () { if (d.open) risposta.classList.add('aperta'); });
+  });
 
   /* ---------- Copia negli appunti ---------- */
   function copia(testo, pulsante, campo) {

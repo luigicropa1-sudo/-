@@ -6,22 +6,37 @@ Il sito per vendere i tuoi siti. Pagina unica, senza librerie esterne a parte i 
 bottega-dei-siti/
 ├── index.html          la pagina (il logo è già dentro, in cima al body)
 ├── css/style.css       colori, font, impaginazione
-├── js/main.js          intestazione, modulo contatti, pulsanti "Copia"
+├── js/main.js          effetti allo scorrimento, domande, modulo contatti, pulsanti "Copia"
 └── assets/
     ├── favicon.svg     l'icona nella scheda del browser
     └── logo/
         ├── logo.svg / logo.png                   logo per sfondi chiari
         ├── logo-negativo.svg / logo-negativo.png logo per sfondi scuri
-        ├── marchio.svg / marchio-512.png         solo il simbolo (tenda e puntatore)
+        ├── marchio.svg / marchio-512.png         solo il simbolo (arco con la B)
         ├── profilo-social.png                    foto profilo per Instagram, Facebook, WhatsApp
         └── anteprima-social.png                  immagine che compare quando condividi il link
 ```
 
 ## Il logo
 
-Una tenda da bottega sopra una vetrina con il puntatore del mouse: la bottega che è anche un sito.
-La scritta "La Bottega dei Siti" è in Bodoni Moda, già convertita in forme, quindi i file SVG
-si aprono uguali ovunque (browser, Illustrator, Canva, tipografia).
+Un arco da bottega blu notte, con un filo color sabbia e la "B" in Bodoni: l'ingresso della bottega.
+Accanto, la scritta su due righe: "La Bottega" e, in corsivo, "dei Siti".
+Le scritte sono già convertite in forme, quindi i file SVG si aprono uguali ovunque
+(browser, Illustrator, Canva, tipografia).
+
+## Effetti
+
+Ispirati a linfa.tech e fynexengine.it, tenuti leggeri:
+
+- il titolo d'apertura sale riga per riga, poi compaiono testo e pulsanti;
+- il sito d'esempio a destra si costruisce pezzo per pezzo, poi telefono e avviso fluttuano;
+- un nastro scorrevole con i tipi di attività (si ferma passandoci sopra);
+- sezioni e schede compaiono con un leggero scivolamento mentre scorri;
+- nella sezione "Come lavoriamo" il titolo resta fermo e la linea delle fasi si riempie scorrendo;
+- una luce attraversa i pulsanti al passaggio del mouse; le schede dei servizi si sollevano;
+- le risposte alle domande si aprono e si chiudono dolcemente.
+
+Chi ha attivato "riduci movimento" sul telefono o sul computer vede il sito fermo, con tutto già visibile.
 
 ## Colori e font
 
@@ -30,7 +45,7 @@ si aprono uguali ovunque (browser, Illustrator, Canva, tipografia).
 | Blu notte     | `#1C2E54` | pulsanti, simbolo del logo                    |
 | Blu scuro     | `#121D36` | sezione "Perché noi", piè di pagina           |
 | Testo         | `#14213D` | testi e titoli                                |
-| Sabbia        | `#B9A68A` | tenda del logo, linee e dettagli              |
+| Sabbia        | `#B9A68A` | filo dell'arco nel logo, linee e dettagli    |
 | Sabbia chiara | `#EDE4D5` | evidenziato del titolo, fondo delle icone     |
 | Beige         | `#F3EDE3` | sfondo dell'apertura e delle sezioni alterne  |
 | Avorio        | `#FBF8F3` | sfondo della pagina                           |
