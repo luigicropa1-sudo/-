@@ -1,6 +1,14 @@
-/* Bottega dei Siti: modulo contatti, pulsanti "Copia" e cartello Aperto */
+/* La Bottega dei Siti: intestazione, modulo contatti e pulsanti "Copia" */
 (function () {
   'use strict';
+
+  /* ---------- Intestazione: ombra quando la pagina scorre ---------- */
+  var testata = document.getElementById('testata');
+  if (testata) {
+    var aggiorna = function () { testata.classList.toggle('scorsa', window.scrollY > 8); };
+    aggiorna();
+    window.addEventListener('scroll', aggiorna, { passive: true });
+  }
 
   /* ---------- Copia negli appunti ---------- */
   function copia(testo, pulsante, campo) {
@@ -39,9 +47,8 @@
     modulo.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      var obbligatori = modulo.querySelectorAll('[required]');
       var primoVuoto = null;
-      obbligatori.forEach(function (campo) {
+      modulo.querySelectorAll('[required]').forEach(function (campo) {
         var vuoto = !campo.value.trim();
         campo.setAttribute('aria-invalid', vuoto ? 'true' : 'false');
         if (vuoto && !primoVuoto) primoVuoto = campo;
@@ -56,7 +63,7 @@
       var d = new FormData(modulo);
       var oggetto = 'Richiesta preventivo: ' + d.get('attivita');
       var corpo = [
-        'Ciao Bottega dei Siti,',
+        'Buongiorno,',
         '',
         'mi chiamo ' + d.get('nome') + ' e ho questa attività: ' + d.get('attivita') + '.',
         'Mi serve: ' + d.get('bisogno') + '.',
@@ -78,18 +85,6 @@
 
     copiaMessaggio.addEventListener('click', function () {
       copia(testoPronto.value, copiaMessaggio, testoPronto);
-    });
-  }
-
-  /* ---------- Il cartello "Aperto" dondola quando ci passi sopra ---------- */
-  var cartello = document.querySelector('.cartello');
-  var vetrina = document.querySelector('.vetrina');
-  var riduci = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (cartello && vetrina && !riduci) {
-    vetrina.addEventListener('pointerenter', function () {
-      cartello.classList.remove('dondola-ancora');
-      void cartello.offsetWidth;
-      cartello.classList.add('dondola-ancora');
     });
   }
 })();
