@@ -163,6 +163,7 @@ async function handleOrder(req, res) {
 function buildOrder(catalogo, body, user) {
   const negozio = catalogo.negozio;
   const prodotti = new Map(catalogo.prodotti.map((p) => [String(p.id), p]));
+  const categorie = new Map((catalogo.categorie || []).map((c) => [String(c.id), c]));
   const items = Array.isArray(body.items) ? body.items : [];
 
   if (!items.length) throw userError('Il carrello è vuoto.');
@@ -187,8 +188,10 @@ function buildOrder(catalogo, body, user) {
       variante = v.nome;
     }
     const unitCent = toCents(prezzo);
+    const cat = categorie.get(String(p.categoria));
+    const nome = (cat && cat.sigla ? cat.sigla + ' ' : '') + p.nome;
     subCent += unitCent * qty;
-    righe.push({ id: p.id, nome: p.nome, variante, qty, prezzo: unitCent / 100, totale: (unitCent * qty) / 100 });
+    righe.push({ id: p.id, nome, variante, qty, prezzo: unitCent / 100, totale: (unitCent * qty) / 100 });
   }
 
   const modalita = body.modalita === 'ritiro' ? 'ritiro' : 'consegna';
@@ -223,6 +226,7 @@ function buildOrder(catalogo, body, user) {
   const pagamenti = Array.isArray(negozio.pagamenti) ? negozio.pagamenti : [];
   const pagamento = pagamenti.includes(body.pagamento) ? body.pagamento : null;
   if (pagamenti.length && !pagamento) throw userError('Scegli un metodo di pagamento.');
+  if (negozio.maggiorenni && body.maggiorenne !== true) throw userError('Devi confermare di avere almeno 18 anni.');
 
   return {
     codice: codiceOrdine(),
@@ -232,6 +236,7 @@ function buildOrder(catalogo, body, user) {
     indirizzo: modalita === 'consegna' ? indirizzo : null,
     orario: pulisci(c.orario, 60),
     pagamento,
+    maggiorenne: Boolean(negozio.maggiorenni),
     note: pulisci(c.note, 500, true),
     righe,
     subtotale: subCent / 100,
@@ -258,6 +263,7 @@ function testoOrdineAdmin(o) {
   }
   if (o.orario) r.push(`🕒 ${esc(o.orario)}`);
   if (o.pagamento) r.push(`💳 ${esc(o.pagamento)}`);
+  if (o.maggiorenne) r.push('🔞 Maggiore età dichiarata: controllare il documento alla consegna');
   r.push('');
   r.push('<b>Prodotti</b>');
   for (const riga of o.righe) r.push(rigaProdotto(riga, n));

@@ -83,10 +83,25 @@ Tutto si fa in `catalogo.json`; le modifiche si vedono appena riapri la mini app
 | `logo`, `copertina` | `"img/logo.jpg"` | Immagini facoltative (metti i file in `public/img/`) |
 | `colore` | `"#FF6A2B"` | Colore principale di pulsanti e dettagli |
 | `messaggioBenvenuto` | `"Ciao {nome}! …"` | Risposta a /start (`{nome}` = nome del cliente) |
+| `maggiorenni` | `true` | Schermata "Solo per maggiorenni" all'apertura e dichiarazione obbligatoria nell'ordine |
+| `avviso` | `"Prodotti contenenti nicotina…"` | Avviso mostrato nella schermata 18+ e in fondo al catalogo |
 | `ordineMinimo` | `10` | Importo minimo per ordinare (`0` = nessun minimo) |
 | `consegna` | `{ "attiva": true, "costo": 2.5, "gratisSopra": 30 }` | Consegna a domicilio; `gratisSopra: null` = sempre a pagamento |
 | `ritiro` | `{ "attivo": true, "indirizzo": "Via…" }` | Ritiro in negozio |
 | `pagamenti` | `["Contanti alla consegna", …]` | Metodi di pagamento tra cui il cliente sceglie |
+
+**Categorie / serie** (dentro `"categorie"`), es. le tre serie ATUS:
+
+```json
+{ "id": "30k", "chip": "30K · 15 €", "nome": "ATUS 30K", "sigla": "30K",
+  "descrizione": "30.000 tiri · 30 ml · …", "immagine": "img/serie-30k.jpg" }
+```
+
+- `chip`: testo corto del pulsante della categoria in alto (se manca si usa `nome`).
+- `sigla`: viene messa davanti al nome nel carrello e negli ordini ("30K Blueberry Ice"),
+  così si distinguono gli stessi gusti di serie diverse.
+- `descrizione` e `immagine`: testo e banner sotto il titolo della sezione. La descrizione
+  compare anche nella scheda dei prodotti che non ne hanno una propria.
 
 **Prodotto** (dentro `"prodotti"`):
 
@@ -107,6 +122,8 @@ Tutto si fa in `catalogo.json`; le modifiche si vedono appena riapri la mini app
 - `categoria`: uno degli `id` della lista `"categorie"`.
 - `immagine`: facoltativa. Senza foto viene mostrata l'`emoji` del prodotto.
   Le foto vanno in `public/img/prodotti/`, meglio se quadrate (circa 800×800 px).
+  Quelle attuali sono ritagliate dalle locandine ATUS: con foto a risoluzione più
+  alta basta sostituire il file mantenendo lo stesso nome.
 - `disponibile: false` mostra il prodotto come **Esaurito**.
 - Per i formati o le taglie usa `"varianti"` al posto di `"prezzo"`:
   `"varianti": [{ "nome": "Piccolo", "prezzo": 4 }, { "nome": "Grande", "prezzo": 9 }]`

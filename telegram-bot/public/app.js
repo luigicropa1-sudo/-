@@ -9,6 +9,7 @@
 
   const CART_KEY = 'negozio:carrello';
   const CUSTOMER_KEY = 'negozio:cliente';
+  const AGE_KEY = 'negozio:maggiorenne';
 
   const appEl = document.getElementById('app');
   const sheetEl = document.getElementById('sheet');
@@ -20,6 +21,9 @@
     categorie: [],
     prodotti: [],
     byId: new Map(),
+    catById: new Map(),
+    adult: true,
+    ageDenied: false,
     cart: [], // [{ id, variante (indice o null), qty }]
     view: 'catalogo', // catalogo | carrello | checkout | fatto
     sheet: null, // { id, variante, qty }
@@ -82,6 +86,8 @@
       state.categorie = Array.isArray(data.categorie) ? data.categorie : [];
       state.prodotti = Array.isArray(data.prodotti) ? data.prodotti : [];
       state.byId = new Map(state.prodotti.map((p) => [String(p.id), p]));
+      state.catById = new Map(state.categorie.map((c) => [String(c.id), c]));
+      state.adult = !state.negozio.maggiorenni || readStorage(AGE_KEY) === true;
       money = new Intl.NumberFormat('it-IT', { style: 'currency', currency: state.negozio.valuta || 'EUR' });
       applyBrand();
       restoreCart();
@@ -133,6 +139,12 @@
 
   function unitPrice(p, v) {
     return hasVariants(p) ? Number((p.varianti[v] || {}).prezzo || 0) : Number(p.prezzo || 0);
+  }
+
+  // Nome usato in carrello e ordini: con la sigla della categoria (es. "30K Blueberry Ice").
+  function lineName(p) {
+    const c = state.catById.get(String(p.categoria));
+    return (c && c.sigla ? c.sigla + ' ' : '') + p.nome;
   }
 
   function minPrice(p) {
@@ -226,6 +238,7 @@
       note: '',
       modalita: modalita || (consegna || !ritiro ? 'consegna' : 'ritiro'),
       pagamento: pagamenti.includes(saved.pagamento) ? saved.pagamento : pagamenti[0] || '',
+      maggiorenne: false,
     };
   }
 
@@ -241,7 +254,7 @@
 
   function render() {
     const views = { catalogo: renderCatalogo, carrello: renderCarrello, checkout: renderCheckout, fatto: renderFatto };
-    appEl.innerHTML = views[state.view]();
+    appEl.innerHTML = state.adult ? views[state.view]() : renderEta();
     refreshButtons();
   }
 
@@ -262,10 +275,11 @@
 
   function refreshButtons() {
     if (inTelegram) {
-      if (state.sheet || state.view !== 'catalogo') tg.BackButton.show();
+      if (state.adult && (state.sheet || state.view !== 'catalogo')) tg.BackButton.show();
       else tg.BackButton.hide();
     }
     if (!state.negozio) return setMain(null);
+    if (!state.adult) return state.ageDenied ? setMain(null) : setMain('Ho almeno 18 anni, entra', confirmAge);
 
     if (state.sheet) {
       const p = product(state.sheet.id);
@@ -372,6 +386,9 @@
         return requestPhone();
       case 'reload':
         return loadCatalog();
+      case 'age-no':
+        state.ageDenied = true;
+        return render();
       default:
     }
   }
@@ -379,7 +396,7 @@
   function onInput(e) {
     const el = e.target;
     if (state.view !== 'checkout' || !el.name || !(el.name in state.form)) return;
-    state.form[el.name] = el.value;
+    state.form[el.name] = el.type === 'checkbox' ? el.checked : el.value;
     if (state.errors[el.name]) {
       delete state.errors[el.name];
       const field = el.closest('[data-field]');
@@ -423,12 +440,13 @@
       </header>
       ${sections.length > 1 ? `
         <nav class="chips" id="chips" aria-label="Categorie">
-          ${sections.map((s, i) => `<button class="chip${i === 0 ? ' active' : ''}" data-action="cat" data-cat="${esc(s.id)}">${s.emoji ? esc(s.emoji) + ' ' : ''}${esc(s.nome)}</button>`).join('')}
+          ${sections.map((s, i) => `<button class="chip${i === 0 ? ' active' : ''}" data-action="cat" data-cat="${esc(s.id)}">${s.emoji ? esc(s.emoji) + ' ' : ''}${esc(s.chip || s.nome)}</button>`).join('')}
         </nav>` : ''}
       <main>
         ${sections.length ? sections.map(sectionHtml).join('') : `
           <div class="empty"><div class="empty-icon">🛍️</div><h2>Nessun prodotto</h2><p>Torna a trovarci più tardi.</p></div>`}
-      </main>`;
+      </main>
+      ${n.avviso ? `<footer class="legal">${esc(n.avviso)}</footer>` : ''}`;
   }
 
   function groupByCategory() {
@@ -437,6 +455,9 @@
       id: String(c.id),
       nome: c.nome,
       emoji: c.emoji,
+      chip: c.chip,
+      descrizione: c.descrizione,
+      immagine: c.immagine,
       prodotti: state.prodotti.filter((p) => String(p.categoria) === String(c.id)),
     }));
     const others = state.prodotti.filter((p) => !known.has(String(p.categoria)));
@@ -448,6 +469,8 @@
     return `
       <section class="cat-section" data-cat="${esc(s.id)}">
         <h2 class="section-title">${s.emoji ? esc(s.emoji) + ' ' : ''}${esc(s.nome)}</h2>
+        ${s.descrizione ? `<p class="section-desc">${esc(s.descrizione)}</p>` : ''}
+        ${s.immagine ? `<img class="section-cover" src="${esc(s.immagine)}" alt="" loading="lazy" decoding="async">` : ''}
         <div class="grid">${s.prodotti.map(cardHtml).join('')}</div>
       </section>`;
   }
@@ -462,7 +485,7 @@
           ${soldOut ? '<span class="badge muted">Esaurito</span>' : p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ''}
         </div>
         <div class="card-body">
-          <h3 class="card-name">${esc(p.nome)}</h3>
+          <h3 class="card-name${p.nome.length > 40 ? ' long' : ''}">${esc(p.nome)}</h3>
           ${p.descrizione ? `<p class="card-desc">${esc(p.descrizione)}</p>` : ''}
           <div class="price">${price}</div>
           <div class="card-ctrl">${cardCtrlHtml(p)}</div>
@@ -600,11 +623,14 @@
         }).join('')}
       </div>` : '';
     const inCart = qtyOfProduct(p.id);
+    const cat = state.catById.get(String(p.categoria));
+    const desc = p.descrizione || (cat && cat.descrizione);
     body.innerHTML = `
       ${p.badge && available ? `<span class="badge inline">${esc(p.badge)}</span>` : ''}
+      ${cat ? `<div class="sheet-cat">${esc(cat.nome)}</div>` : ''}
       <h2 class="sheet-title">${esc(p.nome)}</h2>
       ${hasVariants(p) ? '' : `<div class="sheet-price">${fmt(p.prezzo)}</div>`}
-      ${p.descrizione ? `<p class="sheet-desc">${esc(p.descrizione)}</p>` : ''}
+      ${desc ? `<p class="sheet-desc">${esc(desc)}</p>` : ''}
       ${variants}
       ${available ? `
         <div class="sheet-qty">
@@ -666,7 +692,7 @@
         <div class="line">
           <div class="thumb" style="--h:${hue(p.id)}">${mediaHtml(p)}</div>
           <div class="line-info">
-            <div class="line-name">${esc(p.nome)}</div>
+            <div class="line-name">${esc(lineName(p))}</div>
             <div class="line-sub">${variant ? esc(variant) + ' · ' : ''}${fmt(unit)}</div>
             <div class="line-total">${fmt(unit * l.qty)}</div>
           </div>
@@ -742,12 +768,20 @@
             <textarea name="note" rows="3" maxlength="500" placeholder="Citofono, piano, richieste particolari…">${esc(f.note)}</textarea>
           </label>
         </div>
+        ${n.maggiorenni ? `
+          <div class="group check-group${state.errors.maggiorenne ? ' invalid' : ''}" data-field="maggiorenne">
+            <label class="check">
+              <input type="checkbox" name="maggiorenne"${f.maggiorenne ? ' checked' : ''}>
+              <span>Dichiaro di avere almeno 18 anni. Alla consegna o al ritiro può essere chiesto un documento.</span>
+            </label>
+            ${state.errors.maggiorenne ? `<div class="err pad">${esc(state.errors.maggiorenne)}</div>` : ''}
+          </div>` : ''}
         <div class="group-label">Riepilogo</div>
         <div class="group summary">
           ${state.cart.map((l) => {
             const p = product(l.id);
             const v = hasVariants(p) ? ` (${esc(p.varianti[l.variante].nome)})` : '';
-            return `<div class="row small"><span>${l.qty} × ${esc(p.nome)}${v}</span><span>${fmt(unitPrice(p, l.variante) * l.qty)}</span></div>`;
+            return `<div class="row small"><span>${l.qty} × ${esc(lineName(p))}${v}</span><span>${fmt(unitPrice(p, l.variante) * l.qty)}</span></div>`;
           }).join('')}
           <div class="row sep"><span>Subtotale</span><span>${fmt(t.sub)}</span></div>
           ${f.modalita === 'consegna' ? `<div class="row"><span>Consegna</span><span>${t.delivery ? fmt(t.delivery) : 'Gratis'}</span></div>` : ''}
@@ -766,6 +800,33 @@
           ${autocomplete ? `autocomplete="${autocomplete}"` : ''} ${type === 'tel' ? 'inputmode="tel"' : ''} maxlength="200">
         ${err ? `<div class="err">${esc(err)}</div>` : ''}
       </label>`;
+  }
+
+  function renderEta() {
+    const n = state.negozio;
+    if (state.ageDenied) {
+      return `
+        <div class="gate">
+          <div class="gate-badge">18+</div>
+          <h1>Accesso non consentito</h1>
+          <p>Questo negozio è riservato ai maggiorenni.</p>
+        </div>`;
+    }
+    return `
+      <div class="gate">
+        <div class="gate-badge">18+</div>
+        <h1>Solo per maggiorenni</h1>
+        ${n.avviso ? `<p>${esc(n.avviso)}</p>` : ''}
+        <p class="gate-q">Confermi di avere almeno 18 anni?</p>
+        <button class="text-btn muted" data-action="age-no">No, non ho 18 anni</button>
+      </div>`;
+  }
+
+  function confirmAge() {
+    writeStorage(AGE_KEY, true);
+    state.adult = true;
+    haptic('success');
+    go('catalogo');
   }
 
   function renderFatto() {
@@ -788,6 +849,7 @@
     if (String(f.telefono || '').replace(/\D/g, '').length < 6) errors.telefono = 'Inserisci un numero di telefono valido';
     if (f.modalita === 'consegna' && !String(f.indirizzo || '').trim()) errors.indirizzo = 'Inserisci l\'indirizzo di consegna';
     if (pagamenti.length && !pagamenti.includes(f.pagamento)) errors.pagamento = 'Scegli come vuoi pagare';
+    if (state.negozio.maggiorenni && !f.maggiorenne) errors.maggiorenne = 'Devi confermare di avere almeno 18 anni';
     return errors;
   }
 
@@ -820,6 +882,7 @@
           items: state.cart.map((l) => ({ id: l.id, variante: l.variante, qty: l.qty })),
           modalita: f.modalita,
           pagamento: f.pagamento,
+          maggiorenne: Boolean(f.maggiorenne),
           cliente: { nome: f.nome, telefono: f.telefono, indirizzo: f.indirizzo, orario: f.orario, note: f.note },
         }),
       });
@@ -830,6 +893,7 @@
       saveCart();
       f.note = '';
       f.orario = '';
+      f.maggiorenne = false;
       state.sending = false;
       haptic('success');
       go('fatto');

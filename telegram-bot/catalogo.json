@@ -1,78 +1,78 @@
 {
   "negozio": {
     "nome": "Il Mio Negozio",
-    "sottotitolo": "Ordina in pochi tap, consegna o ritiro",
+    "sottotitolo": "Vape usa e getta ATUS · consegna o ritiro",
     "logo": "",
     "copertina": "",
-    "colore": "#FF6A2B",
+    "colore": "#2F80ED",
     "valuta": "EUR",
     "testoPulsanteMenu": "Ordina",
-    "messaggioBenvenuto": "Ciao {nome}! 👋\n\nBenvenuto nel nostro negozio. Tocca il pulsante qui sotto per vedere i prodotti e ordinare in pochi secondi.",
+    "messaggioBenvenuto": "Ciao {nome}! 👋\n\nTocca il pulsante qui sotto per vedere tutti i gusti e ordinare in pochi secondi.\n\n🔞 Vendita riservata ai maggiorenni.",
+    "maggiorenni": true,
+    "avviso": "🔞 Prodotti contenenti nicotina, una sostanza che crea forte dipendenza. Vendita vietata ai minori di 18 anni.",
     "ordineMinimo": 10,
-    "consegna": { "attiva": true, "costo": 2.5, "gratisSopra": 30 },
-    "ritiro": { "attivo": true, "indirizzo": "Via Esempio 1, Città" },
-    "pagamenti": ["Contanti alla consegna", "Carta / POS alla consegna"]
+    "consegna": {
+      "attiva": true,
+      "costo": 2.5,
+      "gratisSopra": 30
+    },
+    "ritiro": {
+      "attivo": true,
+      "indirizzo": "Via Esempio 1, Città"
+    },
+    "pagamenti": [
+      "Contanti alla consegna",
+      "Carta / POS alla consegna"
+    ]
   },
   "categorie": [
-    { "id": "novita", "nome": "Novità", "emoji": "✨" },
-    { "id": "top", "nome": "Più venduti", "emoji": "🔥" },
-    { "id": "altro", "nome": "Altri prodotti", "emoji": "📦" }
+    { "id": "60k", "chip": "60K · 20 €", "nome": "ATUS 60K · 4 gusti in 1", "sigla": "60K", "descrizione": "60.000 tiri · 4 gusti in un solo dispositivo · 36 ml · batteria 650 mAh · 20 € l'uno", "immagine": "img/serie-60k.jpg" },
+    { "id": "30k", "chip": "30K · 15 €", "nome": "ATUS 30K", "sigla": "30K", "descrizione": "30.000 tiri · 30 ml · batteria 1000 mAh ricaricabile Type-C · dual mesh · 15 € l'uno", "immagine": "img/serie-30k.jpg" },
+    { "id": "25k", "chip": "25K · 10 €", "nome": "ATUS 25K Mecha Vape", "sigla": "25K", "descrizione": "25.000 tiri · 28 ml · batteria 1000 mAh ricaricabile Type-C · flusso d'aria regolabile · 10 € l'uno", "immagine": "img/serie-25k.jpg" }
   ],
   "prodotti": [
-    {
-      "id": "p1",
-      "categoria": "novita",
-      "nome": "Prodotto 1",
-      "descrizione": "Descrizione breve del prodotto. Qui va il testo vero quando arrivano le foto.",
-      "prezzo": 6,
-      "emoji": "🎁",
-      "badge": "Nuovo"
-    },
-    {
-      "id": "p2",
-      "categoria": "novita",
-      "nome": "Prodotto 2 con formati",
-      "descrizione": "Esempio di prodotto con più formati e prezzi diversi.",
-      "emoji": "🧃",
-      "varianti": [
-        { "nome": "Piccolo", "prezzo": 4 },
-        { "nome": "Medio", "prezzo": 6.5 },
-        { "nome": "Grande", "prezzo": 9 }
-      ]
-    },
-    {
-      "id": "p3",
-      "categoria": "top",
-      "nome": "Prodotto 3",
-      "descrizione": "Il preferito dai clienti.",
-      "prezzo": 12.9,
-      "emoji": "⭐",
-      "badge": "Top"
-    },
-    {
-      "id": "p4",
-      "categoria": "top",
-      "nome": "Prodotto 4",
-      "descrizione": "Un altro prodotto di esempio.",
-      "prezzo": 8.5,
-      "emoji": "🍀"
-    },
-    {
-      "id": "p5",
-      "categoria": "altro",
-      "nome": "Prodotto 5",
-      "descrizione": "Prodotto di esempio con prezzo basso.",
-      "prezzo": 3,
-      "emoji": "🧁"
-    },
-    {
-      "id": "p6",
-      "categoria": "altro",
-      "nome": "Prodotto 6",
-      "descrizione": "Esempio di prodotto esaurito: resta visibile ma non si può ordinare.",
-      "prezzo": 15,
-      "emoji": "💎",
-      "disponibile": false
-    }
+    { "id": "60k-01", "categoria": "60k", "nome": "Banana Ice · Lemon Lime · Mixed Fruit · Red Bull", "prezzo": 20, "immagine": "img/prodotti/60k-01.jpg" },
+    { "id": "60k-02", "categoria": "60k", "nome": "Cola Ice · Watermelon Ice · Peach Ice · Grape Ice", "prezzo": 20, "immagine": "img/prodotti/60k-02.jpg" },
+    { "id": "60k-03", "categoria": "60k", "nome": "Apple Ice · Cantaloupe Ice · Mango Ice · Guava Ice", "prezzo": 20, "immagine": "img/prodotti/60k-03.jpg" },
+    { "id": "60k-04", "categoria": "60k", "nome": "Lemon Mint · Strawberry Watermelon · Blueberry Ice · Strawberry Ice", "prezzo": 20, "immagine": "img/prodotti/60k-04.jpg" },
+    { "id": "60k-05", "categoria": "60k", "nome": "Blue Razz Ice · Blueberry Raspberry Cherry · Pineapple Mango · Rainbow Sugar", "prezzo": 20, "immagine": "img/prodotti/60k-05.jpg" },
+    { "id": "60k-06", "categoria": "60k", "nome": "Fizzy Cherry Cola · Watermelon Bubblegum · Strawberry Kiwi · Mixed Berry", "prezzo": 20, "immagine": "img/prodotti/60k-06.jpg" },
+    { "id": "60k-07", "categoria": "60k", "nome": "Lime Carbonated Beverage · Strawberry Watermelon Bubblegum · Strawberry Raspberry · Ten Layers of Citrus", "prezzo": 20, "immagine": "img/prodotti/60k-07.jpg" },
+    { "id": "60k-08", "categoria": "60k", "nome": "Cranberry Grapes · Watermelon Cherry · Black Cherry · Blue Razz Blackberry", "prezzo": 20, "immagine": "img/prodotti/60k-08.jpg" },
+    { "id": "60k-09", "categoria": "60k", "nome": "Blue Razz Cherry · Grape Mango · Gummy Bear · Raspberry Watermelon", "prezzo": 20, "immagine": "img/prodotti/60k-09.jpg" },
+    { "id": "60k-10", "categoria": "60k", "nome": "Kiwi Passion Fruit · Pineapple Peach Mango · Strawberry Grapes · Blueberry Sour Raspberry", "prezzo": 20, "immagine": "img/prodotti/60k-10.jpg" },
+    { "id": "30k-pineapple-ice", "categoria": "30k", "nome": "Pineapple Ice", "prezzo": 15, "immagine": "img/prodotti/30k-pineapple-ice.jpg" },
+    { "id": "30k-mint-ice", "categoria": "30k", "nome": "Mint Ice", "prezzo": 15, "immagine": "img/prodotti/30k-mint-ice.jpg" },
+    { "id": "30k-lychee-ice", "categoria": "30k", "nome": "Lychee Ice", "prezzo": 15, "immagine": "img/prodotti/30k-lychee-ice.jpg" },
+    { "id": "30k-mixed-fruit", "categoria": "30k", "nome": "Mixed Fruit", "prezzo": 15, "immagine": "img/prodotti/30k-mixed-fruit.jpg" },
+    { "id": "30k-blueberry-ice", "categoria": "30k", "nome": "Blueberry Ice", "prezzo": 15, "immagine": "img/prodotti/30k-blueberry-ice.jpg" },
+    { "id": "30k-strawberry-cherry", "categoria": "30k", "nome": "Strawberry Cherry", "prezzo": 15, "immagine": "img/prodotti/30k-strawberry-cherry.jpg", "badge": "Nuovo" },
+    { "id": "30k-watermelon-ice", "categoria": "30k", "nome": "Watermelon Ice", "prezzo": 15, "immagine": "img/prodotti/30k-watermelon-ice.jpg" },
+    { "id": "30k-yakult", "categoria": "30k", "nome": "Yakult", "prezzo": 15, "immagine": "img/prodotti/30k-yakult.jpg" },
+    { "id": "30k-strawberry-ice", "categoria": "30k", "nome": "Strawberry Ice", "prezzo": 15, "immagine": "img/prodotti/30k-strawberry-ice.jpg" },
+    { "id": "30k-cola-ice", "categoria": "30k", "nome": "Cola Ice", "prezzo": 15, "immagine": "img/prodotti/30k-cola-ice.jpg" },
+    { "id": "30k-mango-ice", "categoria": "30k", "nome": "Mango Ice", "prezzo": 15, "immagine": "img/prodotti/30k-mango-ice.jpg" },
+    { "id": "30k-lemon-lime", "categoria": "30k", "nome": "Lemon Lime", "prezzo": 15, "immagine": "img/prodotti/30k-lemon-lime.jpg", "badge": "Nuovo" },
+    { "id": "30k-grape-ice", "categoria": "30k", "nome": "Grape Ice", "prezzo": 15, "immagine": "img/prodotti/30k-grape-ice.jpg" },
+    { "id": "30k-guava-ice", "categoria": "30k", "nome": "Guava Ice", "prezzo": 15, "immagine": "img/prodotti/30k-guava-ice.jpg" },
+    { "id": "30k-banana-orange-ice", "categoria": "30k", "nome": "Banana Orange Ice", "prezzo": 15, "immagine": "img/prodotti/30k-banana-orange-ice.jpg" },
+    { "id": "30k-strawberry-watermelon", "categoria": "30k", "nome": "Strawberry Watermelon", "prezzo": 15, "immagine": "img/prodotti/30k-strawberry-watermelon.jpg" },
+    { "id": "30k-peach-apple-pear", "categoria": "30k", "nome": "Peach Apple Pear", "prezzo": 15, "immagine": "img/prodotti/30k-peach-apple-pear.jpg", "badge": "Nuovo" },
+    { "id": "30k-blueberry-raspberry", "categoria": "30k", "nome": "Blueberry Raspberry", "prezzo": 15, "immagine": "img/prodotti/30k-blueberry-raspberry.jpg", "badge": "Nuovo" },
+    { "id": "25k-blueberry-ice", "categoria": "25k", "nome": "Blueberry Ice", "prezzo": 10, "immagine": "img/prodotti/25k-blueberry-ice.jpg" },
+    { "id": "25k-pineapple-ice", "categoria": "25k", "nome": "Pineapple Ice", "prezzo": 10, "immagine": "img/prodotti/25k-pineapple-ice.jpg" },
+    { "id": "25k-banana-ice", "categoria": "25k", "nome": "Banana Ice", "prezzo": 10, "immagine": "img/prodotti/25k-banana-ice.jpg" },
+    { "id": "25k-watermelon-ice", "categoria": "25k", "nome": "Watermelon Ice", "prezzo": 10, "immagine": "img/prodotti/25k-watermelon-ice.jpg" },
+    { "id": "25k-strawberry-watermelon-ice", "categoria": "25k", "nome": "Strawberry Watermelon Ice", "prezzo": 10, "immagine": "img/prodotti/25k-strawberry-watermelon-ice.jpg" },
+    { "id": "25k-grape-ice", "categoria": "25k", "nome": "Grape Ice", "prezzo": 10, "immagine": "img/prodotti/25k-grape-ice.jpg" },
+    { "id": "25k-mixed-fruit", "categoria": "25k", "nome": "Mixed Fruit", "prezzo": 10, "immagine": "img/prodotti/25k-mixed-fruit.jpg" },
+    { "id": "25k-mango-ice", "categoria": "25k", "nome": "Mango Ice", "prezzo": 10, "immagine": "img/prodotti/25k-mango-ice.jpg" },
+    { "id": "25k-orange-soda", "categoria": "25k", "nome": "Orange Soda", "prezzo": 10, "immagine": "img/prodotti/25k-orange-soda.jpg" },
+    { "id": "25k-rose-lychee", "categoria": "25k", "nome": "Rose Lychee", "prezzo": 10, "immagine": "img/prodotti/25k-rose-lychee.jpg" },
+    { "id": "25k-peach-ice", "categoria": "25k", "nome": "Peach Ice", "prezzo": 10, "immagine": "img/prodotti/25k-peach-ice.jpg" },
+    { "id": "25k-double-apples", "categoria": "25k", "nome": "Double Apples", "prezzo": 10, "immagine": "img/prodotti/25k-double-apples.jpg" },
+    { "id": "25k-strawberry-ice", "categoria": "25k", "nome": "Strawberry Ice", "prezzo": 10, "immagine": "img/prodotti/25k-strawberry-ice.jpg" },
+    { "id": "25k-guava-ice", "categoria": "25k", "nome": "Guava Ice", "prezzo": 10, "immagine": "img/prodotti/25k-guava-ice.jpg" },
+    { "id": "25k-cool-mint", "categoria": "25k", "nome": "Cool Mint", "prezzo": 10, "immagine": "img/prodotti/25k-cool-mint.jpg" }
   ]
 }
