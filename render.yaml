@@ -1,0 +1,17 @@
+# Configurazione per Render.com (New → Blueprint): mette online il bot del negozio
+# che sta nella cartella telegram-bot/. Al momento della creazione Render chiede
+# solo BOT_TOKEN (il token di @BotFather); ADMIN_CHAT_ID si aggiunge dopo, in Environment.
+services:
+  - type: web
+    name: sbuffmilano
+    runtime: node
+    plan: free
+    rootDir: telegram-bot
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: TIMEZONE
+        value: Europe/Rome

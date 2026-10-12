@@ -14,7 +14,8 @@ const crypto = require('crypto');
 loadEnvFile(path.join(__dirname, '.env'));
 
 const BOT_TOKEN = (process.env.BOT_TOKEN || '').trim();
-const PUBLIC_URL = (process.env.PUBLIC_URL || '').trim().replace(/\/+$/, '');
+// Su Render l'indirizzo pubblico arriva da solo (RENDER_EXTERNAL_URL), altrove va messo in PUBLIC_URL
+const PUBLIC_URL = (process.env.PUBLIC_URL || process.env.RENDER_EXTERNAL_URL || '').trim().replace(/\/+$/, '');
 const ADMIN_CHAT_ID = (process.env.ADMIN_CHAT_ID || '').trim();
 const PORT = Number(process.env.PORT) || 3000;
 const TIMEZONE = process.env.TIMEZONE || 'Europe/Rome';

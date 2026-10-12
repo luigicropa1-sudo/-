@@ -23,51 +23,73 @@ Cliente                         Bot                         Voi (chat ordini)
 | `public/` | La mini app (pagina, grafica, logica del carrello). |
 | `server.js` | Il server: pubblica la mini app, riceve gli ordini e fa funzionare il bot. |
 | `.env.example` | Modello delle impostazioni segrete (token del bot ecc.). |
+| `sbuffmilano-foto-profilo.png` | Foto profilo del bot da caricare con @BotFather. |
+| `../render.yaml` | Configurazione pronta per mettere il bot online su Render. |
 
 Non servono librerie da installare: basta **Node.js 18 o più recente**.
 
-## 1. Creare il bot (una volta sola)
+## 1. Creare il bot su Telegram (5 minuti, una volta sola)
 
-1. Su Telegram apri **@BotFather** e scrivi `/newbot`.
-2. Scegli il nome (es. *Il Mio Negozio*) e lo username (deve finire con `bot`, es. `MioNegozio_bot`).
-3. BotFather ti risponde con il **token**, una riga tipo `7123456789:AAH...`.
-   È la password del bot: non pubblicarla e non incollarla in chat con nessuno.
+Su Telegram apri **@BotFather** e mandagli questi messaggi, uno alla volta:
 
-## 2. Mettere il server online
+| Scrivi a @BotFather | Poi rispondi con |
+|---------------------|------------------|
+| `/newbot` | `SBUFFMILANO` (il nome visibile) |
+| | `SbuffMilanoBot` (lo username: deve finire con `bot`; se è preso prova `SbuffMilano_bot`) |
+
+BotFather risponde con il **token**, una riga tipo `7123456789:AAH...`. È la
+password del bot: tienila per il passo 2 e non mandarla a nessuno.
+
+Poi, sempre a @BotFather (ogni comando ti chiede di scegliere il bot):
+
+| Comando | Cosa mandare |
+|---------|--------------|
+| `/setuserpic` | la foto `sbuffmilano-foto-profilo.png` (è in questa cartella) |
+| `/setabouttext` | `Vape usa e getta ATVS 60K · 30K · 25K. Ordina in pochi tap. Solo maggiorenni.` |
+| `/setdescription` | il testo qui sotto |
+
+```
+SBUFFMILANO 💜
+
+Tutti i gusti ATVS 60K (4 gusti in 1), 30K e 25K.
+Tocca AVVIA e poi "Apri il negozio": scegli, metti nel carrello e ordina in pochi secondi.
+
+🔞 Vendita riservata ai maggiorenni.
+```
+
+## 2. Mettere il bot online con Render (gratis)
 
 Telegram apre le mini app solo da un indirizzo **https**, quindi il server deve
-stare su internet. Il modo più semplice è [Render](https://render.com):
+stare su internet. Nel repository c'è già il file `render.yaml` che configura tutto:
 
-1. Crea un account su Render e collega il tuo GitHub.
-2. **New → Web Service** e scegli questo repository.
-3. Impostazioni:
-   - **Root Directory**: `telegram-bot`
-   - **Build Command**: `npm install`
-   - **Start Command**: `npm start`
-4. In **Environment** aggiungi la variabile `BOT_TOKEN` con il token di BotFather.
-5. Crea il servizio. Render ti dà un indirizzo tipo `https://mio-negozio.onrender.com`:
-   aggiungilo come variabile `PUBLIC_URL` e riavvia (Manual Deploy).
+1. Crea un account su [render.com](https://render.com) entrando con GitHub.
+2. **New → Blueprint** e scegli questo repository
+   (ramo `claude/vigilant-volta-0x6s06`, finché non viene unito al ramo principale).
+3. Render chiede solo **BOT_TOKEN**: incolla il token di BotFather e conferma.
+4. Dopo un paio di minuti il servizio `sbuffmilano` è attivo con un indirizzo tipo
+   `https://sbuffmilano.onrender.com`. Il server lo riconosce da solo e collega il bot.
 
 > Il piano gratuito di Render "si addormenta" dopo 15 minuti senza visite: il
 > primo messaggio dopo una pausa può metterci circa un minuto. Per un negozio vero
 > conviene il piano a pagamento più piccolo, che resta sempre acceso.
-> Va bene anche qualsiasi altro hosting Node.js (Railway, Fly.io, una VPS…).
+> Va bene anche qualsiasi altro hosting Node.js: lì l'indirizzo va messo nella variabile `PUBLIC_URL`.
 
 ## 3. Scegliere dove arrivano gli ordini
 
 - **Solo a te**: scrivi `/id` al bot in privato.
 - **A più persone** (consigliato): crea un gruppo, aggiungi il bot e scrivi `/id` nel gruppo.
 
-Il bot risponde con un numero (per i gruppi inizia con `-100…`). Mettilo nella
-variabile `ADMIN_CHAT_ID` e riavvia il server.
+Il bot risponde con un numero (per i gruppi inizia con `-100…`). Su Render apri il
+servizio → **Environment** → aggiungi `ADMIN_CHAT_ID` con quel numero e salva
+(il servizio si riavvia da solo).
 
-Prova: apri il bot, scrivi `/start`, tocca **Apri il negozio** e fai un ordine di prova.
+Prova: apri il bot, premi **Avvia**, tocca **Apri il negozio** e fai un ordine di prova.
 
 ## 4. Pulsante "Apri app" sul profilo del bot (facoltativo)
 
 Per avere il pulsante **Apri app** sul profilo del bot, come Krusty Club:
-@BotFather → `/mybots` → il tuo bot → **Bot Settings** → **Configure Mini App** →
-**Enable Mini App** e incolla l'indirizzo `PUBLIC_URL`.
+@BotFather → `/mybots` → il bot → **Bot Settings** → **Configure Mini App** →
+**Enable Mini App** e incolla l'indirizzo che ti ha dato Render.
 
 Il pulsante **Ordina** accanto alla tastiera viene impostato in automatico dal server.
 
@@ -79,7 +101,7 @@ Tutto si fa in `catalogo.json`; le modifiche si vedono appena riapri la mini app
 
 | Campo | Esempio | Significato |
 |-------|---------|-------------|
-| `nome`, `sottotitolo` | `"Il Mio Negozio"` | Titolo in alto nella mini app |
+| `nome`, `sottotitolo` | `"SBUFFMILANO"` | Titolo in alto nella mini app |
 | `logo`, `copertina` | `"img/logo.jpg"` | Immagini facoltative (metti i file in `public/img/`) |
 | `colore`, `colore2` | `"#7C3AED"`, `"#C026D3"` | Colore principale e secondo colore delle sfumature (ora viola → magenta) |
 | `messaggioBenvenuto` | `"Ciao {nome}! …"` | Risposta a /start (`{nome}` = nome del cliente) |
