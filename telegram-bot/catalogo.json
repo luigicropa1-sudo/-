@@ -1,0 +1,78 @@
+{
+  "negozio": {
+    "nome": "Il Mio Negozio",
+    "sottotitolo": "Ordina in pochi tap, consegna o ritiro",
+    "logo": "",
+    "copertina": "",
+    "colore": "#FF6A2B",
+    "valuta": "EUR",
+    "testoPulsanteMenu": "Ordina",
+    "messaggioBenvenuto": "Ciao {nome}! 👋\n\nBenvenuto nel nostro negozio. Tocca il pulsante qui sotto per vedere i prodotti e ordinare in pochi secondi.",
+    "ordineMinimo": 10,
+    "consegna": { "attiva": true, "costo": 2.5, "gratisSopra": 30 },
+    "ritiro": { "attivo": true, "indirizzo": "Via Esempio 1, Città" },
+    "pagamenti": ["Contanti alla consegna", "Carta / POS alla consegna"]
+  },
+  "categorie": [
+    { "id": "novita", "nome": "Novità", "emoji": "✨" },
+    { "id": "top", "nome": "Più venduti", "emoji": "🔥" },
+    { "id": "altro", "nome": "Altri prodotti", "emoji": "📦" }
+  ],
+  "prodotti": [
+    {
+      "id": "p1",
+      "categoria": "novita",
+      "nome": "Prodotto 1",
+      "descrizione": "Descrizione breve del prodotto. Qui va il testo vero quando arrivano le foto.",
+      "prezzo": 6,
+      "emoji": "🎁",
+      "badge": "Nuovo"
+    },
+    {
+      "id": "p2",
+      "categoria": "novita",
+      "nome": "Prodotto 2 con formati",
+      "descrizione": "Esempio di prodotto con più formati e prezzi diversi.",
+      "emoji": "🧃",
+      "varianti": [
+        { "nome": "Piccolo", "prezzo": 4 },
+        { "nome": "Medio", "prezzo": 6.5 },
+        { "nome": "Grande", "prezzo": 9 }
+      ]
+    },
+    {
+      "id": "p3",
+      "categoria": "top",
+      "nome": "Prodotto 3",
+      "descrizione": "Il preferito dai clienti.",
+      "prezzo": 12.9,
+      "emoji": "⭐",
+      "badge": "Top"
+    },
+    {
+      "id": "p4",
+      "categoria": "top",
+      "nome": "Prodotto 4",
+      "descrizione": "Un altro prodotto di esempio.",
+      "prezzo": 8.5,
+      "emoji": "🍀"
+    },
+    {
+      "id": "p5",
+      "categoria": "altro",
+      "nome": "Prodotto 5",
+      "descrizione": "Prodotto di esempio con prezzo basso.",
+      "prezzo": 3,
+      "emoji": "🧁"
+    },
+    {
+      "id": "p6",
+      "categoria": "altro",
+      "nome": "Prodotto 6",
+      "descrizione": "Esempio di prodotto esaurito: resta visibile ma non si può ordinare.",
+      "prezzo": 15,
+      "emoji": "💎",
+      "disponibile": false
+    }
+  ]
+}
