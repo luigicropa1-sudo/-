@@ -36,7 +36,7 @@
 
   let mainAction = null;
   let money = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' });
-  let accent = '#FF6A2B';
+  let accent = '#7C3AED';
   let onAccent = '#ffffff';
   let spyTick = false;
   let spyLockUntil = 0;
@@ -110,6 +110,7 @@
     if (/^#[0-9a-f]{6}$/i.test(n.colore || '')) accent = n.colore;
     onAccent = contrastText(accent);
     document.documentElement.style.setProperty('--accent', accent);
+    if (/^#[0-9a-f]{6}$/i.test(n.colore2 || '')) document.documentElement.style.setProperty('--accent-2', n.colore2);
     document.documentElement.style.setProperty('--on-accent', onAccent);
     if (n.nome) document.title = n.nome;
   }
@@ -119,10 +120,14 @@
       ? tg.colorScheme === 'dark'
       : Boolean(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
     document.documentElement.dataset.scheme = dark ? 'dark' : 'light';
-    if (inTelegram && ver('6.1')) {
+    // Barra in alto e sfondo di Telegram dello stesso colore della pagina
+    const pageBg = getComputedStyle(document.documentElement).getPropertyValue('--bg2').trim();
+    if (ver('6.9') && /^#[0-9a-f]{6}$/i.test(pageBg)) {
+      tg.setHeaderColor(pageBg);
+      tg.setBackgroundColor(pageBg);
+      if (ver('7.10')) tg.setBottomBarColor(pageBg);
+    } else if (ver('6.1')) {
       tg.setHeaderColor('secondary_bg_color');
-      if (tg.themeParams.secondary_bg_color) tg.setBackgroundColor(tg.themeParams.secondary_bg_color);
-      if (ver('7.10')) tg.setBottomBarColor('secondary_bg_color');
     }
     refreshButtons();
   }
@@ -480,7 +485,7 @@
     const price = hasVariants(p) ? `<small>da</small> ${fmt(minPrice(p))}` : fmt(p.prezzo);
     return `
       <article class="card${soldOut ? ' soldout' : ''}" data-action="open" data-id="${esc(p.id)}">
-        <div class="media" style="--h:${hue(p.id)}">
+        <div class="media${p.immagine ? ' photo' : ''}" style="--h:${hue(p.id)}">
           ${mediaHtml(p)}
           ${soldOut ? '<span class="badge muted">Esaurito</span>' : p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ''}
         </div>
@@ -595,7 +600,7 @@
       <div class="sheet-backdrop" data-action="close-sheet"></div>
       <div class="sheet-panel" role="dialog" aria-modal="true" aria-label="${esc(p.nome)}">
         <button class="sheet-x" data-action="close-sheet" aria-label="Chiudi">${ICON.close}</button>
-        <div class="sheet-media" style="--h:${hue(p.id)}">${mediaHtml(p)}</div>
+        <div class="sheet-media${p.immagine ? ' photo' : ''}" style="--h:${hue(p.id)}">${mediaHtml(p)}</div>
         <div class="sheet-body"></div>
       </div>`;
     updateSheet();
@@ -690,7 +695,7 @@
       const unit = unitPrice(p, l.variante);
       return `
         <div class="line">
-          <div class="thumb" style="--h:${hue(p.id)}">${mediaHtml(p)}</div>
+          <div class="thumb${p.immagine ? ' photo' : ''}" style="--h:${hue(p.id)}">${mediaHtml(p)}</div>
           <div class="line-info">
             <div class="line-name">${esc(lineName(p))}</div>
             <div class="line-sub">${variant ? esc(variant) + ' · ' : ''}${fmt(unit)}</div>

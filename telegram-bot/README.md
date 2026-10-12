@@ -81,7 +81,7 @@ Tutto si fa in `catalogo.json`; le modifiche si vedono appena riapri la mini app
 |-------|---------|-------------|
 | `nome`, `sottotitolo` | `"Il Mio Negozio"` | Titolo in alto nella mini app |
 | `logo`, `copertina` | `"img/logo.jpg"` | Immagini facoltative (metti i file in `public/img/`) |
-| `colore` | `"#FF6A2B"` | Colore principale di pulsanti e dettagli |
+| `colore`, `colore2` | `"#7C3AED"`, `"#C026D3"` | Colore principale e secondo colore delle sfumature (ora viola → magenta) |
 | `messaggioBenvenuto` | `"Ciao {nome}! …"` | Risposta a /start (`{nome}` = nome del cliente) |
 | `maggiorenni` | `true` | Schermata "Solo per maggiorenni" all'apertura e dichiarazione obbligatoria nell'ordine |
 | `avviso` | `"Prodotti contenenti nicotina…"` | Avviso mostrato nella schermata 18+ e in fondo al catalogo |
@@ -90,10 +90,10 @@ Tutto si fa in `catalogo.json`; le modifiche si vedono appena riapri la mini app
 | `ritiro` | `{ "attivo": true, "indirizzo": "Via…" }` | Ritiro in negozio |
 | `pagamenti` | `["Contanti alla consegna", …]` | Metodi di pagamento tra cui il cliente sceglie |
 
-**Categorie / serie** (dentro `"categorie"`), es. le tre serie ATUS:
+**Categorie / serie** (dentro `"categorie"`), es. le tre serie ATVS:
 
 ```json
-{ "id": "30k", "chip": "30K · 15 €", "nome": "ATUS 30K", "sigla": "30K",
+{ "id": "30k", "chip": "30K · 15 €", "nome": "ATVS 30K", "sigla": "30K",
   "descrizione": "30.000 tiri · 30 ml · …", "immagine": "img/serie-30k.jpg" }
 ```
 
@@ -122,8 +122,9 @@ Tutto si fa in `catalogo.json`; le modifiche si vedono appena riapri la mini app
 - `categoria`: uno degli `id` della lista `"categorie"`.
 - `immagine`: facoltativa. Senza foto viene mostrata l'`emoji` del prodotto.
   Le foto vanno in `public/img/prodotti/`, meglio se quadrate (circa 800×800 px).
-  Quelle attuali sono ritagliate dalle locandine ATUS: con foto a risoluzione più
-  alta basta sostituire il file mantenendo lo stesso nome.
+  Quelle attuali vengono dal sito del produttore (atvsvape.com), scontornate su sfondo
+  trasparente (formato `.webp`); i pochi gusti che sul sito non ci sono vengono dalle
+  locandine. Per cambiare una foto basta sostituire il file mantenendo lo stesso nome.
 - `disponibile: false` mostra il prodotto come **Esaurito**.
 - Per i formati o le taglie usa `"varianti"` al posto di `"prezzo"`:
   `"varianti": [{ "nome": "Piccolo", "prezzo": 4 }, { "nome": "Grande", "prezzo": 9 }]`
