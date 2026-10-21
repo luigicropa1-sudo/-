@@ -11,9 +11,9 @@ bottega-dei-siti/
     ├── favicon.svg     l'icona nella scheda del browser
     └── logo/
         ├── logo.svg / logo.png                           stemma per sfondi chiari (il logo principale)
-        ├── logo-negativo.svg / logo-negativo.png         stemma per sfondi scuri
+        ├── logo-negativo.svg / logo-negativo.png         stemma pieno color caramello (per foto o fondi colorati)
         ├── logo-orizzontale.svg / .png                   insegna orizzontale, per spazi bassi e larghi
-        ├── logo-orizzontale-negativo.svg / .png          insegna per sfondi scuri
+        ├── logo-orizzontale-negativo.svg / .png          insegna piena color caramello
         ├── marchio.svg / marchio-512.png                 solo l'arco col puntatore (favicon, icone)
         ├── profilo-social.png                            foto profilo per Instagram, Facebook, WhatsApp
         └── anteprima-social.png                          immagine che compare quando condividi il link
@@ -23,7 +23,7 @@ bottega-dei-siti/
 
 Il nome è dentro il logo. Ci sono due forme:
 
-- **Stemma** (il logo principale): l'arco di una bottega, color moro con un filo sabbia.
+- **Stemma** (il logo principale): l'arco di una bottega su fondo sabbia chiaro, con bordo e filo caramello.
   Dentro: un piccolo puntatore del mouse, "LA" in maiuscoletto, "Bottega" in Bodoni e
   "dei Siti" in corsivo, con un ornamento a rombo in basso. Va bene per social, biglietti da
   visita, vetrofanie e per il piè di pagina del sito.
@@ -52,19 +52,19 @@ Chi ha attivato "riduci movimento" sul telefono o sul computer vede il sito ferm
 
 | Nome          | Colore    | Dove si usa                                        |
 |---------------|-----------|----------------------------------------------------|
-| Moro          | `#3B3128` | arco del logo, pulsanti, numeri delle fasi         |
-| Moro scuro    | `#2A231C` | sezione "Perché noi", piè di pagina                |
-| Testo         | `#2E2620` | testi e titoli                                     |
-| Tortora       | `#7A6A55` | etichette e piccoli testi in evidenza              |
-| Sabbia        | `#B9A68A` | filo del logo, linee e dettagli                    |
-| Sabbia chiara | `#EDE4D5` | evidenziato del titolo, fondo delle icone          |
-| Beige         | `#F3EDE3` | sfondo dell'apertura e delle sezioni alterne       |
-| Avorio        | `#FBF8F3` | sfondo della pagina                                |
+| Cognac        | `#8F6239` | pulsanti, numeri delle fasi, etichette             |
+| Caramello     | `#A9784A` | bordo del logo, linee e piccoli dettagli           |
+| Miele         | `#D9B98F` | evidenziato del titolo, bagliore dell'apertura     |
+| Sabbia        | `#D4BE9F` | filo del logo, bordi leggeri                       |
+| Sabbia chiara | `#F0E3D0` | sezione "Perché noi", piè di pagina, fondo del logo|
+| Beige         | `#F5ECE0` | sfondo dell'apertura e delle sezioni alterne       |
+| Avorio        | `#FBF7F1` | sfondo della pagina                                |
+| Testo         | `#3A2E25` | testi e titoli                                     |
 
-Niente blu: tutto il sito usa i toni caldi del logo.
+Tutti gli sfondi sono chiari e caldi: niente blu e niente sezioni scure.
 
 - Titoli in Bodoni Moda, tutto il resto in Instrument Sans.
-- Il sito ha anche una versione scura, che si attiva da sola se il telefono è in modalità scura.
+- Il sito resta chiaro anche se il telefono o il computer sono in modalità scura.
 
 ## Da sistemare prima di andare online
 
