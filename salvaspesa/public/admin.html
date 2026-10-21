@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Salvaspesa · Gestione</title>
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { padding-bottom: 40px; }
+    .adm-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 16px 6px; }
+    .adm-head h1 { font-size: 22px; font-weight: 800; }
+    .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
+    @media (min-width: 760px) { .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .stat { background: var(--card); border-radius: var(--r-md); box-shadow: var(--shadow); padding: 14px; }
+    .stat small { color: var(--hint); font-weight: 600; font-size: 12.5px; }
+    .stat b { display: block; font-size: 24px; font-weight: 800; margin-top: 2px; font-variant-numeric: tabular-nums; }
+    .stat.hl { background: var(--brand); color: #fff; }
+    .stat.hl small { color: rgba(255, 255, 255, .85); }
+    .orders { display: grid; gap: 12px; }
+    @media (min-width: 900px) { .orders { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } }
+    .o { background: var(--card); border-radius: var(--r-lg); box-shadow: var(--shadow); padding: 14px 16px; display: grid; gap: 10px; }
+    .o-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .o-top strong { font-size: 17px; }
+    .o-top small { display: block; color: var(--hint); }
+    .o-when { display: flex; align-items: center; gap: 8px; padding: 9px 11px; border-radius: 11px; background: var(--brand-soft); color: var(--brand-ink); font-weight: 700; font-size: 14px; }
+    .o-when svg { width: 18px; height: 18px; }
+    .o p { font-size: 14px; }
+    .o .muted { color: var(--hint); }
+    .o-items { font-size: 14px; display: grid; gap: 3px; border-top: 1px solid var(--sep); padding-top: 10px; }
+    .o-items .row span:first-child { min-width: 0; }
+    .o-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .o-actions .btn { height: 42px; font-size: 14px; padding: 0 14px; }
+    .btn.danger { background: var(--sale-soft); color: var(--sale); }
+    .login { max-width: 380px; margin: 12vh auto 0; display: grid; gap: 14px; text-align: center; }
+    .login input { height: 52px; border-radius: 14px; border: 2px solid var(--sep); background: var(--card); padding: 0 14px; font-size: 16px; outline: 0; }
+    .login input:focus { border-color: var(--brand); }
+    .watch { font-size: 14px; }
+    .watch .row { padding: 9px 14px; }
+    .watch .row + .row { border-top: 1px solid var(--sep); }
+  </style>
+</head>
+<body>
+  <main id="adm" class="wrap"></main>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script src="admin.js"></script>
+</body>
+</html>
