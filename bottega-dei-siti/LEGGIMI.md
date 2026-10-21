@@ -23,7 +23,7 @@ bottega-dei-siti/
 
 Il nome è dentro il logo. Ci sono due forme:
 
-- **Stemma** (il logo principale): l'arco di una bottega, blu notte con un filo color sabbia.
+- **Stemma** (il logo principale): l'arco di una bottega, color moro con un filo sabbia.
   Dentro: un piccolo puntatore del mouse, "LA" in maiuscoletto, "Bottega" in Bodoni e
   "dei Siti" in corsivo, con un ornamento a rombo in basso. Va bene per social, biglietti da
   visita, vetrofanie e per il piè di pagina del sito.
@@ -50,15 +50,18 @@ Chi ha attivato "riduci movimento" sul telefono o sul computer vede il sito ferm
 
 ## Colori e font
 
-| Nome          | Colore    | Dove si usa                                   |
-|---------------|-----------|-----------------------------------------------|
-| Blu notte     | `#1C2E54` | pulsanti, simbolo del logo                    |
-| Blu scuro     | `#121D36` | sezione "Perché noi", piè di pagina           |
-| Testo         | `#14213D` | testi e titoli                                |
-| Sabbia        | `#B9A68A` | filo del logo, linee e dettagli               |
-| Sabbia chiara | `#EDE4D5` | evidenziato del titolo, fondo delle icone     |
-| Beige         | `#F3EDE3` | sfondo dell'apertura e delle sezioni alterne  |
-| Avorio        | `#FBF8F3` | sfondo della pagina                           |
+| Nome          | Colore    | Dove si usa                                        |
+|---------------|-----------|----------------------------------------------------|
+| Moro          | `#3B3128` | arco del logo, pulsanti, numeri delle fasi         |
+| Moro scuro    | `#2A231C` | sezione "Perché noi", piè di pagina                |
+| Testo         | `#2E2620` | testi e titoli                                     |
+| Tortora       | `#7A6A55` | etichette e piccoli testi in evidenza              |
+| Sabbia        | `#B9A68A` | filo del logo, linee e dettagli                    |
+| Sabbia chiara | `#EDE4D5` | evidenziato del titolo, fondo delle icone          |
+| Beige         | `#F3EDE3` | sfondo dell'apertura e delle sezioni alterne       |
+| Avorio        | `#FBF8F3` | sfondo della pagina                                |
+
+Niente blu: tutto il sito usa i toni caldi del logo.
 
 - Titoli in Bodoni Moda, tutto il resto in Instrument Sans.
 - Il sito ha anche una versione scura, che si attiva da sola se il telefono è in modalità scura.
