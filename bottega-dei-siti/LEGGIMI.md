@@ -9,6 +9,7 @@ bottega-dei-siti/
 ├── js/main.js          effetti allo scorrimento, domande, modulo contatti, pulsanti "Copia"
 └── assets/
     ├── favicon.svg     l'icona nella scheda del browser
+    ├── img/            screenshot dei lavori (Maremonti su computer e telefono)
     └── logo/
         ├── logo.svg / logo.png                           stemma per sfondi chiari (il logo principale)
         ├── logo-negativo.svg / logo-negativo.png         stemma pieno color caramello (per foto o fondi colorati)
@@ -66,6 +67,18 @@ Tutti gli sfondi sono chiari e caldi: niente blu e niente sezioni scure.
 - Titoli in Bodoni Moda, tutto il resto in Instrument Sans.
 - Il sito resta chiaro anche se il telefono o il computer sono in modalità scura.
 
+## Contatti nel sito
+
+- **Telefono e WhatsApp: 333 732 4287.** Compare nei contatti (pulsanti "Scrivici su WhatsApp" e
+  "Chiama"), nel piè di pagina, nei dati per Google e nel pulsante WhatsApp rotondo in basso a destra.
+- Il modulo ha due pulsanti: **Invia su WhatsApp** apre WhatsApp con il messaggio già scritto,
+  **Invia per email** apre il programma di posta. Per cambiare numero cerca `3337324287` in `index.html`.
+
+## Lavori
+
+La sezione "Lavori" mostra il Ristorante Maremonti. Per aggiungere un nuovo sito, copia il blocco
+`<li class="lavoro">` in `index.html`, cambia testi e link e metti i due screenshot in `assets/img/`.
+
 ## Da sistemare prima di andare online
 
 1. **Dominio**: `labottegadeisiti.com` risultava libero il 28/09/2026. Registralo (anche il `.it`, se è libero).
@@ -73,4 +86,4 @@ Tutti gli sfondi sono chiari e caldi: niente blu e niente sezioni scure.
    Per cambiarla, cerca e sostituisci `ciao@labottegadeisiti.com` in `index.html` (compare in più punti).
 3. **Partita IVA**: in fondo a `index.html` c'è un commento che indica dove aggiungerla.
 4. **Testi**: rileggi servizi, fasi di lavoro e domande frequenti: devono dire solo cose che offri davvero.
-5. **Lavori**: la sezione dei lavori non c'è ancora. Si aggiunge quando avrai più progetti da mostrare.
+5. **Maremonti**: tieni per iscritto l'ok del ristorante a mostrarlo tra i lavori (basta un messaggio).

@@ -10,10 +10,14 @@
   /* ---------- Linea delle fasi che si riempie mentre scorri ---------- */
   var fasi = document.getElementById('fasi');
 
+  /* ---------- Pulsante WhatsApp: compare dopo l'apertura ---------- */
+  var waFisso = document.getElementById('wa-fisso');
+
   var inAttesa = false;
   function aggiornaScorrimento() {
     inAttesa = false;
     if (testata) testata.classList.toggle('scorsa', window.scrollY > 8);
+    if (waFisso) waFisso.classList.toggle('visibile', window.scrollY > 480);
     if (fasi && !riduci) {
       var r = fasi.getBoundingClientRect();
       var centro = window.innerHeight * 0.6;
@@ -96,10 +100,11 @@
     });
   });
 
-  /* ---------- Modulo: prepara un'email già scritta ---------- */
+  /* ---------- Modulo: prepara il messaggio su WhatsApp o per email ---------- */
   var modulo = document.getElementById('modulo');
   if (modulo) {
     var email = modulo.getAttribute('data-email');
+    var whatsapp = modulo.getAttribute('data-whatsapp');
     var esito = document.getElementById('modulo-esito');
     var boxCopia = document.getElementById('modulo-copia');
     var testoPronto = document.getElementById('f-testo');
@@ -133,6 +138,17 @@
         '',
         'Grazie!'
       ].join('\n');
+
+      var canale = (e.submitter && e.submitter.value) || 'email';
+      if (canale === 'whatsapp' && whatsapp) {
+        var indirizzo = 'https://wa.me/' + whatsapp + '?text=' + encodeURIComponent(corpo);
+        boxCopia.hidden = true;
+        esito.textContent = 'Si sta aprendo WhatsApp con il messaggio già scritto: premi Invia per mandarcelo.';
+        esito.hidden = false;
+        var finestra = window.open(indirizzo, '_blank');
+        if (finestra) { finestra.opener = null; } else { window.location.href = indirizzo; }
+        return;
+      }
 
       testoPronto.value = 'A: ' + email + '\nOggetto: ' + oggetto + '\n\n' + corpo;
       boxCopia.hidden = false;

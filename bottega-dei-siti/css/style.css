@@ -139,6 +139,8 @@ p { margin: 0; }
 .btn--linea:hover { border-color: var(--inchiostro); }
 .btn--piccolo { min-height: 42px; padding: 9px 18px; font-size: .95rem; }
 .btn__corto { display: none; }
+.btn__icona { width: 20px; height: 20px; margin-right: 10px; flex: none; fill: currentColor; }
+.btn__icona--tratto { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
 @keyframes luce-scorre { from { transform: translateX(-120%); } to { transform: translateX(120%); } }
 
@@ -466,6 +468,51 @@ p { margin: 0; }
   .servizio { padding: 22px 20px 24px; }
 }
 
+/* ---------- Lavori ---------- */
+.lavori { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(48px, 7vw, 88px); }
+.lavoro { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+.lavoro__vetrina { position: relative; display: block; padding: 0 28px 44px 0; text-decoration: none; color: inherit; }
+.lavoro__browser {
+  display: block; overflow: hidden;
+  background: var(--superficie); border: 1px solid var(--riga); border-radius: 12px;
+  box-shadow: var(--ombra);
+  transition: transform .6s var(--morbido), box-shadow .6s var(--morbido);
+}
+.lavoro__browser img { width: 100%; transition: transform 1.2s var(--morbido); }
+.lavoro__telefono {
+  position: absolute; right: 0; bottom: 0; width: 24%; min-width: 92px;
+  padding: 6px; background: var(--telaio); border-radius: 22px;
+  box-shadow: 0 24px 44px -18px rgb(var(--ombra-rgb) / .55);
+  transition: transform .6s var(--morbido);
+}
+.lavoro__telefono img { width: 100%; border-radius: 16px; }
+.lavoro__vetrina:hover .lavoro__browser { transform: translateY(-4px); box-shadow: 0 30px 60px -28px rgb(var(--ombra-rgb) / .45); }
+.lavoro__vetrina:hover .lavoro__browser img { transform: scale(1.03); }
+.lavoro__vetrina:hover .lavoro__telefono { transform: translateY(-10px) rotate(-2deg); }
+.lavoro__testo { display: grid; justify-items: start; gap: 16px; }
+.lavoro__testo h3 { font-family: var(--f-titoli); font-size: clamp(1.7rem, 2vw + .8rem, 2.4rem); font-weight: 600; line-height: 1.1; }
+.lavoro__testo > p { color: var(--inchiostro-2); max-width: 32em; }
+.lavoro__etichette { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.lavoro__etichette li {
+  font-size: .78rem; font-weight: 600; color: var(--accento-testo);
+  background: var(--sabbia-chiara); border-radius: 20px; padding: 4px 12px;
+}
+.lavoro__fatto { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.lavoro__fatto li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 8px; }
+.lavoro__fatto li::before { content: "✓"; color: var(--accento-testo); font-weight: 700; }
+.collegamento {
+  font-weight: 600; text-decoration: none; color: var(--inchiostro);
+  border-bottom: 1.5px solid var(--caramello); padding-bottom: 2px;
+  transition: color .2s ease;
+}
+.collegamento:hover { color: var(--accento-testo); }
+@media (max-width: 900px) {
+  .lavoro { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 480px) {
+  .lavoro__vetrina { padding: 0 16px 32px 0; }
+}
+
 /* ---------- Metodo: titolo fermo, fasi che scorrono ---------- */
 .metodo { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
 .metodo__testa { position: sticky; top: 130px; margin-bottom: 0; }
@@ -488,7 +535,7 @@ p { margin: 0; }
 /* la linea si ferma al numero dell'ultima fase */
 .fase:last-child::before {
   content: ""; position: absolute; z-index: 1; left: 19px; top: 44px; bottom: -24px; width: 6px;
-  background: var(--fondo-2);
+  background: var(--fondo);
 }
 .fase__numero {
   grid-row: span 2;
@@ -496,7 +543,7 @@ p { margin: 0; }
   width: 44px; height: 44px; border-radius: 50%;
   background: var(--cognac); color: #FFFFFF;
   font-family: var(--f-titoli); font-size: 1.25rem; font-weight: 700;
-  box-shadow: 0 0 0 6px var(--fondo-2);
+  box-shadow: 0 0 0 6px var(--fondo);
   position: relative; z-index: 1;
 }
 .fase:last-child .fase__numero { background: var(--caramello); color: var(--chiaro); }
@@ -586,6 +633,8 @@ p { margin: 0; }
 /* ---------- Contatti ---------- */
 .contatti { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
 .contatti__testo { display: grid; justify-items: start; gap: 14px; }
+.contatti__rapidi { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+@media (max-width: 480px) { .contatti__rapidi { justify-self: stretch; } .contatti__rapidi .btn { flex: 1 1 100%; } }
 .email { display: grid; gap: 6px; margin-top: 14px; padding-top: 18px; border-top: 1px solid var(--riga); justify-self: stretch; }
 .email__etichetta { font-size: var(--t-piccolo); color: var(--inchiostro-2); }
 .email__riga { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
@@ -630,7 +679,7 @@ p { margin: 0; }
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--sabbia) 35%, transparent);
 }
 .campo input[aria-invalid="true"] { border-color: #C0392B; }
-.modulo .btn { justify-self: start; }
+.modulo__invio { display: flex; flex-wrap: wrap; gap: 12px; }
 .modulo__esito { font-size: var(--t-piccolo); color: var(--inchiostro-2); }
 .modulo__copia { display: grid; gap: 8px; }
 .modulo__copia .copia { justify-self: start; }
@@ -639,7 +688,7 @@ p { margin: 0; }
 }
 @media (max-width: 520px) {
   .modulo__campi { grid-template-columns: minmax(0, 1fr); }
-  .modulo .btn { justify-self: stretch; }
+  .modulo__invio .btn { flex: 1 1 100%; }
 }
 
 /* ---------- Piè di pagina ---------- */
@@ -658,6 +707,21 @@ p { margin: 0; }
 .piede__fondo { font-size: .85rem; }
 .piede__fondo p { padding-top: 22px; border-top: 1px solid var(--riga); }
 .piede__fondo a { color: var(--accento-testo); }
+
+/* ---------- Pulsante WhatsApp sempre a portata di mano ---------- */
+.wa-fisso {
+  position: fixed; z-index: 30;
+  right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--btn-fondo); color: var(--btn-testo);
+  box-shadow: 0 14px 30px -12px rgb(var(--ombra-rgb) / .6);
+  transition: opacity .4s var(--morbido), transform .4s var(--morbido);
+}
+.wa-fisso svg { width: 28px; height: 28px; fill: currentColor; }
+.wa-fisso:hover { transform: translateY(-2px) scale(1.05); }
+/* compare dopo l'apertura (senza script resta sempre visibile) */
+.js .wa-fisso:not(.visibile) { opacity: 0; transform: translateY(16px) scale(.9); pointer-events: none; }
 
 /* ---------- Movimento ridotto: tutto fermo e subito visibile ---------- */
 @media (prefers-reduced-motion: reduce) {
