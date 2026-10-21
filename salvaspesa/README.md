@@ -112,6 +112,9 @@ Tutto è in `catalogo.json`. Le modifiche si vedono appena si ricarica la pagina
 ## Prima di aprire
 
 - Metti nome, dati dell'azienda, contatti, zone e prezzi veri in `catalogo.json`.
+- Le foto in `public/img/prodotti` sono generate al computer e servono a mostrare il negozio.
+  Quando carichi la merce vera, sostituiscile con foto dei prodotti che vendi davvero
+  (stesso nome file, formato quadrato): il cliente deve vedere quello che riceve.
 - Fai verificare condizioni di vendita e privacy (pagina Info) da un consulente.
 - Vendere alimenti, anche online, richiede la notifica sanitaria (SCIA) alla ASL e un piano
   di autocontrollo HACCP. Per fresco e surgelati serve un trasporto refrigerato:

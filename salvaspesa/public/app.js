@@ -321,7 +321,7 @@
       <div class="wrap">
         <div class="topbar"><button class="icon-btn" data-act="back" aria-label="Indietro">${I.back}</button></div>
         <div class="pd">
-          <div class="pd-media" style="--tile:${esc(c ? c.colore || '' : '')}">${media(p)}${sconto(p) ? `<span class="disc">−${sconto(p)}%</span>` : ''}</div>
+          <div class="pd-media${p.immagine ? ' foto' : ''}" style="--tile:${esc(c ? c.colore || '' : '')}">${media(p)}${sconto(p) ? `<span class="disc">−${sconto(p)}%</span>` : ''}</div>
           <div>
             ${c ? `<a class="pd-cat" href="#/c/${encodeURIComponent(c.id)}">${esc(c.nome)}</a>` : ''}
             <h1>${esc(p.nome)}</h1>
@@ -392,7 +392,7 @@
     const qty = state.cart[id];
     return `
       <div class="line">
-        <a class="thumb${p.immagine ? '' : ''}" href="#/p/${encodeURIComponent(p.id)}" style="--tile:${esc(c ? c.colore || '' : '')}">${media(p)}</a>
+        <a class="thumb${p.immagine ? ' foto' : ''}" href="#/p/${encodeURIComponent(p.id)}" style="--tile:${esc(c ? c.colore || '' : '')}">${media(p)}</a>
         <div class="line-info">
           <a class="line-name" href="#/p/${encodeURIComponent(p.id)}">${esc(p.nome)}</a>
           <div class="line-sub">${esc(p.formato || '')}${p.scadenza ? ` · ${p.tipoScadenza === 'preferibilmente' ? 'pref. entro' : 'scade'} ${dataBreve(p.scadenza)}` : ''}</div>
@@ -657,7 +657,7 @@
     return `
       <article class="card${soldOut ? ' soldout' : ''}">
         <div class="media-wrap">
-          <a class="card-media" href="#/p/${encodeURIComponent(p.id)}" style="--tile:${esc(c ? c.colore || '' : '')}" aria-label="${esc(p.nome)}">
+          <a class="card-media${p.immagine ? ' foto' : ''}" href="#/p/${encodeURIComponent(p.id)}" style="--tile:${esc(c ? c.colore || '' : '')}" aria-label="${esc(p.nome)}">
             ${media(p)}${sconto(p) ? `<span class="disc">−${sconto(p)}%</span>` : ''}${tag}
           </a>
           <div class="card-ctl" data-ctl="${esc(p.id)}">${ctlHtml(p)}</div>
