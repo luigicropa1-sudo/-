@@ -11,9 +11,9 @@ bottega-dei-siti/
     ├── favicon.svg     l'icona nella scheda del browser
     └── logo/
         ├── logo.svg / logo.png                           stemma per sfondi chiari (il logo principale)
-        ├── logo-negativo.svg / logo-negativo.png         stemma pieno color bordeaux (per foto o fondi colorati)
+        ├── logo-negativo.svg / logo-negativo.png         stemma pieno color caramello (per foto o fondi colorati)
         ├── logo-orizzontale.svg / .png                   insegna orizzontale, per spazi bassi e larghi
-        ├── logo-orizzontale-negativo.svg / .png          insegna piena color bordeaux
+        ├── logo-orizzontale-negativo.svg / .png          insegna piena color caramello
         ├── marchio.svg / marchio-512.png                 solo l'arco col puntatore (favicon, icone)
         ├── profilo-social.png                            foto profilo per Instagram, Facebook, WhatsApp
         └── anteprima-social.png                          immagine che compare quando condividi il link
@@ -23,7 +23,7 @@ bottega-dei-siti/
 
 Il nome è dentro il logo. Ci sono due forme:
 
-- **Stemma** (il logo principale): l'arco di una bottega su fondo panna, con bordo e dettagli bordeaux.
+- **Stemma** (il logo principale): l'arco di una bottega su fondo sabbia chiaro, con bordo e filo caramello.
   Dentro: un piccolo puntatore del mouse, "LA" in maiuscoletto, "Bottega" in Bodoni e
   "dei Siti" in corsivo, con un ornamento a rombo in basso. Va bene per social, biglietti da
   visita, vetrofanie e per il piè di pagina del sito.
@@ -50,19 +50,18 @@ Chi ha attivato "riduci movimento" sul telefono o sul computer vede il sito ferm
 
 ## Colori e font
 
-| Nome          | Colore    | Dove si usa                                          |
-|---------------|-----------|------------------------------------------------------|
-| Bordeaux      | `#7A2E3A` | pulsanti, numeri delle fasi, etichette, bordo del logo |
-| Rosa antico   | `#A0525E` | linee e piccoli dettagli                             |
-| Cipria        | `#DDB7AE` | evidenziato del titolo, bagliore dell'apertura       |
-| Sabbia rosata | `#D9C4BB` | filo del logo, bordi leggeri                         |
-| Panna scura   | `#EFE2D8` | sezione "Perché noi", piè di pagina                  |
-| Panna         | `#F4EDE4` | sfondo dell'apertura e delle sezioni alterne         |
-| Avorio        | `#FBF8F3` | sfondo della pagina                                  |
-| Testo         | `#33232A` | testi e titoli                                       |
+| Nome          | Colore    | Dove si usa                                        |
+|---------------|-----------|----------------------------------------------------|
+| Cognac        | `#8F6239` | pulsanti, numeri delle fasi, etichette             |
+| Caramello     | `#A9784A` | bordo del logo, linee e piccoli dettagli           |
+| Miele         | `#D9B98F` | evidenziato del titolo, bagliore dell'apertura     |
+| Sabbia        | `#D4BE9F` | filo del logo, bordi leggeri                       |
+| Sabbia chiara | `#F0E3D0` | sezione "Perché noi", piè di pagina, fondo del logo|
+| Beige         | `#F5ECE0` | sfondo dell'apertura e delle sezioni alterne       |
+| Avorio        | `#FBF7F1` | sfondo della pagina                                |
+| Testo         | `#3A2E25` | testi e titoli                                     |
 
-Palette "Bordeaux e panna": sfondi sempre chiari, il bordeaux solo per pulsanti e dettagli.
-Tutti i colori sono variabili in cima a `css/style.css`: per cambiarli basta modificare quel blocco.
+Tutti gli sfondi sono chiari e caldi: niente blu e niente sezioni scure.
 
 - Titoli in Bodoni Moda, tutto il resto in Instrument Sans.
 - Il sito resta chiaro anche se il telefono o il computer sono in modalità scura.
