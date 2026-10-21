@@ -9,7 +9,6 @@ bottega-dei-siti/
 ├── js/main.js          effetti allo scorrimento, domande, modulo contatti, pulsanti "Copia"
 └── assets/
     ├── favicon.svg     l'icona nella scheda del browser
-    ├── img/            screenshot dei lavori (Maremonti su computer e telefono)
     └── logo/
         ├── logo.svg / logo.png                           stemma per sfondi chiari (il logo principale)
         ├── logo-negativo.svg / logo-negativo.png         stemma pieno color caramello (per foto o fondi colorati)
@@ -76,8 +75,9 @@ Tutti gli sfondi sono chiari e caldi: niente blu e niente sezioni scure.
 
 ## Lavori
 
-La sezione "Lavori" mostra il Ristorante Maremonti. Per aggiungere un nuovo sito, copia il blocco
-`<li class="lavoro">` in `index.html`, cambia testi e link e metti i due screenshot in `assets/img/`.
+Per ora il sito non mostra lavori. La sezione "Lavori" (schede con screenshot su computer e telefono,
+cosa è stato fatto e link al sito) è pronta nella cronologia di git, nel commit `211dc91`:
+si rimette quando il primo sito da mostrare è online.
 
 ## Da sistemare prima di andare online
 
@@ -86,4 +86,4 @@ La sezione "Lavori" mostra il Ristorante Maremonti. Per aggiungere un nuovo sito
    Per cambiarla, cerca e sostituisci `ciao@labottegadeisiti.com` in `index.html` (compare in più punti).
 3. **Partita IVA**: in fondo a `index.html` c'è un commento che indica dove aggiungerla.
 4. **Testi**: rileggi servizi, fasi di lavoro e domande frequenti: devono dire solo cose che offri davvero.
-5. **Maremonti**: tieni per iscritto l'ok del ristorante a mostrarlo tra i lavori (basta un messaggio).
+5. **Lavori**: quando un sito è online e il cliente è d'accordo, si rimette la sezione Lavori.
