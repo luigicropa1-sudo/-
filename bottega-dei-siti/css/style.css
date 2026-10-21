@@ -25,7 +25,15 @@
   --btn-testo: #FFFCF8;
   --icona-fondo: #F3E7D6;
   --icona-tratto: #8F6239;
-  --ombra: 0 1px 2px rgb(110 76 42 / .06), 0 20px 44px -20px rgb(110 76 42 / .25);
+  --ombra-rgb: 110 76 42;
+  --ombra: 0 1px 2px rgb(var(--ombra-rgb) / .06), 0 20px 44px -20px rgb(var(--ombra-rgb) / .25);
+  --chiaro: #FFFCF8;
+  /* illustrazione d'apertura */
+  --mock-hero-1: #C79F72;
+  --mock-hero-2: #A9784A;
+  --mock-foto-1: #F3E7D6;
+  --mock-foto-2: #D9B98F;
+  --mock-monti: #B98B5C;
 
   /* colori del logo */
   --l-fondo: #F1E4D1;
@@ -124,8 +132,8 @@ p { margin: 0; }
 }
 .btn:hover { transform: translateY(-2px); }
 .btn:hover::after { animation: luce-scorre .8s cubic-bezier(.4, 0, .2, 1); }
-.btn--pieno { background: var(--btn-fondo); color: var(--btn-testo); box-shadow: 0 6px 16px -8px rgb(110 76 42 / .55); }
-.btn--pieno:hover { box-shadow: 0 14px 26px -12px rgb(110 76 42 / .6); }
+.btn--pieno { background: var(--btn-fondo); color: var(--btn-testo); box-shadow: 0 6px 16px -8px rgb(var(--ombra-rgb) / .55); }
+.btn--pieno:hover { box-shadow: 0 14px 26px -12px rgb(var(--ombra-rgb) / .6); }
 .btn--linea { border-color: var(--riga); color: var(--inchiostro); background: var(--superficie); }
 .btn--linea::after { background: linear-gradient(100deg, transparent 25%, color-mix(in srgb, var(--sabbia) 30%, transparent) 50%, transparent 75%); }
 .btn--linea:hover { border-color: var(--inchiostro); }
@@ -145,7 +153,7 @@ p { margin: 0; }
   border-bottom: 1px solid transparent;
   transition: border-color .3s ease, box-shadow .3s ease;
 }
-.testata.scorsa { border-bottom-color: var(--riga); box-shadow: 0 10px 30px -22px rgb(110 76 42 / .45); }
+.testata.scorsa { border-bottom-color: var(--riga); box-shadow: 0 10px 30px -22px rgb(var(--ombra-rgb) / .45); }
 .testata__in { display: flex; align-items: center; gap: 28px; min-height: 80px; transition: min-height .3s var(--morbido); }
 .testata.scorsa .testata__in { min-height: 68px; }
 .testata__logo { display: block; height: 46px; flex: none; transition: height .3s var(--morbido), transform .4s var(--morbido); }
@@ -289,14 +297,14 @@ p { margin: 0; }
 
 .mock__hero {
   display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; align-items: stretch;
-  background: linear-gradient(150deg, #C79F72, #A9784A); border-radius: 8px; padding: 16px;
+  background: linear-gradient(150deg, var(--mock-hero-1), var(--mock-hero-2)); border-radius: 8px; padding: 16px;
 }
 .mock__hero-testo { display: grid; gap: 8px; align-content: center; }
-.mock__pill { width: 74px; height: 18px; border-radius: 9px; background: #FFFCF8; margin-top: 6px; }
-.mock__foto { border-radius: 6px; overflow: hidden; background: linear-gradient(160deg, #F3E7D6, #D9B98F); min-height: 96px; }
+.mock__pill { width: 74px; height: 18px; border-radius: 9px; background: var(--chiaro); margin-top: 6px; }
+.mock__foto { border-radius: 6px; overflow: hidden; background: linear-gradient(160deg, var(--mock-foto-1), var(--mock-foto-2)); min-height: 96px; }
 .mock__foto svg { width: 100%; height: 100%; display: block; }
-.mock__foto circle { fill: #FFFCF8; }
-.mock__foto path { fill: #B98B5C; }
+.mock__foto circle { fill: var(--chiaro); }
+.mock__foto path { fill: var(--mock-monti); }
 
 .riga { display: block; height: 7px; border-radius: 4px; background: var(--riga); }
 .riga--chiara { background: rgb(255 255 255 / .92); height: 10px; }
@@ -318,7 +326,7 @@ p { margin: 0; }
   padding: 7px;
   background: var(--telaio);
   border-radius: 24px;
-  box-shadow: 0 24px 44px -18px rgb(110 76 42 / .55);
+  box-shadow: 0 24px 44px -18px rgb(var(--ombra-rgb) / .55);
   animation: arriva-telefono .9s var(--morbido) 1.2s both, fluttua 7s ease-in-out 2.2s infinite;
 }
 .mock__schermo {
@@ -446,7 +454,7 @@ p { margin: 0; }
   fill: none; stroke: var(--icona-tratto); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
   transition: background-color .3s ease, stroke .3s ease, transform .5s var(--morbido);
 }
-.servizio:hover .servizio__icona { background: var(--cognac); stroke: #FFFCF8; transform: rotate(-6deg); }
+.servizio:hover .servizio__icona { background: var(--cognac); stroke: var(--chiaro); transform: rotate(-6deg); }
 .servizio__nota { font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accento-testo); }
 .servizio p:last-child { color: var(--inchiostro-2); margin-top: 4px; }
 
@@ -491,7 +499,7 @@ p { margin: 0; }
   box-shadow: 0 0 0 6px var(--fondo-2);
   position: relative; z-index: 1;
 }
-.fase:last-child .fase__numero { background: var(--caramello); color: #FFFCF8; }
+.fase:last-child .fase__numero { background: var(--caramello); color: var(--chiaro); }
 .fase h3 { padding-top: 9px; font-size: 1.25rem; }
 .fase p { color: var(--inchiostro-2); max-width: 30em; }
 
