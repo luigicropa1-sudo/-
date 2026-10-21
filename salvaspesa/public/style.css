@@ -475,6 +475,16 @@ img { max-width: 100%; }
 .zones th { color: var(--hint); font-weight: 600; font-size: 12.5px; }
 .zones td:not(:first-child) { white-space: nowrap; font-variant-numeric: tabular-nums; }
 
+/* --- Footer con dati legali --- */
+
+.site-footer { margin-top: 44px; padding-block: 20px 6px; border-top: 1px solid var(--sep); color: var(--hint); font-size: 12.5px; line-height: 1.55; }
+.site-footer .wrap { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 14px 28px; }
+.ft-left { display: grid; gap: 1px; text-align: left; min-width: 0; max-width: 62ch; overflow-wrap: anywhere; }
+.ft-left strong { color: var(--text); font-size: 13px; font-weight: 700; }
+.ft-links { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.ft-links a { color: var(--hint); text-decoration: underline; text-underline-offset: 2px; }
+.ft-links a:hover { color: var(--brand-ink); }
+
 /* --- Pannello CAP (foglio dal basso) --- */
 
 .sheet { position: fixed; inset: 0; z-index: 50; visibility: hidden; transition: visibility 0s .3s; }

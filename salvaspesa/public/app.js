@@ -141,7 +141,7 @@
       location.replace('#/carrello');
       return;
     }
-    $app.innerHTML = views[r.name](r);
+    $app.innerHTML = views[r.name](r) + footerHtml();
     renderTabbar();
     renderCartbar();
     if (navigated && (!prev || prev.name !== r.name || prev.id !== r.id)) window.scrollTo(0, 0);
@@ -615,6 +615,28 @@
         <p>Usiamo nome, telefono, email e indirizzo solo per gestire e consegnare il tuo ordine, e li conserviamo per il tempo richiesto dalla legge. Non li cediamo a terzi, tranne a chi effettua la consegna. Puoi chiedere in ogni momento di vederli, correggerli o cancellarli scrivendo a ${esc(k.email || 'noi')}.</p>
         <p class="muted">Questi testi sono una base: falli verificare da un consulente prima di aprire il negozio.</p>
       </div>`;
+  }
+
+  // Footer con dati dell'azienda e licenze, in basso a sinistra su ogni pagina
+  function footerHtml() {
+    const a = state.data.negozio.azienda || {};
+    const k = state.data.negozio.contatti || {};
+    const licenze = Array.isArray(a.licenze) ? a.licenze.filter(Boolean) : [];
+    return `
+      <footer class="site-footer"><div class="wrap">
+        <div class="ft-left">
+          ${a.ragioneSociale ? `<strong>${esc(a.ragioneSociale)}</strong>` : ''}
+          ${a.sede ? `<span>${esc(a.sede)}</span>` : ''}
+          ${a.piva ? `<span>P. IVA ${esc(a.piva)}</span>` : ''}
+          ${licenze.map((l) => `<span>${esc(l)}</span>`).join('')}
+          ${k.email || k.telefono ? `<span>${[k.telefono, k.email].filter(Boolean).map(esc).join(' · ')}</span>` : ''}
+        </div>
+        <nav class="ft-links" aria-label="Informazioni legali">
+          <a href="#/info/termini">Condizioni di vendita</a>
+          <a href="#/info/privacy">Privacy</a>
+          <a href="#/info/contatti">Contatti</a>
+        </nav>
+      </div></footer>`;
   }
 
   function notFound() {

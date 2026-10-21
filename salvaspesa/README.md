@@ -106,7 +106,8 @@ Tutto è in `catalogo.json`. Le modifiche si vedono appena si ricarica la pagina
 | `consegna.fasce` | Fasce orarie tra cui scegliere. |
 | `consegna.zone` | Zone servite: inizio dei CAP, costo, soglia di consegna gratuita. |
 | `pagamenti` | Metodi di pagamento alla consegna. |
-| `contatti`, `azienda` | Compaiono nella pagina Info e nelle condizioni di vendita. |
+| `contatti`, `azienda` | Compaiono nella pagina Info, nelle condizioni di vendita e nel footer. |
+| `azienda.licenze` | Elenco di licenze e autorizzazioni (SCIA, registrazioni…): ogni riga compare nel footer in basso a sinistra, su tutte le pagine. |
 
 ## Prima di aprire
 

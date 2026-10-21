@@ -63,7 +63,10 @@
     "azienda": {
       "ragioneSociale": "Nome Azienda S.r.l.",
       "piva": "00000000000",
-      "sede": "Via Esempio 1, 20100 Milano"
+      "sede": "Via Esempio 1, 20100 Milano",
+      "licenze": [
+        "Notifica sanitaria (SCIA) n. ____ del __/__/____ – ASL ____"
+      ]
     }
   },
   "categorie": [
