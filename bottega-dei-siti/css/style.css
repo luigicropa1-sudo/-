@@ -1,47 +1,47 @@
 /* =========================================================
    La Bottega dei Siti
-   Toni caldi e chiari: avorio, sabbia, caramello e cognac.
+   Bordeaux e panna, su fondi sempre chiari.
    ========================================================= */
 
 :root {
   /* sfondi: sempre chiari */
-  --fondo: #FBF7F1;
-  --fondo-2: #F5ECE0;
-  --superficie: #FFFCF8;
-  --sabbia-chiara: #F0E3D0;
+  --fondo: #FBF8F3;
+  --fondo-2: #F4EDE4;
+  --superficie: #FFFDF9;
+  --sabbia-chiara: #EFE2D8;
   /* testi */
-  --inchiostro: #3A2E25;
-  --inchiostro-2: #7A6B5C;
-  --accento-testo: #8F6239;
-  /* toni caldi */
-  --cognac: #8F6239;
-  --caramello: #A9784A;
-  --miele: #D9B98F;
-  --sabbia: #D4BE9F;
-  --riga: #EADDCB;
-  --focus: #A9784A;
-  --telaio: #5A4636;
-  --btn-fondo: #8F6239;
-  --btn-testo: #FFFCF8;
-  --icona-fondo: #F3E7D6;
-  --icona-tratto: #8F6239;
-  --ombra-rgb: 110 76 42;
+  --inchiostro: #33232A;
+  --inchiostro-2: #77666B;
+  --accento-testo: #7A2E3A;
+  /* bordeaux e panna */
+  --bordeaux: #7A2E3A;
+  --rosa-antico: #A0525E;
+  --cipria: #DDB7AE;
+  --sabbia: #D9C4BB;
+  --riga: #EBDFD6;
+  --focus: #A0525E;
+  --telaio: #4A2D33;
+  --btn-fondo: #7A2E3A;
+  --btn-testo: #FFFDF9;
+  --icona-fondo: #F4E8E1;
+  --icona-tratto: #7A2E3A;
+  --ombra-rgb: 100 40 50;
   --ombra: 0 1px 2px rgb(var(--ombra-rgb) / .06), 0 20px 44px -20px rgb(var(--ombra-rgb) / .25);
-  --chiaro: #FFFCF8;
+  --chiaro: #FFFDF9;
   /* illustrazione d'apertura */
-  --mock-hero-1: #C79F72;
-  --mock-hero-2: #A9784A;
-  --mock-foto-1: #F3E7D6;
-  --mock-foto-2: #D9B98F;
-  --mock-monti: #B98B5C;
+  --mock-hero-1: #B06A74;
+  --mock-hero-2: #7A2E3A;
+  --mock-foto-1: #F5E9E2;
+  --mock-foto-2: #DDB7AE;
+  --mock-monti: #A0525E;
 
   /* colori del logo */
-  --l-fondo: #F1E4D1;
-  --l-bordo: #A9784A;
-  --l-filo: #D4BE9F;
-  --l-dettaglio: #A9784A;
-  --l-testo: #3A2E25;
-  --l-testo2: #8F6239;
+  --l-fondo: #F2E6DD;
+  --l-bordo: #7A2E3A;
+  --l-filo: #D9C4BB;
+  --l-dettaglio: #7A2E3A;
+  --l-testo: #33232A;
+  --l-testo2: #7A2E3A;
 
   --f-titoli: "Bodoni Moda", "Bodoni 72", Didot, Georgia, serif;
   --f-testo: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
@@ -87,7 +87,7 @@ p { margin: 0; }
 
 .salta {
   position: absolute; left: 12px; top: -60px; z-index: 50;
-  background: var(--cognac); color: #FFFFFF; padding: 10px 14px; font-weight: 600;
+  background: var(--bordeaux); color: #FFFFFF; padding: 10px 14px; font-weight: 600;
 }
 .salta:focus { top: 12px; }
 
@@ -171,7 +171,7 @@ p { margin: 0; }
 /* sottolineatura che si allunga */
 .nav a::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
-  background: var(--caramello);
+  background: var(--rosa-antico);
   transform: scaleX(0); transform-origin: right;
   transition: transform .45s var(--morbido);
 }
@@ -217,7 +217,7 @@ p { margin: 0; }
 .riga-titolo > * { display: inline-block; animation: sale 1.1s var(--morbido) both; animation-delay: var(--d, 0s); }
 .apertura__titolo em {
   font-weight: 500;
-  background: linear-gradient(transparent 66%, color-mix(in srgb, var(--miele) 50%, transparent) 66%, color-mix(in srgb, var(--miele) 50%, transparent) 92%, transparent 92%);
+  background: linear-gradient(transparent 66%, color-mix(in srgb, var(--cipria) 50%, transparent) 66%, color-mix(in srgb, var(--cipria) 50%, transparent) 92%, transparent 92%);
   padding-inline: .04em;
 }
 @keyframes sale { from { transform: translateY(110%); } }
@@ -239,7 +239,7 @@ p { margin: 0; }
   display: inline-grid; place-items: center;
   width: 20px; height: 20px; border-radius: 50%;
   background: var(--sabbia-chiara);
-  color: var(--cognac); font-size: .72rem; font-weight: 700;
+  color: var(--bordeaux); font-size: .72rem; font-weight: 700;
 }
 
 @media (max-width: 980px) {
@@ -256,7 +256,7 @@ p { margin: 0; }
   position: absolute; z-index: 0; left: 50%; top: 45%;
   width: 115%; aspect-ratio: 1; max-width: 720px;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, color-mix(in srgb, var(--miele) 40%, transparent) 0, transparent 62%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--cipria) 40%, transparent) 0, transparent 62%);
   filter: blur(10px);
   animation: respira 9s ease-in-out infinite;
   pointer-events: none;
@@ -290,10 +290,10 @@ p { margin: 0; }
 }
 .mock__pagina { display: grid; gap: 14px; padding: 14px 16px 18px; }
 .mock__nav { display: flex; align-items: center; gap: 12px; }
-.mock__logo { width: 22px; height: 22px; border-radius: 11px 11px 3px 3px; background: var(--cognac); flex: none; }
+.mock__logo { width: 22px; height: 22px; border-radius: 11px 11px 3px 3px; background: var(--bordeaux); flex: none; }
 .mock__voci { display: flex; gap: 8px; margin-left: auto; }
 .mock__voci i { width: 34px; height: 6px; border-radius: 3px; background: var(--riga); }
-.mock__btn { width: 50px; height: 16px; border-radius: 4px; background: var(--cognac); }
+.mock__btn { width: 50px; height: 16px; border-radius: 4px; background: var(--bordeaux); }
 
 .mock__hero {
   display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; align-items: stretch;
@@ -342,7 +342,7 @@ p { margin: 0; }
 .mock__menu { display: grid; gap: 3px; margin-left: auto; }
 .mock__menu i { width: 14px; height: 2px; background: var(--inchiostro); border-radius: 2px; }
 .mock__foto--tel { min-height: 0; aspect-ratio: 4 / 3; margin-bottom: 4px; }
-.mock__pill--tel { width: 60%; height: 16px; margin-top: 4px; background: var(--caramello); }
+.mock__pill--tel { width: 60%; height: 16px; margin-top: 4px; background: var(--rosa-antico); }
 
 .mock__nota {
   position: absolute; z-index: 3; right: -10px; bottom: 16%;
@@ -360,7 +360,7 @@ p { margin: 0; }
 .mock__spunta {
   display: grid; place-items: center; flex: none;
   width: 28px; height: 28px; border-radius: 50%;
-  background: var(--cognac); color: #FFFFFF; font-weight: 700; font-size: .8rem;
+  background: var(--bordeaux); color: #FFFFFF; font-weight: 700; font-size: .8rem;
 }
 
 /* sequenza di costruzione: prima la struttura, poi i testi, infine i pulsanti */
@@ -421,7 +421,7 @@ p { margin: 0; }
   font-family: var(--f-titoli); font-style: italic; font-size: clamp(1.25rem, 1.2vw + .9rem, 1.7rem);
   color: var(--inchiostro); white-space: nowrap;
 }
-.nastro li::after { content: ""; width: 7px; height: 7px; transform: rotate(45deg); background: var(--caramello); }
+.nastro li::after { content: ""; width: 7px; height: 7px; transform: rotate(45deg); background: var(--rosa-antico); }
 @keyframes nastro { to { transform: translateX(-50%); } }
 
 /* ---------- Sezioni ---------- */
@@ -446,7 +446,7 @@ p { margin: 0; }
 }
 /* finita la comparsa, la scheda torna a rispondere subito al mouse */
 .js .servizio.pronto { transition: transform .5s var(--morbido), border-color .3s ease, box-shadow .5s var(--morbido); }
-.servizio:hover { transform: translateY(-6px); border-color: var(--caramello); box-shadow: var(--ombra); }
+.servizio:hover { transform: translateY(-6px); border-color: var(--rosa-antico); box-shadow: var(--ombra); }
 .servizio__icona {
   width: 46px; height: 46px; padding: 11px; margin-bottom: 10px;
   border-radius: 10px;
@@ -454,7 +454,7 @@ p { margin: 0; }
   fill: none; stroke: var(--icona-tratto); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
   transition: background-color .3s ease, stroke .3s ease, transform .5s var(--morbido);
 }
-.servizio:hover .servizio__icona { background: var(--cognac); stroke: var(--chiaro); transform: rotate(-6deg); }
+.servizio:hover .servizio__icona { background: var(--bordeaux); stroke: var(--chiaro); transform: rotate(-6deg); }
 .servizio__nota { font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accento-testo); }
 .servizio p:last-child { color: var(--inchiostro-2); margin-top: 4px; }
 
@@ -476,7 +476,7 @@ p { margin: 0; }
 }
 .fasi::before { background: var(--riga); }
 .fasi::after {
-  background: var(--cognac);
+  background: var(--bordeaux);
   transform-origin: top; transform: scaleY(var(--avanzamento, 1));
 }
 .fase {
@@ -494,12 +494,12 @@ p { margin: 0; }
   grid-row: span 2;
   display: grid; place-items: center;
   width: 44px; height: 44px; border-radius: 50%;
-  background: var(--cognac); color: #FFFFFF;
+  background: var(--bordeaux); color: #FFFFFF;
   font-family: var(--f-titoli); font-size: 1.25rem; font-weight: 700;
   box-shadow: 0 0 0 6px var(--fondo-2);
   position: relative; z-index: 1;
 }
-.fase:last-child .fase__numero { background: var(--caramello); color: var(--chiaro); }
+.fase:last-child .fase__numero { background: var(--rosa-antico); color: var(--chiaro); }
 .fase h3 { padding-top: 9px; font-size: 1.25rem; }
 .fase p { color: var(--inchiostro-2); max-width: 30em; }
 
@@ -524,7 +524,7 @@ p { margin: 0; }
 /* la linea si disegna quando il blocco compare */
 .pilastri li::before {
   content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
-  background: var(--caramello);
+  background: var(--rosa-antico);
   transform-origin: left; transform: scaleX(1);
 }
 .js .pilastri li::before { transform: scaleX(0); transition: transform 1.2s var(--morbido) calc(var(--rit, 0s) + .2s); }
@@ -571,7 +571,7 @@ p { margin: 0; }
   font-size: 1.1rem; color: var(--inchiostro);
   transition: transform .4s var(--morbido), background-color .3s ease, color .3s ease;
 }
-.domande__lista details[open] summary::after { transform: rotate(135deg); background: var(--cognac); border-color: var(--cognac); color: #FFFFFF; }
+.domande__lista details[open] summary::after { transform: rotate(135deg); background: var(--bordeaux); border-color: var(--bordeaux); color: #FFFFFF; }
 /* la risposta si apre dolcemente (lo script aggiunge .aperta; senza script si apre e basta) */
 .risposta { display: grid; grid-template-rows: 1fr; }
 .risposta > p { overflow: hidden; color: var(--inchiostro-2); max-width: 36em; padding-bottom: 22px; }
@@ -626,7 +626,7 @@ p { margin: 0; }
 }
 .campo textarea, .modulo__copia textarea { resize: vertical; }
 .campo input:focus, .campo select:focus, .campo textarea:focus {
-  outline: none; border-color: var(--cognac);
+  outline: none; border-color: var(--bordeaux);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--sabbia) 35%, transparent);
 }
 .campo input[aria-invalid="true"] { border-color: #C0392B; }
