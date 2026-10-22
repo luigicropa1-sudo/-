@@ -290,6 +290,16 @@ img { max-width: 100%; }
 }
 .chip.active { background: var(--brand); color: #fff; box-shadow: none; }
 .sticky-chips { position: sticky; top: calc(60px + env(safe-area-inset-top, 0px)); z-index: 19; background: var(--bg); padding-top: 2px; }
+/* le barre fisse coprono anche i margini laterali, così le schede non si intravedono sotto */
+.topbar, .sticky-chips { box-shadow: 0 0 0 100vmax var(--bg); clip-path: inset(0 -100vmax); }
+
+/* Catalogo continuo: una sezione per categoria */
+.cat-section { scroll-margin-top: calc(118px + env(safe-area-inset-top, 0px)); }
+.cat-section + .cat-section { margin-top: 30px; }
+.cat-section-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.cat-section-head h2 { font-size: 20px; font-weight: 800; line-height: 1.2; min-width: 0; }
+.cat-section-head small { margin-left: auto; color: var(--hint); font-size: 13px; white-space: nowrap; }
+.cat-dot { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; flex: none; font-size: 21px; background: var(--tile, var(--brand-soft)); }
 .page-title { font-size: 24px; font-weight: 800; margin-top: 6px; }
 .page-sub { color: var(--hint); margin-top: 2px; font-size: 14px; }
 .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 14px 0 12px; }
@@ -529,6 +539,7 @@ img { max-width: 100%; }
    e le foto si abbassano un po' di luminosità per non abbagliare */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .cat-icon,
+  :root:not([data-theme="light"]) .cat-dot,
   :root:not([data-theme="light"]) .card-media:not(.foto),
   :root:not([data-theme="light"]) .pd-media:not(.foto),
   :root:not([data-theme="light"]) .thumb:not(.foto) { background: color-mix(in srgb, var(--tile, #23b07c) 16%, var(--card)); }
@@ -536,6 +547,7 @@ img { max-width: 100%; }
   :root:not([data-theme="light"]) .foto img { filter: brightness(0.9); }
 }
 :root[data-theme="dark"] .cat-icon,
+:root[data-theme="dark"] .cat-dot,
 :root[data-theme="dark"] .card-media:not(.foto),
 :root[data-theme="dark"] .pd-media:not(.foto),
 :root[data-theme="dark"] .thumb:not(.foto) { background: color-mix(in srgb, var(--tile, #23b07c) 16%, var(--card)); }
@@ -559,6 +571,7 @@ img { max-width: 100%; }
   .cartbar { left: auto; right: 24px; bottom: 24px; width: 380px; }
   .topbar { top: 64px; }
   .sticky-chips { top: 124px; }
+  .cat-section { scroll-margin-top: 182px; }
   .hero { padding: 34px 32px; }
   .hero h1 { font-size: 42px; }
   .hero-art { font-size: 150px; right: 30px; bottom: -20px; }

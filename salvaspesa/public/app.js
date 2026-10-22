@@ -27,6 +27,7 @@
     mieiOrdini: [],
     appenaOrdinato: null,
     route: null,
+    catScrollY: null,
   };
 
   let money = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' });
@@ -63,6 +64,7 @@
     $app.addEventListener('change', onInput);
     $sheet.addEventListener('input', onSheetInput);
     window.addEventListener('hashchange', () => render(true));
+    window.addEventListener('scroll', onScroll, { passive: true });
     try {
       const res = await fetch('api/catalogo', { cache: 'no-store' });
       if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -144,7 +146,17 @@
     $app.innerHTML = views[r.name](r) + footerHtml();
     renderTabbar();
     renderCartbar();
-    if (navigated && (!prev || prev.name !== r.name || prev.id !== r.id)) window.scrollTo(0, 0);
+    if (r.name === 'categoria') {
+      // tornando indietro da un prodotto si riparte da dove si era; altrimenti dalla categoria scelta
+      if (navigated && prev && prev.name === 'prodotto' && state.catScrollY != null) {
+        window.scrollTo(0, state.catScrollY);
+        spyFermoFino = Date.now() + 100;
+      } else if (navigated && (!prev || prev.name !== r.name || prev.id !== r.id)) {
+        vaiASezione(r.id, false);
+      }
+    } else if (navigated && (!prev || prev.name !== r.name || prev.id !== r.id)) {
+      window.scrollTo(0, 0);
+    }
     if (r.name === 'cerca') {
       const input = document.getElementById('q');
       if (input && navigated) input.focus();
@@ -223,9 +235,9 @@
         </section>
 
         <section class="section">
-          <div class="section-head"><h2>Categorie</h2></div>
+          <div class="section-head"><h2>Categorie</h2>${prodotti.length ? `<a href="#/c/${encodeURIComponent(categorieConProdotti(prodotti)[0].id)}">Vedi tutto</a>` : ''}</div>
           <div class="cat-grid">
-            ${d.categorie.filter((c) => prodotti.some((p) => p.categoria === c.id)).map((c) => `
+            ${categorieConProdotti(prodotti).map((c) => `
               <a class="cat-tile" href="#/c/${encodeURIComponent(c.id)}">
                 <span class="cat-icon" style="--tile:${esc(c.colore || '')}">${esc(c.emoji || '🛒')}</span>
                 <span class="cat-label">${esc(c.nome)}</span>
@@ -256,19 +268,78 @@
       </div>`;
   }
 
+  // Tutte le categorie una sotto l'altra: si entra da una categoria e scorrendo si passa alle successive.
+  // Le etichette in alto seguono lo scorrimento e portano direttamente a una sezione.
   function viewCategoria(r) {
     const c = state.catById.get(r.id);
     if (!c) return notFound();
-    const lista = ordina(visibili(state.data.prodotti).filter((p) => p.categoria === c.id));
+    const prodotti = visibili(state.data.prodotti);
+    const sezioni = categorieConProdotti(prodotti).map((x) => ({ c: x, lista: ordina(prodotti.filter((p) => p.categoria === x.id)) }));
     return `
       <div class="wrap">
-        <div class="topbar"><a class="icon-btn" href="#/" aria-label="Indietro">${I.back}</a><h1>${esc(c.nome)}</h1></div>
-        <div class="sticky-chips"><div class="chips">
-          ${state.data.categorie.map((x) => `<a class="chip${x.id === c.id ? ' active' : ''}" href="#/c/${encodeURIComponent(x.id)}">${esc(x.emoji || '')} ${esc(x.nome)}</a>`).join('')}
+        <div class="topbar"><a class="icon-btn" href="#/" aria-label="Indietro">${I.back}</a><h1 id="cat-title">${esc(c.nome)}</h1></div>
+        <div class="sticky-chips"><div class="chips" id="cat-chips">
+          ${sezioni.map(({ c: x }) => `<a class="chip${x.id === c.id ? ' active' : ''}" href="#/c/${encodeURIComponent(x.id)}" data-act="goto-cat" data-cat="${esc(x.id)}">${esc(x.emoji || '')} ${esc(x.nome)}</a>`).join('')}
         </div></div>
-        ${toolbar(lista.length)}
-        <div class="grid">${lista.map(card).join('')}</div>
+        ${toolbar(prodotti.length)}
+        ${sezioni.map(({ c: x, lista }) => `
+          <section class="cat-section" id="sez-${esc(x.id)}" data-cat="${esc(x.id)}">
+            <div class="cat-section-head">
+              <span class="cat-dot" style="--tile:${esc(x.colore || '')}">${esc(x.emoji || '🛒')}</span>
+              <h2>${esc(x.nome)}</h2><small>${lista.length} ${lista.length === 1 ? 'prodotto' : 'prodotti'}</small>
+            </div>
+            <div class="grid">${lista.map(card).join('')}</div>
+          </section>`).join('')}
       </div>`;
+  }
+
+  function categorieConProdotti(prodotti) {
+    return state.data.categorie.filter((c) => prodotti.some((p) => p.categoria === c.id));
+  }
+
+  function vaiASezione(id, smooth) {
+    const el = document.getElementById('sez-' + id);
+    if (!el) return;
+    const behavior = smooth ? 'smooth' : 'auto';
+    if (el === document.querySelector('.cat-section')) window.scrollTo({ top: 0, behavior });
+    else el.scrollIntoView({ behavior, block: 'start' });
+    segnaSezione(id);
+    spyFermoFino = Date.now() + (smooth ? 900 : 100);
+  }
+
+  // Evidenzia la categoria in vista: etichetta attiva, titolo e indirizzo (senza ricaricare la pagina)
+  function segnaSezione(id) {
+    if (state.route.id === id && document.querySelector(`#cat-chips .chip.active[data-cat="${cssEsc(id)}"]`)) return;
+    state.route.id = id;
+    const c = state.catById.get(id);
+    const title = document.getElementById('cat-title');
+    if (title && c) title.textContent = c.nome;
+    const chips = document.getElementById('cat-chips');
+    if (chips) {
+      chips.querySelectorAll('.chip').forEach((n) => n.classList.toggle('active', n.dataset.cat === id));
+      const chip = chips.querySelector(`.chip[data-cat="${cssEsc(id)}"]`);
+      if (chip) chips.scrollTo({ left: chip.offsetLeft - (chips.clientWidth - chip.offsetWidth) / 2, behavior: 'smooth' });
+    }
+    try { history.replaceState(null, '', '#/c/' + encodeURIComponent(id)); } catch { /* indirizzo invariato */ }
+  }
+
+  let spyFermoFino = 0;
+  let spyFrame = 0;
+  function onScroll() {
+    if (!state.route || state.route.name !== 'categoria' || spyFrame) return;
+    spyFrame = requestAnimationFrame(() => {
+      spyFrame = 0;
+      state.catScrollY = window.scrollY;
+      if (Date.now() < spyFermoFino) return;
+      const sezioni = document.querySelectorAll('.cat-section');
+      const bar = document.querySelector('.sticky-chips');
+      if (!sezioni.length || !bar) return;
+      const limite = bar.getBoundingClientRect().bottom + 16;
+      let attiva = sezioni[0];
+      for (const s of sezioni) if (s.getBoundingClientRect().top <= limite) attiva = s;
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) attiva = sezioni[sezioni.length - 1];
+      segnaSezione(attiva.dataset.cat);
+    });
   }
 
   function viewCerca() {
@@ -734,6 +805,9 @@
       case 'sort':
         state.sort = el.dataset.sort;
         return render(false);
+      case 'goto-cat':
+        e.preventDefault();
+        return vaiASezione(el.dataset.cat, true);
       case 'clear-q':
         state.query = '';
         render(false);

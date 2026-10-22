@@ -10,6 +10,9 @@ a prezzo scontato e con consegna programmata in pochi giorni.
 
 **Per il cliente**
 - Home con ricerca, categorie a griglia, "Scadono presto" e "Sconti più alti".
+- Catalogo in un'unica pagina: si entra da una categoria (es. Frutta e verdura) e scorrendo
+  si passa a tutte le altre fino in fondo. Le etichette in alto seguono lo scorrimento
+  e portano subito a una categoria.
 - Schede prodotto con prezzo pieno barrato, percentuale di sconto e data di scadenza.
 - Carrello con risparmio totale, ordine minimo e soglia per la consegna gratuita.
 - Cassa: indirizzo, giorno di consegna (tra `giorniMin` e `giorniMax` giorni), fascia oraria,
@@ -112,9 +115,6 @@ Tutto è in `catalogo.json`. Le modifiche si vedono appena si ricarica la pagina
 ## Prima di aprire
 
 - Metti nome, dati dell'azienda, contatti, zone e prezzi veri in `catalogo.json`.
-- Le foto in `public/img/prodotti` sono generate al computer e servono a mostrare il negozio.
-  Quando carichi la merce vera, sostituiscile con foto dei prodotti che vendi davvero
-  (stesso nome file, formato quadrato): il cliente deve vedere quello che riceve.
 - Fai verificare condizioni di vendita e privacy (pagina Info) da un consulente.
 - Vendere alimenti, anche online, richiede la notifica sanitaria (SCIA) alla ASL e un piano
   di autocontrollo HACCP. Per fresco e surgelati serve un trasporto refrigerato:
