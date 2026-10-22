@@ -391,40 +391,24 @@
         <div class="empty"><div class="big">🛒</div><h2>Il carrello è vuoto</h2><p>Scopri i prodotti vicini alla scadenza a prezzi scontati.</p>
         <a class="btn" href="#/">Inizia la spesa</a></div></div>`;
     }
-    const n = state.data.negozio;
     const t = totals();
-    const zona = zonaPerCap(state.cap);
     const limite = limiteConsegna();
     const giorni = state.data.consegna.giorni;
-    const minimo = Number(n.ordineMinimo || 0);
-
-    const progressi = [];
-    if (minimo && t.sub < minimo) {
-      progressi.push(`<div class="progress"><p>Aggiungi <b>${fmt(minimo - t.sub)}</b> per raggiungere l'ordine minimo di ${fmt(minimo)}.</p>
-        <div class="bar"><i style="width:${Math.min(100, (t.sub / minimo) * 100)}%"></i></div></div>`);
-    }
-    if (zona && zona.gratisSopra && t.sub < zona.gratisSopra) {
-      progressi.push(`<div class="progress"><p>Ti mancano <b>${fmt(zona.gratisSopra - t.sub)}</b> per la consegna gratuita.</p>
-        <div class="bar"><i style="width:${Math.min(100, (t.sub / zona.gratisSopra) * 100)}%"></i></div></div>`);
-    }
 
     return `
       <div class="wrap">
         <div class="topbar"><h1>Carrello</h1><button class="btn ghost" data-act="clear-cart">Svuota</button></div>
         ${t.risparmio > 0 ? `<div class="savebar">${I.tag}<span>Con questa spesa risparmi <b>${fmt(t.risparmio)}</b></span></div>` : ''}
         <div class="group">${ids.map(lineHtml).join('')}</div>
-        ${progressi.length ? `<div class="group" style="margin-top:12px">${progressi.join('')}</div>` : ''}
         <div class="group-label">Riepilogo</div>
         <div class="group summary">
           <div class="row"><span>Prodotti (${cartCount()})</span><span>${fmt(t.sub)}</span></div>
           ${t.risparmio > 0 ? `<div class="row green"><span>Risparmio</span><span>−${fmt(t.risparmio)}</span></div>` : ''}
-          <div class="row"><span>Consegna${zona ? ` · ${esc(zona.nome)}` : ''}</span><span>${!state.cap ? `<button class="btn ghost" style="height:auto;padding:0" data-act="cap">Inserisci il CAP</button>` : !zona ? 'Non disponibile' : t.consegna ? fmt(t.consegna) : 'Gratis'}</span></div>
-          <div class="row total"><span>Totale</span><span>${fmt(t.totale)}</span></div>
+          <div class="row total"><span>Totale prodotti</span><span>${fmt(t.sub)}</span></div>
         </div>
         <p class="note">${I.truck.replace('<svg', '<svg style="display:inline;width:16px;height:16px;vertical-align:-3px"')} Consegna tra ${giorno(giorni[0])} e ${giorno(giorni[giorni.length - 1])}: scegli il giorno alla cassa.</p>
         ${limite && limite < giorni[giorni.length - 1] ? `<p class="note warn">Alcuni prodotti scadono presto: la consegna sarà al massimo entro ${giorno(limite)}.</p>` : ''}
-        ${state.cap && !zona ? `<p class="note warn">Al momento non consegniamo nel CAP ${esc(state.cap)}. <button class="btn ghost" style="height:auto;padding:0" data-act="cap">Cambia CAP</button></p>` : ''}
-        <div style="margin-top:18px"><a class="btn block" href="#/cassa" ${minimo && t.sub < minimo ? 'aria-disabled="true" data-act="noop" style="opacity:.45;pointer-events:none"' : ''}>Vai alla cassa · ${fmt(t.totale)}</a></div>
+        <div style="margin-top:18px"><a class="btn block" href="#/cassa">Vai alla cassa · ${fmt(t.sub)}</a></div>
       </div>`;
   }
 
@@ -457,6 +441,8 @@
     if (!fasce.includes(state.checkout.fascia)) state.checkout.fascia = '';
     const zona = zonaPerCap(f.cap);
     const pag = n.pagamenti || [];
+    const minimo = Number(n.ordineMinimo || 0);
+    const sotto = minimo && t.sub < minimo;
 
     const field = (name, label, opts = {}) => `
       <label class="field${e[name] ? ' invalid' : ''}" data-field="${name}">
@@ -469,6 +455,10 @@
       <div class="wrap">
         <div class="topbar"><a class="icon-btn" href="#/carrello" aria-label="Indietro">${I.back}</a><h1>Cassa</h1></div>
         <div class="checkout-grid"><div>
+          <div class="co-rules${sotto ? ' warn' : ''}">
+            <div><b>Ordine minimo ${fmt(minimo)}</b><span>${sotto ? `Mancano ${fmt(minimo - t.sub)}: <a href="#/">aggiungi altri prodotti</a>` : 'Raggiunto ✓'}</span></div>
+            <div><b>Spedizione ${fmt(t.consegna)}</b><span>Tariffa unica, paghi alla consegna</span></div>
+          </div>
           <div class="group-label">Chi riceve la spesa</div>
           <div class="group">
             ${field('nome', 'Nome e cognome', { attrs: 'autocomplete="name"', ph: 'Mario Rossi' })}
@@ -528,7 +518,7 @@
           <div class="group summary">
             <div class="row"><span>Prodotti (${cartCount()})</span><span>${fmt(t.sub)}</span></div>
             ${t.risparmio > 0 ? `<div class="row green"><span>Risparmio</span><span>−${fmt(t.risparmio)}</span></div>` : ''}
-            <div class="row"><span>Consegna${zona ? ` · ${esc(zona.nome)}` : ''}</span><span>${zona ? (t.consegna ? fmt(t.consegna) : 'Gratis') : '—'}</span></div>
+            <div class="row"><span>Spedizione</span><span>${t.consegna ? fmt(t.consegna) : 'Gratis'}</span></div>
             <div class="row total"><span>Totale</span><span>${fmt(t.totale)}</span></div>
           </div>
           <div class="group${e.privacy ? ' invalid' : ''}" style="margin-top:12px" data-field="privacy">
@@ -537,7 +527,7 @@
             ${e.privacy ? `<div class="err" style="padding:0 14px 12px">${esc(e.privacy)}</div>` : ''}
           </div>
           ${e._generale ? `<p class="note warn">${esc(e._generale)}</p>` : ''}
-          <div style="margin-top:16px"><button class="btn block" data-act="submit" ${state.sending ? 'disabled' : ''}>${state.sending ? 'Invio in corso…' : `Conferma ordine · ${fmt(t.totale)}`}</button></div>
+          <div style="margin-top:16px"><button class="btn block" data-act="submit" ${state.sending || sotto ? 'disabled' : ''}>${state.sending ? 'Invio in corso…' : sotto ? `Ordine minimo ${fmt(minimo)}` : `Conferma ordine · ${fmt(t.totale)}`}</button></div>
           <p class="note">Non paghi niente adesso: paghi alla consegna.</p>
         </div></div>
       </div>`;
@@ -642,10 +632,7 @@
         </ul>
         <h2 id="consegne">Consegne</h2>
         <p>Consegniamo in ${n.consegna.giorniMin}–${n.consegna.giorniMax} giorni, ${settimana.length === 6 ? 'dal lunedì al sabato' : settimana.join(', ')}, nella fascia oraria che scegli. Ordini dopo le ${esc(n.consegna.oraLimite || '20:00')} contano dal giorno dopo.</p>
-        <div style="overflow-x:auto"><table class="zones"><thead><tr><th>Zona</th><th>Costo</th><th>Gratis da</th></tr></thead><tbody>
-          ${(n.consegna.zone || []).map((z) => `<tr><td>${esc(z.nome)}</td><td>${fmt(z.costo)}</td><td>${z.gratisSopra != null ? fmt(z.gratisSopra) : '—'}</td></tr>`).join('')}
-        </tbody></table></div>
-        <p class="muted">Ordine minimo ${fmt(n.ordineMinimo || 0)}.</p>
+        <p>Zone servite: ${(n.consegna.zone || []).map((z) => esc(z.nome)).join(', ')}. Ordine minimo e costo di spedizione sono indicati alla cassa prima di confermare.</p>
         <h2 id="pagamenti">Pagamenti</h2>
         <p>Paghi alla consegna: ${(n.pagamenti || []).map(esc).join(' oppure ').toLowerCase()}.</p>
         ${state.data.prodotti.some((p) => p.foto && p.foto.autore) ? `<h2 id="foto">Foto dei prodotti</h2>
@@ -653,7 +640,7 @@
         <h2 id="contatti">Contatti</h2>
         <p>${k.telefono ? `Telefono: <b>${esc(k.telefono)}</b><br>` : ''}${k.email ? `Email: <b>${esc(k.email)}</b><br>` : ''}${k.orari ? `Orari: ${esc(k.orari)}` : ''}</p>
         <h2 id="termini">Condizioni di vendita</h2>
-        <p>Il venditore è ${esc(a.ragioneSociale || '')}, P. IVA ${esc(a.piva || '')}, ${esc(a.sede || '')}. I prezzi sono comprensivi di IVA. Il contratto si conclude alla conferma dell'ordine; il pagamento avviene alla consegna.</p>
+        <p>Il venditore è ${esc(a.ragioneSociale || '')}, P. IVA ${esc(a.partitaIva || '')}, con sede legale in ${esc(a.sedeLegale || '')}. I prezzi sono comprensivi di IVA. Il contratto si conclude alla conferma dell'ordine; il pagamento avviene alla consegna.</p>
         <p>Diritto di recesso: per i prodotti alimentari deperibili e per quelli vicini alla scadenza il recesso è escluso (art. 59 Codice del Consumo). Per gli altri prodotti puoi recedere entro 14 giorni dalla consegna contattandoci. Se un prodotto arriva danneggiato o non conforme, segnalacelo entro 48 ore e ti rimborsiamo.</p>
         <h2 id="privacy">Privacy</h2>
         <p>Usiamo nome, telefono, email e indirizzo solo per gestire e consegnare il tuo ordine, e li conserviamo per il tempo richiesto dalla legge. Non li cediamo a terzi, tranne a chi effettua la consegna. Puoi chiedere in ogni momento di vederli, correggerli o cancellarli scrivendo a ${esc(k.email || 'noi')}.</p>
@@ -661,25 +648,51 @@
       </div>`;
   }
 
-  // Footer con dati dell'azienda e licenze, in basso a sinistra su ogni pagina
+  // Fondo pagina: dati societari, licenze, contatti e link legali, in colonne, allineati a sinistra
   function footerHtml() {
-    const a = state.data.negozio.azienda || {};
-    const k = state.data.negozio.contatti || {};
+    const n = state.data.negozio;
+    const a = n.azienda || {};
+    const k = n.contatti || {};
     const licenze = Array.isArray(a.licenze) ? a.licenze.filter(Boolean) : [];
+    const riga = (label, v) => (v ? `<div class="ft-row"><dt>${label}</dt><dd>${esc(v)}</dd></div>` : '');
+    const dati = [
+      riga('Sede legale', a.sedeLegale), a.sedeOperativa && a.sedeOperativa !== a.sedeLegale ? riga('Sede operativa', a.sedeOperativa) : '',
+      riga('P. IVA', a.partitaIva), riga('Cod. fiscale', a.codiceFiscale), riga('REA', a.rea),
+      riga('Capitale sociale', a.capitaleSociale), riga('PEC', a.pec),
+    ].join('');
+    const contatti = [
+      k.telefono ? `<div class="ft-row"><dt>Telefono</dt><dd><a href="tel:${esc(String(k.telefono).replace(/[^\d+]/g, ''))}">${esc(k.telefono)}</a></dd></div>` : '',
+      k.email ? `<div class="ft-row"><dt>Email</dt><dd><a href="mailto:${esc(k.email)}">${esc(k.email)}</a></dd></div>` : '',
+      riga('Orari', k.orari),
+    ].join('');
     return `
       <footer class="site-footer"><div class="wrap">
-        <div class="ft-left">
-          ${a.ragioneSociale ? `<strong>${esc(a.ragioneSociale)}</strong>` : ''}
-          ${a.sede ? `<span>${esc(a.sede)}</span>` : ''}
-          ${a.piva ? `<span>P. IVA ${esc(a.piva)}</span>` : ''}
-          ${licenze.map((l) => `<span>${esc(l)}</span>`).join('')}
-          ${k.email || k.telefono ? `<span>${[k.telefono, k.email].filter(Boolean).map(esc).join(' · ')}</span>` : ''}
+        <div class="ft-grid">
+          <section class="ft-col">
+            <h3>${esc(a.ragioneSociale || n.nome)}</h3>
+            <dl>${dati}</dl>
+          </section>
+          ${licenze.length ? `<section class="ft-col">
+            <h3>Licenze e autorizzazioni</h3>
+            <ul>${licenze.map((l) => `<li>${esc(l)}</li>`).join('')}</ul>
+          </section>` : ''}
+          <section class="ft-col">
+            <h3>Contatti</h3>
+            <dl>${contatti}</dl>
+          </section>
+          <nav class="ft-col" aria-label="Informazioni">
+            <h3>Informazioni</h3>
+            <ul class="ft-links">
+              <li><a href="#/info/come">Come funziona</a></li>
+              <li><a href="#/info/scadenze">Le scadenze</a></li>
+              <li><a href="#/info/consegne">Consegne</a></li>
+              <li><a href="#/info/pagamenti">Pagamenti</a></li>
+              <li><a href="#/info/termini">Condizioni di vendita</a></li>
+              <li><a href="#/info/privacy">Privacy</a></li>
+            </ul>
+          </nav>
         </div>
-        <nav class="ft-links" aria-label="Informazioni legali">
-          <a href="#/info/termini">Condizioni di vendita</a>
-          <a href="#/info/privacy">Privacy</a>
-          <a href="#/info/contatti">Contatti</a>
-        </nav>
+        <p class="ft-bottom">© ${new Date().getFullYear()} ${esc(a.ragioneSociale || n.nome)} · Prezzi IVA inclusa · Pagamento alla consegna${state.data.prodotti.some((p) => p.foto && p.foto.autore) ? ' · <a href="#/info/foto">Crediti delle foto</a>' : ''}</p>
       </div></footer>`;
   }
 
@@ -909,6 +922,11 @@
 
   async function submitOrder() {
     if (state.sending) return;
+    const minimo = Number(state.data.negozio.ordineMinimo || 0);
+    if (minimo && totals().sub < minimo) {
+      toast(`L'ordine minimo è di ${fmt(minimo)}`);
+      return;
+    }
     const f = state.cliente;
     const e = {};
     if (!String(f.nome || '').trim() || String(f.nome).trim().length < 2) e.nome = 'Inserisci nome e cognome';
@@ -1007,7 +1025,7 @@
     if (!/^\d{5}$/.test(cap || '')) return '';
     const z = zonaPerCap(cap);
     if (!z) return '<div class="cap-result no">Al momento non consegniamo in questo CAP. Stiamo crescendo: torna a trovarci!</div>';
-    return `<div class="cap-result ok"><b>${esc(z.nome)}</b> · consegna ${fmt(z.costo)}${z.gratisSopra != null ? `, gratis da ${fmt(z.gratisSopra)}` : ''}.<br>
+    return `<div class="cap-result ok"><b>${esc(z.nome)}</b> · consegniamo qui.<br>
       Primo giorno disponibile: ${giornoLungo(state.data.consegna.giorni[0])}.</div>`;
   }
 
@@ -1083,7 +1101,8 @@
       sub += Math.round(p.prezzo * 100) * qty;
       pieno += Math.round((p.prezzoPieno || p.prezzo) * 100) * qty;
     }
-    const zona = zonaPerCap(state.route && state.route.name === 'cassa' ? state.cliente.cap : state.cap);
+    const zone = state.data.negozio.consegna.zone || [];
+    const zona = zonaPerCap(state.route && state.route.name === 'cassa' ? state.cliente.cap : state.cap) || zone[0];
     let consegna = 0;
     if (zona) consegna = zona.gratisSopra != null && sub >= Math.round(zona.gratisSopra * 100) ? 0 : Math.round(zona.costo * 100);
     return { sub: sub / 100, risparmio: (pieno - sub) / 100, consegna: consegna / 100, totale: (sub + consegna) / 100 };

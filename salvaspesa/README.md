@@ -20,7 +20,7 @@ a prezzo scontato e con consegna programmata in pochi giorni.
   si passa a tutte le altre fino in fondo. Le etichette in alto seguono lo scorrimento
   e portano subito a una categoria.
 - Schede prodotto con prezzo pieno barrato, percentuale di sconto e data di scadenza.
-- Carrello con risparmio totale, ordine minimo e soglia per la consegna gratuita.
+- Carrello con risparmio totale. Ordine minimo (30 €) e spedizione (10 €) compaiono solo alla cassa.
 - Cassa: indirizzo, giorno di consegna (tra `giorniMin` e `giorniMax` giorni), fascia oraria,
   pagamento alla consegna (contanti o POS), consenso a condizioni e privacy.
 - Pagina dell'ordine con lo stato (ricevuto → in preparazione → in consegna → consegnato)
@@ -106,17 +106,18 @@ Tutto è in `catalogo.json`. Le modifiche si vedono appena si ricarica la pagina
 
 | Campo | Significato |
 |-------|-------------|
-| `ordineMinimo` | Importo minimo per ordinare. |
+| `ordineMinimo` | Importo minimo per ordinare (ora 30 €). Si vede solo alla cassa, dove blocca la conferma finché non è raggiunto. |
 | `margineGiorni` | Giorni di margine sulla scadenza (vedi sopra). |
 | `consegna.giorniMin` / `giorniMax` | Finestra di consegna, in giorni da oggi. |
 | `consegna.giorniSettimana` | Giorni in cui consegni: 1 = lunedì … 6 = sabato, 0 = domenica. |
 | `consegna.oraLimite` | Dopo quest'ora gli ordini contano dal giorno dopo. |
 | `consegna.chiusure` | Date senza consegne (festivi, ferie). |
 | `consegna.fasce` | Fasce orarie tra cui scegliere. |
-| `consegna.zone` | Zone servite: inizio dei CAP, costo, soglia di consegna gratuita. |
+| `consegna.zone` | Zone servite: inizio dei CAP e `costo` di spedizione (ora 10 € per tutte). Si vede solo alla cassa. Con `gratisSopra` si può aggiungere una soglia di spedizione gratuita. |
 | `pagamenti` | Metodi di pagamento alla consegna. |
-| `contatti`, `azienda` | Compaiono nella pagina Info, nelle condizioni di vendita e nel footer. |
-| `azienda.licenze` | Elenco di licenze e autorizzazioni (SCIA, registrazioni…): ogni riga compare nel footer in basso a sinistra, su tutte le pagine. |
+| `azienda` | Dati societari che compaiono nel fondo pagina e nelle condizioni di vendita: `ragioneSociale`, `partitaIva`, `codiceFiscale`, `rea`, `capitaleSociale`, `sedeLegale`, `sedeOperativa`, `pec`. Un campo lasciato vuoto non viene mostrato. |
+| `azienda.licenze` | Elenco di licenze e autorizzazioni (SCIA, registrazioni…): ogni riga compare nel fondo pagina, su tutte le pagine. |
+| `contatti` | `telefono`, `email`, `orari`: compaiono nel fondo pagina e nella pagina Info. |
 
 ## Prima di aprire
 
