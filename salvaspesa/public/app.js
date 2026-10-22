@@ -214,7 +214,6 @@
     if (r.name === 'categoria' && !state.catById.get(r.id)) return notFound();
     const prodotti = visibili(d.prodotti);
     const sezioni = categorieConProdotti(prodotti).map((c) => ({ c, lista: ordina(prodotti.filter((p) => p.categoria === c.id)) }));
-    const maxSconto = Math.max(0, ...prodotti.map(sconto));
     const zona = zonaPerCap(state.cap);
     const attiva = r.name === 'categoria' ? r.id : '';
 
@@ -230,8 +229,8 @@
         <a class="searchbox" href="#/cerca">${I.search}<span>Cerca tra ${prodotti.length} prodotti</span></a>
 
         <section class="hero">
-          <h1>Fino al −${maxSconto}% sulla spesa</h1>
-          <p>Prodotti vicini alla scadenza · consegna in ${n.consegna.giorniMin}–${n.consegna.giorniMax} giorni · paghi alla consegna</p>
+          <h1>Recuperiamo dai produttori e dalla distribuzione prodotti buoni che si avvicinano alla scadenza, sono in eccedenza o hanno una confezione imperfetta.</h1>
+          <p>Li vendiamo scontati per non sprecarli.</p>
         </section>
 
         <nav class="cat-row" aria-label="Categorie">
