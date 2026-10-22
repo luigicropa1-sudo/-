@@ -392,7 +392,10 @@
       <div class="wrap">
         <div class="topbar"><button class="icon-btn" data-act="back" aria-label="Indietro">${I.back}</button></div>
         <div class="pd">
-          <div class="pd-media${p.immagine ? ' foto' : ''}" style="--tile:${esc(c ? c.colore || '' : '')}">${media(p)}${sconto(p) ? `<span class="disc">−${sconto(p)}%</span>` : ''}</div>
+          <div>
+            <div class="pd-media${p.immagine ? ' foto' : ''}" style="--tile:${esc(c ? c.colore || '' : '')}">${media(p)}${sconto(p) ? `<span class="disc">−${sconto(p)}%</span>` : ''}</div>
+            ${p.immagine ? creditoFoto(p.foto) : ''}
+          </div>
           <div>
             ${c ? `<a class="pd-cat" href="#/c/${encodeURIComponent(c.id)}">${esc(c.nome)}</a>` : ''}
             <h1>${esc(p.nome)}</h1>
@@ -677,6 +680,8 @@
         <p class="muted">Ordine minimo ${fmt(n.ordineMinimo || 0)}.</p>
         <h2 id="pagamenti">Pagamenti</h2>
         <p>Paghi alla consegna: ${(n.pagamenti || []).map(esc).join(' oppure ').toLowerCase()}.</p>
+        ${state.data.prodotti.some((p) => p.foto && p.foto.autore) ? `<h2 id="foto">Foto dei prodotti</h2>
+        <p>Sono foto reali delle confezioni, da archivi pubblici con licenza libera come Open Food Facts e Wikimedia Commons. Autore e licenza sono indicati sotto la foto di ogni prodotto.</p>` : ''}
         <h2 id="contatti">Contatti</h2>
         <p>${k.telefono ? `Telefono: <b>${esc(k.telefono)}</b><br>` : ''}${k.email ? `Email: <b>${esc(k.email)}</b><br>` : ''}${k.orari ? `Orari: ${esc(k.orari)}` : ''}</p>
         <h2 id="termini">Condizioni di vendita</h2>
@@ -761,6 +766,14 @@
     return p.immagine
       ? `<img src="${esc(p.immagine)}" alt="" loading="lazy" decoding="async">`
       : `<span class="emoji">${esc(p.emoji || '🛒')}</span>`;
+  }
+
+  // Le foto con licenza libera (Open Food Facts, Wikimedia Commons) vanno attribuite: autore, licenza, fonte
+  function creditoFoto(f) {
+    if (!f || !f.autore) return '';
+    const fonte = /^https:\/\//.test(f.fonte || '') ? f.fonte : '';
+    const autore = fonte ? `<a href="${esc(fonte)}" target="_blank" rel="noopener">${esc(f.autore)}</a>` : esc(f.autore);
+    return `<p class="pd-credit">Foto: ${autore}${f.licenza ? ` · ${esc(f.licenza)}` : ''}</p>`;
   }
 
   function toolbar(count) {
