@@ -21,7 +21,7 @@ const TELEGRAM_BOT_TOKEN = (process.env.TELEGRAM_BOT_TOKEN || '').trim();
 const TELEGRAM_CHAT_ID = (process.env.TELEGRAM_CHAT_ID || '').trim();
 
 const PUBLIC_DIR = path.join(__dirname, 'public');
-const CATALOG_FILE = path.join(__dirname, 'catalogo.json');
+const CATALOG_FILE = process.env.CATALOGO_FILE || path.join(__dirname, 'catalogo.json');
 const ORDERS_FILE = path.join(DATA_DIR, 'ordini.json');
 
 const STATI = ['ricevuto', 'preparazione', 'spedito', 'consegnato', 'annullato'];

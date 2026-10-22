@@ -130,13 +130,15 @@
     }
   }
 
+  const NEGOZIO = ['home', 'categoria'];
+
   function render(navigated) {
     if (!state.data) return;
     const r = parseRoute();
     const prev = state.route;
     state.route = r;
     const views = {
-      home: viewHome, categoria: viewCategoria, prodotto: viewProdotto, cerca: viewCerca,
+      home: viewNegozio, categoria: viewNegozio, prodotto: viewProdotto, cerca: viewCerca,
       carrello: viewCarrello, cassa: viewCassa, ordini: viewOrdini, ordine: viewOrdine, info: viewInfo,
     };
     if (r.name === 'cassa' && !cartCount()) {
@@ -146,13 +148,15 @@
     $app.innerHTML = views[r.name](r) + footerHtml();
     renderTabbar();
     renderCartbar();
-    if (r.name === 'categoria') {
-      // tornando indietro da un prodotto si riparte da dove si era; altrimenti dalla categoria scelta
+    if (NEGOZIO.includes(r.name)) {
+      sezioneSegnata = r.name === 'categoria' ? r.id : '';
+      // tornando indietro da un prodotto si riparte da dove si era; altrimenti dall'inizio o dalla categoria scelta
       if (navigated && prev && prev.name === 'prodotto' && state.catScrollY != null) {
         window.scrollTo(0, state.catScrollY);
         spyFermoFino = Date.now() + 100;
       } else if (navigated && (!prev || prev.name !== r.name || prev.id !== r.id)) {
-        vaiASezione(r.id, false);
+        if (r.name === 'categoria') vaiASezione(r.id, false);
+        else window.scrollTo(0, 0);
       }
     } else if (navigated && (!prev || prev.name !== r.name || prev.id !== r.id)) {
       window.scrollTo(0, 0);
@@ -201,16 +205,18 @@
   // -------------------------------------------------------------------------
   // Pagine
 
-  function viewHome() {
+  // La home è il negozio intero: in alto ricerca e categorie, poi tutti i prodotti divisi per categoria,
+  // dalla prima (frutta e verdura) all'ultima. La barra delle categorie resta fissa in alto, segue
+  // lo scorrimento e porta direttamente a una sezione. #/c/<id> apre la stessa pagina su quella sezione.
+  function viewNegozio(r) {
     const d = state.data;
     const n = d.negozio;
+    if (r.name === 'categoria' && !state.catById.get(r.id)) return notFound();
     const prodotti = visibili(d.prodotti);
-    const inScadenza = prodotti.filter((p) => p.scadenza && p.disponibili > 0)
-      .sort((a, b) => a.scadenza.localeCompare(b.scadenza)).slice(0, 12);
-    const topSconti = prodotti.filter((p) => p.disponibili > 0)
-      .sort((a, b) => sconto(b) - sconto(a)).slice(0, 12);
+    const sezioni = categorieConProdotti(prodotti).map((c) => ({ c, lista: ordina(prodotti.filter((p) => p.categoria === c.id)) }));
     const maxSconto = Math.max(0, ...prodotti.map(sconto));
     const zona = zonaPerCap(state.cap);
+    const attiva = r.name === 'categoria' ? r.id : '';
 
     return `
       <div class="wrap">
@@ -224,72 +230,31 @@
         <a class="searchbox" href="#/cerca">${I.search}<span>Cerca tra ${prodotti.length} prodotti</span></a>
 
         <section class="hero">
-          <div class="hero-kicker">Salva il cibo, risparmia</div>
           <h1>Fino al −${maxSconto}% sulla spesa</h1>
-          <p>Prodotti buoni vicini alla scadenza, controllati uno a uno e consegnati a casa in ${n.consegna.giorniMin}–${n.consegna.giorniMax} giorni.</p>
-          <div class="hero-stats">
-            <span>📦 Consegna ${n.consegna.giorniMin}–${n.consegna.giorniMax} giorni</span>
-            <span>💳 Paghi alla consegna</span>
-          </div>
-          <div class="hero-art" aria-hidden="true">🥫</div>
+          <p>Prodotti vicini alla scadenza · consegna in ${n.consegna.giorniMin}–${n.consegna.giorniMax} giorni · paghi alla consegna</p>
         </section>
 
-        <section class="section">
-          <div class="section-head"><h2>Categorie</h2>${prodotti.length ? `<a href="#/c/${encodeURIComponent(categorieConProdotti(prodotti)[0].id)}">Vedi tutto</a>` : ''}</div>
-          <div class="cat-grid">
-            ${categorieConProdotti(prodotti).map((c) => `
-              <a class="cat-tile" href="#/c/${encodeURIComponent(c.id)}">
-                <span class="cat-icon" style="--tile:${esc(c.colore || '')}">${esc(c.emoji || '🛒')}</span>
+        <nav class="cat-row" aria-label="Categorie">
+            ${sezioni.map(({ c }) => `
+              <a class="cat-tile" href="#/c/${encodeURIComponent(c.id)}" data-act="goto-cat" data-cat="${esc(c.id)}">
+                <span class="cat-icon">${c.immagine ? `<img src="${esc(c.immagine)}" alt="" loading="lazy" decoding="async">` : esc((c.nome || '?').charAt(0))}</span>
                 <span class="cat-label">${esc(c.nome)}</span>
               </a>`).join('')}
-          </div>
-        </section>
+        </nav>
 
-        ${inScadenza.length ? `
-        <section class="section">
-          <div class="section-head"><h2>Scadono presto, costano meno</h2></div>
-          <p class="section-sub">Arrivano in tempo: almeno ${n.margineGiorni ? n.margineGiorni.entro : 3} giorni prima della data “da consumarsi entro”.</p>
-          <div class="hscroll">${inScadenza.map(card).join('')}</div>
-        </section>` : ''}
-
-        <section class="section">
-          <div class="section-head"><h2>Gli sconti più alti</h2></div>
-          <div class="hscroll">${topSconti.map(card).join('')}</div>
-        </section>
-
-        <section class="section">
-          <div class="section-head"><h2>Come funziona</h2><a href="#/info">Scopri di più</a></div>
-          <div class="how">
-            <div><b>🛒</b><strong>Scegli</strong><p>Prodotti vicini alla scadenza, a prezzi scontati.</p></div>
-            <div><b>📅</b><strong>Programma</strong><p>Scegli giorno e fascia oraria di consegna.</p></div>
-            <div><b>🏠</b><strong>Ricevi</strong><p>Arriva a casa e paghi alla consegna.</p></div>
-          </div>
-        </section>
-      </div>`;
-  }
-
-  // Tutte le categorie una sotto l'altra: si entra da una categoria e scorrendo si passa alle successive.
-  // Le etichette in alto seguono lo scorrimento e portano direttamente a una sezione.
-  function viewCategoria(r) {
-    const c = state.catById.get(r.id);
-    if (!c) return notFound();
-    const prodotti = visibili(state.data.prodotti);
-    const sezioni = categorieConProdotti(prodotti).map((x) => ({ c: x, lista: ordina(prodotti.filter((p) => p.categoria === x.id)) }));
-    return `
-      <div class="wrap">
-        <div class="topbar"><a class="icon-btn" href="#/" aria-label="Indietro">${I.back}</a><h1 id="cat-title">${esc(c.nome)}</h1></div>
-        <div class="sticky-chips"><div class="chips" id="cat-chips">
-          ${sezioni.map(({ c: x }) => `<a class="chip${x.id === c.id ? ' active' : ''}" href="#/c/${encodeURIComponent(x.id)}" data-act="goto-cat" data-cat="${esc(x.id)}">${esc(x.emoji || '')} ${esc(x.nome)}</a>`).join('')}
-        </div></div>
-        ${toolbar(prodotti.length)}
-        ${sezioni.map(({ c: x, lista }) => `
-          <section class="cat-section" id="sez-${esc(x.id)}" data-cat="${esc(x.id)}">
-            <div class="cat-section-head">
-              <span class="cat-dot" style="--tile:${esc(x.colore || '')}">${esc(x.emoji || '🛒')}</span>
-              <h2>${esc(x.nome)}</h2><small>${lista.length} ${lista.length === 1 ? 'prodotto' : 'prodotti'}</small>
-            </div>
-            <div class="grid">${lista.map(card).join('')}</div>
-          </section>`).join('')}
+        <div class="shop">
+          <div class="sticky-chips solo"><div class="chips" id="cat-chips">
+            ${sezioni.map(({ c }) => `<a class="chip${c.id === attiva ? ' active' : ''}" href="#/c/${encodeURIComponent(c.id)}" data-act="goto-cat" data-cat="${esc(c.id)}">${esc(c.nome)}</a>`).join('')}
+          </div></div>
+          ${toolbar(prodotti.length)}
+          ${sezioni.map(({ c, lista }) => `
+            <section class="cat-section" id="sez-${esc(c.id)}" data-cat="${esc(c.id)}">
+              <div class="cat-section-head">
+                <h2>${esc(c.nome)}</h2><small>${lista.length} ${lista.length === 1 ? 'prodotto' : 'prodotti'}</small>
+              </div>
+              <div class="grid">${lista.map(card).join('')}</div>
+            </section>`).join('')}
+        </div>
       </div>`;
   }
 
@@ -300,45 +265,47 @@
   function vaiASezione(id, smooth) {
     const el = document.getElementById('sez-' + id);
     if (!el) return;
-    const behavior = smooth ? 'smooth' : 'auto';
-    if (el === document.querySelector('.cat-section')) window.scrollTo({ top: 0, behavior });
-    else el.scrollIntoView({ behavior, block: 'start' });
+    el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
     segnaSezione(id);
     spyFermoFino = Date.now() + (smooth ? 900 : 100);
   }
 
-  // Evidenzia la categoria in vista: etichetta attiva, titolo e indirizzo (senza ricaricare la pagina)
+  // Evidenzia la categoria in vista (etichetta attiva e indirizzo, senza ricaricare la pagina);
+  // id vuoto = si è sopra il catalogo
+  let sezioneSegnata = null;
   function segnaSezione(id) {
-    if (state.route.id === id && document.querySelector(`#cat-chips .chip.active[data-cat="${cssEsc(id)}"]`)) return;
-    state.route.id = id;
-    const c = state.catById.get(id);
-    const title = document.getElementById('cat-title');
-    if (title && c) title.textContent = c.nome;
+    if (id === sezioneSegnata) return;
+    sezioneSegnata = id;
+    state.route = id ? { name: 'categoria', id } : { name: 'home' };
     const chips = document.getElementById('cat-chips');
     if (chips) {
       chips.querySelectorAll('.chip').forEach((n) => n.classList.toggle('active', n.dataset.cat === id));
-      const chip = chips.querySelector(`.chip[data-cat="${cssEsc(id)}"]`);
+      const chip = id && chips.querySelector(`.chip[data-cat="${cssEsc(id)}"]`);
       if (chip) chips.scrollTo({ left: chip.offsetLeft - (chips.clientWidth - chip.offsetWidth) / 2, behavior: 'smooth' });
     }
-    try { history.replaceState(null, '', '#/c/' + encodeURIComponent(id)); } catch { /* indirizzo invariato */ }
+    const hash = id ? '#/c/' + encodeURIComponent(id) : '#/';
+    if (location.hash !== hash) {
+      try { history.replaceState(null, '', hash); } catch { /* indirizzo invariato */ }
+    }
   }
 
   let spyFermoFino = 0;
   let spyFrame = 0;
   function onScroll() {
-    if (!state.route || state.route.name !== 'categoria' || spyFrame) return;
+    if (!state.route || !NEGOZIO.includes(state.route.name) || spyFrame) return;
     spyFrame = requestAnimationFrame(() => {
       spyFrame = 0;
+      if (!NEGOZIO.includes(state.route.name)) return;
       state.catScrollY = window.scrollY;
       if (Date.now() < spyFermoFino) return;
       const sezioni = document.querySelectorAll('.cat-section');
       const bar = document.querySelector('.sticky-chips');
       if (!sezioni.length || !bar) return;
       const limite = bar.getBoundingClientRect().bottom + 16;
-      let attiva = sezioni[0];
+      let attiva = null;
       for (const s of sezioni) if (s.getBoundingClientRect().top <= limite) attiva = s;
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) attiva = sezioni[sezioni.length - 1];
-      segnaSezione(attiva.dataset.cat);
+      segnaSezione(attiva ? attiva.dataset.cat : '');
     });
   }
 
@@ -359,7 +326,7 @@
   function risultatiHtml(q, risultati) {
     if (!q) {
       return `<div class="section"><div class="section-head"><h2>Sfoglia per categoria</h2></div>
-        <div class="chips" style="flex-wrap:wrap">${state.data.categorie.map((c) => `<a class="chip" href="#/c/${encodeURIComponent(c.id)}">${esc(c.emoji || '')} ${esc(c.nome)}</a>`).join('')}</div></div>`;
+        <div class="chips" style="flex-wrap:wrap">${state.data.categorie.map((c) => `<a class="chip" href="#/c/${encodeURIComponent(c.id)}">${esc(c.nome)}</a>`).join('')}</div></div>`;
     }
     if (!risultati.length) {
       return `<div class="empty"><div class="big">🔎</div><h2>Nessun prodotto per “${esc(q)}”</h2><p>Prova con un'altra parola o sfoglia le categorie.</p></div>`;
@@ -398,6 +365,7 @@
           </div>
           <div>
             ${c ? `<a class="pd-cat" href="#/c/${encodeURIComponent(c.id)}">${esc(c.nome)}</a>` : ''}
+            ${p.marca ? `<div class="pd-brand">${esc(p.marca)}</div>` : ''}
             <h1>${esc(p.nome)}</h1>
             <div class="pd-fmt">${esc(p.formato || '')}</div>
             <div class="pd-price"><b>${fmt(p.prezzo)}</b>${saving > 0 ? `<s>${fmt(p.prezzoPieno)}</s><span class="save">Risparmi ${fmt(saving)}</span>` : ''}</div>
@@ -740,6 +708,7 @@
         </div>
         <div class="card-body">
           <div class="price"><b>${fmt(p.prezzo)}</b>${p.prezzoPieno > p.prezzo ? `<s>${fmt(p.prezzoPieno)}</s>` : ''}</div>
+          ${p.marca ? `<div class="card-brand">${esc(p.marca)}</div>` : ''}
           <a class="card-name" href="#/p/${encodeURIComponent(p.id)}">${esc(p.nome)}</a>
           <div class="card-fmt">${esc(p.formato || '')}</div>
           ${!soldOut && p.disponibili <= 5 ? `<div class="low">Ultimi ${p.disponibili}</div>` : ''}
