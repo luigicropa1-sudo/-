@@ -214,7 +214,7 @@
     const n = d.negozio;
     if (r.name === 'categoria' && !state.catById.get(r.id)) return notFound();
     const prodotti = visibili(d.prodotti);
-    const sezioni = categorieConProdotti(prodotti).map((c) => ({ c, lista: ordina(prodotti.filter((p) => p.categoria === c.id)) }));
+    const sezioni = categorieConProdotti(prodotti).map((c) => ({ c, lista: ordina(prodottiDi(c, prodotti)) }));
     const zona = zonaPerCap(state.cap);
     const attiva = r.name === 'categoria' ? r.id : '';
     const maxSconto = Math.max(0, ...prodotti.map(sconto));
@@ -243,21 +243,21 @@
 
         <nav class="cat-row" aria-label="Categorie">
             ${sezioni.map(({ c }) => `
-              <a class="cat-tile" href="#/c/${encodeURIComponent(c.id)}" data-act="goto-cat" data-cat="${esc(c.id)}">
-                <span class="cat-icon">${c.immagine ? `<img src="${esc(c.immagine)}" alt="" loading="lazy" decoding="async">` : esc((c.nome || '?').charAt(0))}</span>
+              <a class="cat-tile${c.speciale ? ' speciale' : ''}" href="#/c/${encodeURIComponent(c.id)}" data-act="goto-cat" data-cat="${esc(c.id)}">
+                <span class="cat-icon">${c.badge ? `<b>${esc(c.badge)}</b>` : c.immagine ? `<img src="${esc(c.immagine)}" alt="" loading="lazy" decoding="async">` : esc((c.nome || '?').charAt(0))}</span>
                 <span class="cat-label">${esc(c.nome)}</span>
               </a>`).join('')}
         </nav>
 
         <div class="shop">
           <div class="sticky-chips solo"><div class="chips" id="cat-chips">
-            ${sezioni.map(({ c }) => `<a class="chip${c.id === attiva ? ' active' : ''}" href="#/c/${encodeURIComponent(c.id)}" data-act="goto-cat" data-cat="${esc(c.id)}">${esc(c.nome)}</a>`).join('')}
+            ${sezioni.map(({ c }) => `<a class="chip${c.id === attiva ? ' active' : ''}${c.speciale ? ' speciale' : ''}" href="#/c/${encodeURIComponent(c.id)}" data-act="goto-cat" data-cat="${esc(c.id)}">${esc(c.nome)}</a>`).join('')}
           </div></div>
           ${toolbar(prodotti.length)}
           ${sezioni.map(({ c, lista }) => `
             <section class="cat-section" id="sez-${esc(c.id)}" data-cat="${esc(c.id)}">
               <div class="cat-section-head">
-                <h2>${esc(c.nome)}</h2><small>${lista.length} ${lista.length === 1 ? 'prodotto' : 'prodotti'}</small>
+                <h2>${esc(c.nome)}</h2>${c.descrizione ? `<span class="cat-desc">${esc(c.descrizione)}</span>` : ''}<small>${lista.length} ${lista.length === 1 ? 'prodotto' : 'prodotti'}</small>
               </div>
               <div class="grid">${lista.map(card).join('')}</div>
             </section>`).join('')}
@@ -265,8 +265,14 @@
       </div>`;
   }
 
+  // Una categoria "virtuale" raccoglie prodotti di altre categorie (es. "Sotto 1 €": tutto ciò che costa meno di un euro)
+  function prodottiDi(c, prodotti) {
+    if (c.virtuale === 'sotto1') return prodotti.filter((p) => p.prezzo < 1 && p.disponibili > 0);
+    return prodotti.filter((p) => p.categoria === c.id);
+  }
+
   function categorieConProdotti(prodotti) {
-    return state.data.categorie.filter((c) => prodotti.some((p) => p.categoria === c.id));
+    return state.data.categorie.filter((c) => prodottiDi(c, prodotti).length);
   }
 
   function vaiASezione(id, smooth) {
