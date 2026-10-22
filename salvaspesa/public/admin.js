@@ -44,7 +44,7 @@
   function renderLogin(errore) {
     $root.innerHTML = `
       <form class="login" id="login">
-        <div class="brand" style="justify-content:center"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15"/><path d="M5 19c3-4 6-6 10-8"/></svg></span>Gestione</div>
+        <div class="brand" style="justify-content:center"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 8.8h13l-1 10.9a2 2 0 0 1-2 1.8H8.5a2 2 0 0 1-2-1.8z" fill="currentColor" stroke="none"/><path d="M9 8.8V7.2a3 3 0 0 1 6 0v1.6"/><path d="M9.2 18c0-3.9 2.4-6.2 6.6-6.2 0 4-2.6 6.2-6.6 6.2z" fill="var(--brand, #0F8A5F)" stroke="none"/><path d="M9.6 17.6c1.4-2 2.9-3.2 4.9-4.1" stroke="currentColor" stroke-width="1.2"/></svg></span>Gestione</div>
         <p class="page-sub">Inserisci la password del pannello.</p>
         <input id="pw" type="password" autocomplete="current-password" placeholder="Password" aria-label="Password" required>
         ${errore ? `<p class="err">${esc(errore)}</p>` : ''}
