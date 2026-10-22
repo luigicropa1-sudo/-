@@ -6,6 +6,12 @@ a prezzo scontato e con consegna programmata in pochi giorni.
 
 "Salvaspesa" è un nome provvisorio: si cambia in `catalogo.json` e in `public/manifest.webmanifest`.
 
+> **Dati di esempio.** Il catalogo attuale usa prodotti veri di marche italiane (nomi, formati e foto da
+> [Open Food Facts](https://world.openfoodfacts.org), licenza CC BY-SA 3.0, con credito sotto ogni foto) ma
+> **prezzi, scadenze e quantità sono inventati** per far vedere il negozio. Quando carichi la merce vera,
+> sostituisci i prodotti in `catalogo.json` con quelli che vendi e le foto con le tue
+> (`public/img/prodotti`, formato quadrato).
+
 ## Cosa fa
 
 **Per il cliente**
