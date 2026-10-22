@@ -107,7 +107,7 @@
 
   function applyTheme() {
     const t = document.documentElement.dataset.theme;
-    const dark = t ? t === 'dark' : window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
+    const dark = false; // tema sempre chiaro
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.content = dark ? '#0d1210' : '#0F8A5F';
   }

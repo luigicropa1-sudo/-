@@ -10,12 +10,12 @@
   --sale-soft: #fdebe8;
   --warn: #a35a00;
   --warn-soft: #fff1d6;
-  --bg: #f5f6f3;
+  --bg: #f4efe5;
   --card: #ffffff;
   --text: #16201b;
   --hint: #66726c;
-  --sep: rgba(22, 32, 27, 0.09);
-  --shadow: 0 1px 2px rgba(16, 24, 20, 0.05), 0 6px 18px rgba(16, 24, 20, 0.06);
+  --sep: rgba(60, 45, 20, 0.11);
+  --shadow: 0 1px 2px rgba(60, 45, 20, 0.06), 0 6px 18px rgba(60, 45, 20, 0.07);
   --shadow-lg: 0 10px 30px rgba(16, 24, 20, 0.16);
   --font: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --r-lg: 18px;
@@ -23,44 +23,6 @@
   --gutter: 16px;
   --tabbar-h: 64px;
   color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --brand: #23b07c;
-    --brand-ink: #5fd6a6;
-    --brand-soft: rgba(35, 176, 124, 0.16);
-    --sale: #ff6b55;
-    --sale-soft: rgba(255, 107, 85, 0.16);
-    --warn: #f3b44c;
-    --warn-soft: rgba(243, 180, 76, 0.15);
-    --bg: #0d1210;
-    --card: #161d19;
-    --text: #edf3ef;
-    --hint: #95a39b;
-    --sep: rgba(255, 255, 255, 0.08);
-    --shadow: none;
-    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
-    color-scheme: dark;
-  }
-}
-
-:root[data-theme="dark"] {
-  --brand: #23b07c;
-  --brand-ink: #5fd6a6;
-  --brand-soft: rgba(35, 176, 124, 0.16);
-  --sale: #ff6b55;
-  --sale-soft: rgba(255, 107, 85, 0.16);
-  --warn: #f3b44c;
-  --warn-soft: rgba(243, 180, 76, 0.15);
-  --bg: #0d1210;
-  --card: #161d19;
-  --text: #edf3ef;
-  --hint: #95a39b;
-  --sep: rgba(255, 255, 255, 0.08);
-  --shadow: none;
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
-  color-scheme: dark;
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -559,25 +521,6 @@ img { max-width: 100%; }
   background: #18211c; color: #fff; font-size: 14px; font-weight: 600; box-shadow: var(--shadow-lg); text-align: center;
 }
 
-
-/* Al buio i colori pastello delle categorie diventano tinte leggere sullo sfondo scuro,
-   e le foto si abbassano un po' di luminosità per non abbagliare */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .cat-icon,
-  :root:not([data-theme="light"]) .cat-dot,
-  :root:not([data-theme="light"]) .card-media:not(.foto),
-  :root:not([data-theme="light"]) .pd-media:not(.foto),
-  :root:not([data-theme="light"]) .thumb:not(.foto) { background: color-mix(in srgb, var(--tile, #23b07c) 16%, var(--card)); }
-  :root:not([data-theme="light"]) .foto { background: #e6e6e6; }
-  :root:not([data-theme="light"]) .foto img { filter: brightness(0.9); }
-}
-:root[data-theme="dark"] .cat-icon,
-:root[data-theme="dark"] .cat-dot,
-:root[data-theme="dark"] .card-media:not(.foto),
-:root[data-theme="dark"] .pd-media:not(.foto),
-:root[data-theme="dark"] .thumb:not(.foto) { background: color-mix(in srgb, var(--tile, #23b07c) 16%, var(--card)); }
-:root[data-theme="dark"] .foto { background: #e6e6e6; }
-:root[data-theme="dark"] .foto img { filter: brightness(0.9); }
 
 /* --- Schermi larghi: barra in alto --- */
 
