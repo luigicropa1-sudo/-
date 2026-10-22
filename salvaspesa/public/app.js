@@ -43,7 +43,6 @@
     plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
     minus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14"/></svg>',
     pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
-    logo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 8.8h13l-1 10.9a2 2 0 0 1-2 1.8H8.5a2 2 0 0 1-2-1.8z" fill="currentColor" stroke="none"/><path d="M9 8.8V7.2a3 3 0 0 1 6 0v1.6"/><path d="M9.2 18c0-3.9 2.4-6.2 6.6-6.2 0 4-2.6 6.2-6.6 6.2z" fill="var(--brand, #0F8A5F)" stroke="none"/><path d="M9.6 17.6c1.4-2 2.9-3.2 4.9-4.1" stroke="currentColor" stroke-width="1.2"/></svg>',
     leaf: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15"/><path d="M5 19c3-4 6-6 10-8"/></svg>',
     clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
     tag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>',
@@ -179,7 +178,7 @@
     const count = cartCount();
     const active = (names) => (names.includes(r) ? ' active' : '');
     $tabbar.innerHTML = `
-      <a class="brand brand-top" href="#/">${brandMark()}<span>${esc(state.data.negozio.nome)}</span></a>
+      <a class="brand brand-top" href="#/" aria-label="${esc(state.data.negozio.nome)}">${brandMark()}</a>
       <a class="tab${active(['home', 'categoria', 'prodotto'])}" href="#/">${I.home}<span>Home</span></a>
       <a class="tab${active(['cerca'])}" href="#/cerca">${I.search}<span>Cerca</span></a>
       <a class="tab${active(['carrello', 'cassa'])}" href="#/carrello" id="tab-cart">${I.bag}<span>Carrello</span>
@@ -222,7 +221,7 @@
     return `
       <div class="wrap">
         <header class="home-head">
-          <a class="brand" href="#/">${brandMark()}<span>${esc(n.nome)}</span></a>
+          <a class="brand" href="#/" aria-label="${esc(n.nome)}">${brandMark(true)}</a>
           <button class="cap-chip" data-act="cap" aria-label="Cambia CAP di consegna">${I.pin}
             <span><b>${state.cap ? `Consegna a ${esc(state.cap)}` : 'Dove consegniamo?'}</b>
             <small>${state.cap && !zona ? 'Zona non ancora servita' : `Arriva da ${giorno(d.consegna.giorni[0])}`}</small></span>
@@ -782,8 +781,12 @@
     return `<span class="pill ${esc(stato)}">${label}</span>`;
   }
 
-  function brandMark() {
-    return `<span class="brand-mark">${I.logo}</span>`;
+  // Logo: solo scritta, "Salva" dritto e "spesa" in corsivo verde; lo slogan sotto (solo in alto nella home)
+  function brandMark(conSlogan) {
+    const l = state.data.negozio.logo || {};
+    const nome = state.data.negozio.nome || '';
+    const testo = l.a && l.b ? `${esc(l.a)}<em>${esc(l.b)}</em>` : esc(nome);
+    return `<span class="wordmark"><span class="wm-nome">${testo}</span>${conSlogan && l.slogan ? `<small>${esc(l.slogan)}</small>` : ''}</span>`;
   }
 
   // -------------------------------------------------------------------------

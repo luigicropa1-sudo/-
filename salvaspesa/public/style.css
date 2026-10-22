@@ -134,11 +134,15 @@ img { max-width: 100%; }
 
 .home-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 14px 10px; }
 .brand { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 20px; letter-spacing: -0.02em; }
-.brand-mark {
-  width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center;
-  background: var(--brand); color: #fff;
+.wordmark {
+  display: inline-flex; flex-direction: column; align-items: flex-start; line-height: 1;
+  font-family: "Fraunces", Georgia, "Times New Roman", serif; font-weight: 600; font-size: 27px; letter-spacing: -0.025em; color: var(--text);
 }
-.brand-mark svg { width: 20px; height: 20px; }
+.wordmark em { font-style: italic; font-weight: 500; color: var(--brand); }
+.wordmark small {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif; font-size: 8.5px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--hint); margin-top: 6px; white-space: nowrap;
+}
 .cap-chip {
   display: flex; align-items: center; gap: 8px; padding: 7px 12px 7px 10px; border-radius: 999px;
   background: var(--card); box-shadow: var(--shadow); text-align: left; min-width: 0;
@@ -149,7 +153,7 @@ img { max-width: 100%; }
 .cap-chip b { font-size: 13px; }
 .cap-chip small { font-size: 11.5px; color: var(--hint); }
 .home-head .brand { min-width: 0; flex: none; }
-@media (max-width: 360px) { .home-head .brand span:last-child { display: none; } }
+@media (max-width: 360px) { .wordmark { font-size: 23px; } .wordmark small { display: none; } }
 
 .searchbox {
   display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 14px; border-radius: 14px;
