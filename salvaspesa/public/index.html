@@ -13,7 +13,12 @@
   <meta name="apple-mobile-web-app-title" content="Salvaspesa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- i caratteri si caricano senza fermare la pagina; il logo usa solo le lettere che servono -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&text=Salvaspesa&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
+  <!-- il catalogo parte subito, mentre si scaricano stile e programma -->
+  <script>window.__catalogo = fetch('api/catalogo', { cache: 'no-cache' }).catch(function () { return null; }).then(function (r) { if (!r) throw new Error('rete'); return r; });</script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,6 +27,6 @@
   <div id="cartbar" class="cartbar" hidden></div>
   <div id="sheet" class="sheet" aria-hidden="true"></div>
   <div id="toast" class="toast" role="status" hidden></div>
-  <script src="app.js"></script>
+  <script src="app.js" defer></script>
 </body>
 </html>

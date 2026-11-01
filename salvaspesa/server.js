@@ -10,6 +10,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const zlib = require('zlib');
 
 loadEnvFile(path.join(__dirname, '.env'));
 
@@ -64,7 +65,7 @@ async function route(req, res) {
     if (!limiteRichieste(req, 'api', 240, 60_000)) {
       return sendJson(res, 429, { ok: false, errore: 'Troppe richieste, riprova tra un minuto.' });
     }
-    if (req.method === 'GET' && p === '/api/catalogo') return sendJson(res, 200, catalogoPubblico());
+    if (req.method === 'GET' && p === '/api/catalogo') return sendCatalogo(req, res);
     if (req.method === 'POST' && p === '/api/ordini') return creaOrdine(req, res);
     const m = /^\/api\/ordini\/(\d+)$/.exec(p);
     if (req.method === 'GET' && m) return statoOrdine(res, Number(m[1]), url.searchParams.get('t') || '');
@@ -494,6 +495,33 @@ const MIME = {
   '.ico': 'image/x-icon',
 };
 
+// Risposte compresse: il catalogo e i file di testo si inviano in gzip (circa 6 volte più piccoli).
+const COMPRIMIBILI = new Set(['.html', '.css', '.js', '.json', '.webmanifest', '.svg']);
+const cacheFile = new Map(); // file -> { mtime, size, etag, raw, gz }
+
+function accettaGzip(req) {
+  return /\bgzip\b/.test(String(req.headers['accept-encoding'] || ''));
+}
+
+function sendCatalogo(req, res) {
+  const json = JSON.stringify(catalogoPubblico());
+  const etag = '"' + crypto.createHash('sha1').update(json).digest('hex').slice(0, 20) + '"';
+  const headers = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-cache', ETag: etag, Vary: 'Accept-Encoding' };
+  if (req.headers['if-none-match'] === etag) {
+    res.writeHead(304, headers);
+    return res.end();
+  }
+  if (accettaGzip(req)) {
+    headers['Content-Encoding'] = 'gzip';
+    const gz = zlib.gzipSync(json, { level: 6 });
+    headers['Content-Length'] = gz.length;
+    res.writeHead(200, headers);
+    return res.end(gz);
+  }
+  res.writeHead(200, headers);
+  res.end(json);
+}
+
 function serveStatic(pathname, req, res) {
   let rel;
   try {
@@ -508,13 +536,35 @@ function serveStatic(pathname, req, res) {
     if (err || !st.isFile()) return sendText(res, 404, 'Non trovato');
     const ext = path.extname(file).toLowerCase();
     const isMedia = /^image\//.test(MIME[ext] || '');
-    res.writeHead(200, {
+    const base = {
       'Content-Type': MIME[ext] || 'application/octet-stream',
-      'Content-Length': st.size,
-      'Cache-Control': isMedia ? 'public, max-age=86400' : 'no-cache',
+      // Foto dei prodotti: il nome cambia se cambia la foto, quindi si possono tenere a lungo. Il resto si ricontrolla sempre (304 se invariato).
+      'Cache-Control': isMedia && rel.includes('/img/prodotti/') ? 'public, max-age=31536000, immutable' : isMedia ? 'public, max-age=86400' : 'no-cache',
       'X-Content-Type-Options': 'nosniff',
       'Referrer-Policy': 'same-origin',
-    });
+    };
+    const etag = `"${st.size.toString(16)}-${Math.round(st.mtimeMs).toString(16)}"`;
+    base.ETag = etag;
+    if (req.headers['if-none-match'] === etag) {
+      res.writeHead(304, base);
+      return res.end();
+    }
+    if (COMPRIMIBILI.has(ext) && accettaGzip(req)) {
+      let c = cacheFile.get(file);
+      const finito = (raw) => {
+        const gz = zlib.gzipSync(raw, { level: 9 });
+        cacheFile.set(file, { etag, gz });
+        invia(gz);
+      };
+      const invia = (gz) => {
+        res.writeHead(200, { ...base, 'Content-Encoding': 'gzip', 'Content-Length': gz.length, Vary: 'Accept-Encoding' });
+        if (req.method === 'HEAD') return res.end();
+        res.end(gz);
+      };
+      if (c && c.etag === etag) return invia(c.gz);
+      return fs.readFile(file, (e, raw) => (e ? sendText(res, 500, 'Errore') : finito(raw)));
+    }
+    res.writeHead(200, { ...base, 'Content-Length': st.size });
     if (req.method === 'HEAD') return res.end();
     fs.createReadStream(file).pipe(res);
   });

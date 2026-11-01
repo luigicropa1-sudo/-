@@ -10,7 +10,7 @@
   const $sheet = document.getElementById('sheet');
   const $toast = document.getElementById('toast');
 
-  const KEY = { cart: 'ss:carrello', cap: 'ss:cap', cliente: 'ss:cliente', ordini: 'ss:ordini' };
+  const KEY = { cart: 'ss:carrello', cap: 'ss:cap', cliente: 'ss:cliente', ordini: 'ss:ordini', catalogo: 'ss:catalogo' };
 
   const state = {
     data: null,
@@ -65,18 +65,38 @@
     $sheet.addEventListener('input', onSheetInput);
     window.addEventListener('hashchange', () => render(true));
     window.addEventListener('scroll', onScroll, { passive: true });
-    try {
-      const res = await fetch('api/catalogo', { cache: 'no-store' });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      setData(await res.json());
-    } catch {
-      $app.innerHTML = `<div class="wrap"><div class="empty"><div class="big">📡</div><h2>Non riesco a caricare il negozio</h2>
-        <p>Controlla la connessione e riprova.</p><button class="btn" data-act="reload">Riprova</button></div></div>`;
-      return;
+    // Apertura veloce: se il telefono ha già il catalogo dell'ultima visita lo mostra subito,
+    // intanto chiede quello aggiornato (partito già dall'index.html) e ridisegna solo se è cambiato.
+    let salvato = null;
+    try { salvato = localStorage.getItem(KEY.catalogo); } catch { /* niente copia locale */ }
+    let mostrato = false;
+    if (salvato) {
+      try {
+        setData(JSON.parse(salvato));
+        restore();
+        render(true);
+        mostrato = true;
+      } catch { salvato = null; }
     }
-    restore();
-    render(true);
-    if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    try {
+      const res = await (window.__catalogo || fetch('api/catalogo', { cache: 'no-cache' }));
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const testo = await res.text();
+      if (testo !== salvato) {
+        try { localStorage.setItem(KEY.catalogo, testo); } catch { /* spazio finito: pazienza */ }
+        setData(JSON.parse(testo));
+        restore();
+        if (!mostrato) render(true);
+        else if (state.route && state.route.name !== 'cassa') render(false);
+      }
+    } catch {
+      if (!mostrato) {
+        $app.innerHTML = `<div class="wrap"><div class="empty"><div class="big">📡</div><h2>Non riesco a caricare il negozio</h2>
+          <p>Controlla la connessione e riprova.</p><button class="btn" data-act="reload">Riprova</button></div></div>`;
+        return;
+      }
+    }
+    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
       navigator.serviceWorker.register('sw.js').catch(() => {});
     }
   }
@@ -243,7 +263,7 @@
         <nav class="cat-row" aria-label="Categorie">
             ${sezioni.map(({ c }) => `
               <a class="cat-tile${c.speciale ? ' speciale' : ''}" href="#/c/${encodeURIComponent(c.id)}" data-act="goto-cat" data-cat="${esc(c.id)}">
-                <span class="cat-icon">${c.badge ? `<b>${esc(c.badge)}</b>` : c.immagine ? `<img src="${esc(c.immagine)}" alt="" loading="lazy" decoding="async">` : esc((c.nome || '?').charAt(0))}</span>
+                <span class="cat-icon">${c.badge ? `<b>${esc(c.badge)}</b>` : c.immagine ? `<img src="${esc(foto(c.immagine, true))}" alt="" loading="lazy" decoding="async">` : esc((c.nome || '?').charAt(0))}</span>
                 <span class="cat-label">${esc(c.nome)}</span>
               </a>`).join('')}
         </nav>
@@ -430,7 +450,7 @@
     const qty = state.cart[id];
     return `
       <div class="line">
-        <a class="thumb${p.immagine ? ' foto' : ''}" href="#/p/${encodeURIComponent(p.id)}" style="--tile:${esc(c ? c.colore || '' : '')}">${media(p)}</a>
+        <a class="thumb${p.immagine ? ' foto' : ''}" href="#/p/${encodeURIComponent(p.id)}" style="--tile:${esc(c ? c.colore || '' : '')}">${media(p, true)}</a>
         <div class="line-info">
           <a class="line-name" href="#/p/${encodeURIComponent(p.id)}">${esc(p.nome)}</a>
           <div class="line-sub">${esc(p.formato || '')}${p.scadenza ? ` · ${p.tipoScadenza === 'preferibilmente' ? 'pref. entro' : 'scade'} ${dataBreve(p.scadenza)}` : ''}</div>
@@ -727,7 +747,7 @@
       <article class="card${soldOut ? ' soldout' : ''}">
         <div class="media-wrap">
           <a class="card-media${p.immagine ? ' foto' : ''}" href="#/p/${encodeURIComponent(p.id)}" style="--tile:${esc(c ? c.colore || '' : '')}" aria-label="${esc(p.nome)}">
-            ${media(p)}${sconto(p) ? `<span class="disc">−${sconto(p)}%</span>` : ''}${tag}
+            ${media(p, true)}${sconto(p) ? `<span class="disc">−${sconto(p)}%</span>` : ''}${tag}
           </a>
           <div class="card-ctl" data-ctl="${esc(p.id)}">${ctlHtml(p)}</div>
         </div>
@@ -756,9 +776,14 @@
     </div>`;
   }
 
-  function media(p) {
+  // Nelle liste si usa la miniatura (-s.webp, 320 px); la foto intera solo nella scheda prodotto
+  function foto(src, piccola) {
+    return piccola ? src.replace(/\.webp$/, '-s.webp') : src;
+  }
+
+  function media(p, piccola) {
     return p.immagine
-      ? `<img src="${esc(p.immagine)}" alt="" loading="lazy" decoding="async">`
+      ? `<img src="${esc(foto(p.immagine, piccola))}" alt="" loading="lazy" decoding="async"${piccola ? ` onerror="this.onerror=null;this.src='${esc(p.immagine)}'"` : ''}>`
       : `<span class="emoji">${esc(p.emoji || '🛒')}</span>`;
   }
 

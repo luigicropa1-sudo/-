@@ -79,6 +79,16 @@ Gli ordini finiscono nel file `data/ordini.json`.
 Facoltativo: per ricevere un messaggio Telegram a ogni ordine aggiungi
 `TELEGRAM_BOT_TOKEN` e `TELEGRAM_CHAT_ID`.
 
+## Velocità
+
+Il sito è pensato per aprirsi subito anche con poco campo:
+- il catalogo e i file di testo viaggiano compressi (gzip) e il telefono li riusa se non sono cambiati;
+- nelle liste si usano miniature da 320 px (`nomefoto-s.webp`, create accanto alla foto grande), la foto intera si scarica solo aprendo un prodotto;
+- le foto si tengono sul telefono e alla seconda visita il negozio si apre dalla copia locale, mentre il catalogo si aggiorna in sottofondo;
+- i caratteri non fermano la pagina mentre si scaricano.
+
+Se aggiungi una foto, crea anche la miniatura con lo stesso nome più `-s` (320 × 320 px, webp). Se manca, il sito usa la foto grande.
+
 ## Modificare prodotti e impostazioni
 
 Tutto è in `catalogo.json`. Le modifiche si vedono appena si ricarica la pagina.
