@@ -9,7 +9,7 @@ bottega-dei-siti/
 ├── js/main.js          effetti allo scorrimento, domande, modulo contatti, pulsanti "Copia"
 └── assets/
     ├── favicon.svg     l'icona nella scheda del browser
-    ├── img/            screenshot del sito Maremonti usati nell'apertura (computer e telefono)
+    ├── img/            screenshot del sito Bora Bora usati nell'apertura (computer e telefono)
     └── logo/
         ├── logo.svg / logo.png                           stemma per sfondi chiari (il logo principale)
         ├── logo-negativo.svg / logo-negativo.png         stemma pieno color oro con scritta nera (alternativa)
@@ -40,8 +40,9 @@ uguali ovunque (browser, Illustrator, Canva, tipografia).
 Ispirati a linfa.tech e fynexengine.it, tenuti leggeri:
 
 - il titolo d'apertura sale riga per riga, poi compaiono testo e pulsanti;
-- a destra c'è un nostro sito vero (Maremonti, la versione della repository): lo screenshot su computer
-  si "carica" dall'alto, poi arrivano il telefono e l'avviso del menù, che fluttuano;
+- a destra c'è un nostro sito vero (Bora Bora, parrucchieri ed estetica a Galliate): lo screenshot su computer
+  si "carica" dall'alto, poi arrivano il telefono e l'avviso "Aperto ora", che fluttuano.
+  Gli screenshot sono presi dall'anteprima di Bora Bora con l'orologio impostato in orario di apertura;
 - un nastro scorrevole con i tipi di attività (si ferma passandoci sopra);
 - sezioni e schede compaiono con un leggero scivolamento mentre scorri;
 - nella sezione "Come lavoriamo" il titolo resta fermo e la linea delle fasi si riempie scorrendo;
