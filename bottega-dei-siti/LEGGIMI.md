@@ -9,11 +9,12 @@ bottega-dei-siti/
 ├── js/main.js          effetti allo scorrimento, domande, modulo contatti, pulsanti "Copia"
 └── assets/
     ├── favicon.svg     l'icona nella scheda del browser
+    ├── img/            screenshot del sito Maremonti usati nell'apertura (computer e telefono)
     └── logo/
         ├── logo.svg / logo.png                           stemma per sfondi chiari (il logo principale)
-        ├── logo-negativo.svg / logo-negativo.png         stemma pieno color caramello (per foto o fondi colorati)
+        ├── logo-negativo.svg / logo-negativo.png         stemma pieno color oro con scritta nera (alternativa)
         ├── logo-orizzontale.svg / .png                   insegna orizzontale, per spazi bassi e larghi
-        ├── logo-orizzontale-negativo.svg / .png          insegna piena color caramello
+        ├── logo-orizzontale-negativo.svg / .png          insegna piena color oro
         ├── marchio.svg / marchio-512.png                 solo l'arco col puntatore (favicon, icone)
         ├── profilo-social.png                            foto profilo per Instagram, Facebook, WhatsApp
         └── anteprima-social.png                          immagine che compare quando condividi il link
@@ -23,7 +24,7 @@ bottega-dei-siti/
 
 Il nome è dentro il logo. Ci sono due forme:
 
-- **Stemma** (il logo principale): l'arco di una bottega su fondo sabbia chiaro, con bordo e filo caramello.
+- **Stemma** (il logo principale): l'arco di una bottega nero, con bordo e dettagli oro e la scritta avorio.
   Dentro: un piccolo puntatore del mouse, "LA" in maiuscoletto, "Bottega" in Bodoni e
   "dei Siti" in corsivo, con un ornamento a rombo in basso. Va bene per social, biglietti da
   visita, vetrofanie e per il piè di pagina del sito.
@@ -39,7 +40,8 @@ uguali ovunque (browser, Illustrator, Canva, tipografia).
 Ispirati a linfa.tech e fynexengine.it, tenuti leggeri:
 
 - il titolo d'apertura sale riga per riga, poi compaiono testo e pulsanti;
-- il sito d'esempio a destra si costruisce pezzo per pezzo, poi telefono e avviso fluttuano;
+- a destra c'è un nostro sito vero (Maremonti, la versione della repository): lo screenshot su computer
+  si "carica" dall'alto, poi arrivano il telefono e l'avviso del menù, che fluttuano;
 - un nastro scorrevole con i tipi di attività (si ferma passandoci sopra);
 - sezioni e schede compaiono con un leggero scivolamento mentre scorri;
 - nella sezione "Come lavoriamo" il titolo resta fermo e la linea delle fasi si riempie scorrendo;
@@ -50,21 +52,23 @@ Chi ha attivato "riduci movimento" sul telefono o sul computer vede il sito ferm
 
 ## Colori e font
 
-| Nome          | Colore    | Dove si usa                                        |
-|---------------|-----------|----------------------------------------------------|
-| Cognac        | `#8F6239` | pulsanti, numeri delle fasi, etichette             |
-| Caramello     | `#A9784A` | bordo del logo, linee e piccoli dettagli           |
-| Miele         | `#D9B98F` | evidenziato del titolo, bagliore dell'apertura     |
-| Sabbia        | `#D4BE9F` | filo del logo, bordi leggeri                       |
-| Sabbia chiara | `#F0E3D0` | sezione "Perché noi", piè di pagina, fondo del logo|
-| Beige         | `#F5ECE0` | sfondo dell'apertura e delle sezioni alterne       |
-| Avorio        | `#FBF7F1` | sfondo della pagina                                |
-| Testo         | `#3A2E25` | testi e titoli                                     |
+| Nome          | Colore    | Dove si usa                                              |
+|---------------|-----------|----------------------------------------------------------|
+| Nero          | `#0F0E0C` | sfondo della pagina                                      |
+| Nero 2        | `#161410` | sfondo dell'apertura e delle sezioni alterne             |
+| Nero 3        | `#211E18` | sezione "Perché noi", piè di pagina                      |
+| Superficie    | `#1C1915` | schede, modulo, finestre                                 |
+| Oro           | `#C9A45C` | pulsanti, numeri delle fasi, bordo del logo, WhatsApp    |
+| Oro chiaro    | `#D9BC7A` | corsivo del titolo, linee e piccoli dettagli             |
+| Oro testo     | `#D4B26A` | etichette e piccoli testi in evidenza                    |
+| Avorio        | `#F2ECE0` | testi e titoli                                           |
+| Grigio caldo  | `#A8A090` | testi secondari                                          |
 
-Tutti gli sfondi sono chiari e caldi: niente blu e niente sezioni scure.
+Palette "Nero e oro": sfondi neri caldi, oro champagne per pulsanti e dettagli, testi avorio.
+Sui pulsanti oro il testo è nero, per leggerlo bene.
 
 - Titoli in Bodoni Moda, tutto il resto in Instrument Sans.
-- Il sito resta chiaro anche se il telefono o il computer sono in modalità scura.
+- Il sito è sempre scuro, anche se il telefono o il computer sono in modalità chiara.
 
 ## Contatti nel sito
 
